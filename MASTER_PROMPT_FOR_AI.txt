@@ -1,0 +1,373 @@
+# MASTER PROMPT - COPY ENTIRE FILE AND GIVE TO AI FOR REACT INTEGRATION
+
+---
+
+## CONTEXT
+
+I have a Python backend system (EduPlus Placement Prediction) that:
+- Takes student scores as input (8 fields: DSA, GitHub project, aptitude, HR, resume ATS, CS fundamentals, hackathon wins, CGPA)
+- Outputs predictions: placement probability, salary (point + 9 cumulative thresholds), job role, 5 company recommendations
+- Stores results in CSV: `data/Predicted_Data.csv` with 17 columns (1 ID, 1 placement, 5 salary fields, 9 threshold probabilities, 1 job role, 1 companies list)
+
+I need you to **build a React UI** that integrates with this backend smoothly.
+
+---
+
+## USER EXPERIENCE FLOW
+
+### Step 1: Student ID Input
+```
+User enters Student ID (200000-200100)
+  ↓ (API: GET /api/student/{id})
+If exists: Show "Update This Record?" (YES/NO)
+If NO: Cancel & return to step 1
+If YES OR new student: Go to Step 2
+```
+
+### Step 2: Skills Collection (8-Step Wizard with Progress Bar)
+```
+Shows: "X of 8" with progress bar
+
+Step 1 - LeetCode DSA:
+  Option A: Enter LeetCode username (API fetches score)
+  Option B: Enter score manually (0-100)
+
+Step 2 - GitHub Project:
+  Option A: Enter GitHub username (API fetches score)
+  Option B: Enter score manually (0-100)
+
+Step 3 - Aptitude Score: Manual input (0-100)
+
+Step 4 - HR Round Score: Manual input (0-100)
+
+Step 5 - Resume ATS:
+  Upload file (PDF/DOCX) → API analyzes → Returns score (0-100)
+
+Step 6 - CS Fundamentals: Manual input (0-100)
+
+Step 7 - Hackathon Wins: Number input (0+)
+
+Step 8 - CGPA: Decimal input (0.0-10.0)
+
+Navigation: Previous/Next/Skip buttons
+Validation: All required fields filled + in valid range before Next enabled
+```
+
+### Step 3: Loading Screen
+```
+Show spinning loader with progress messages:
+  - Loading ML models (20%)
+  - Calculating placement (40%)
+  - Predicting salary (60%)
+  - Predicting job role (80%)
+  - Recommending companies (100%)
+
+API Call: POST /api/predictions/generate with all 8 scores
+Response: Full prediction object
+Auto-Save: POST /api/predictions/save
+```
+
+### Step 4: Results Display (One Comprehensive Page)
+```
+SECTION 1: Placement Probability
+  - Circular progress indicator (0-100%)
+  - Show percentage (e.g., 86.25%)
+
+SECTION 2: Salary Prediction
+  - Predicted Salary: 29.46 LPA
+  - Salary Range: 20.62 (min) → 29.46 (mid) → 38.30 (max) LPA
+  - Visual: Horizontal bar showing range
+
+SECTION 3: Cumulative Salary Thresholds (9 bars)
+  >2 LPA:   95.0% ████████████████████
+  >5 LPA:   95.0% ████████████████████
+  >10 LPA:  80.8% ████████████████
+  >15 LPA:  62.5% █████████████
+  >20 LPA:  42.0% ████████
+  >25 LPA:  32.5% █████
+  >30 LPA:  13.4% ███
+  >35 LPA:  7.2%  █
+  >40 LPA:  1.3%
+  Each as horizontal bar chart
+
+SECTION 4: Predicted Job Role
+  - Show as badge (e.g., "SDE")
+
+SECTION 5: Recommended Companies
+  - Show top 5 companies as cards
+  - List format (Mindtree, Walmart, Zoho, Wipro, Bosch)
+
+ACTION BUTTONS:
+  - Download as PDF
+  - Export as CSV
+  - New Prediction
+  - Home
+```
+
+---
+
+## REQUIRED COMPONENTS (React)
+
+1. **StudentIdInput**
+   - Input field for 6-digit ID
+   - Validation button
+   - Error message display
+   
+2. **UpdateConfirmation**
+   - Show student name
+   - Show last prediction date
+   - YES/NO buttons
+   
+3. **SkillsCollectionWizard**
+   - 8 sequential steps
+   - Progress bar (X of 8)
+   - Each step has input + validation
+   - Previous/Next/Skip navigation
+   - Show loading spinner for API calls
+   
+4. **PredictionLoadingComponent**
+   - Animated spinner
+   - Progress bar (0-100%)
+   - Status messages
+   
+5. **ResultsDisplay**
+   - 5 sections as described
+   - Charts/visualizations
+   - Action buttons
+
+---
+
+## REQUIRED API ENDPOINTS (Backend)
+
+```
+GET /api/student/{studentId}
+  Response: { exists: bool, name: string, lastPredictionDate: string, data: {...} }
+
+POST /api/integrations/leetcode
+  Body: { username: string }
+  Response: { score: number, problemsSolved: number, ... }
+
+POST /api/integrations/github
+  Body: { username: string }
+  Response: { score: number, repositories: number, ... }
+
+POST /api/integrations/resume-ats
+  Body: FormData { resume: File }
+  Response: { atsScore: number, keywordsFound: [...], ... }
+
+POST /api/predictions/generate
+  Body: {
+    studentId: number,
+    dsa_score: number,
+    project_score: number,
+    cs_fundamentals_score: number,
+    aptitude_score: number,
+    hr_score: number,
+    resume_ats_score: number,
+    hackathon_wins: number,
+    cgpa: number
+  }
+  Response: {
+    overall_placement_probability: number,
+    predicted_salary_lpa: number,
+    salary_range_min_lpa: number,
+    salary_range_mid_lpa: number,
+    salary_range_max_lpa: number,
+    prob_salary_gt_2_lpa: number,
+    prob_salary_gt_5_lpa: number,
+    prob_salary_gt_10_lpa: number,
+    prob_salary_gt_15_lpa: number,
+    prob_salary_gt_20_lpa: number,
+    prob_salary_gt_25_lpa: number,
+    prob_salary_gt_30_lpa: number,
+    prob_salary_gt_35_lpa: number,
+    prob_salary_gt_40_lpa: number,
+    predicted_job_role: string,
+    recommended_companies: [string, ...]
+  }
+
+POST /api/predictions/save
+  Body: { studentId: number, predictions: {...} }
+  Response: { success: bool, message: string }
+```
+
+---
+
+## STATE STRUCTURE
+
+```javascript
+{
+  // Navigation & UI
+  currentStep: 0,              // 0-8 for wizard
+  isLoading: false,
+  error: null,
+  
+  // Student Info
+  studentId: null,
+  studentName: null,
+  updateChoice: null,          // 'update' | 'new' | null
+  
+  // Collected Scores
+  scores: {
+    dsa_score: null,
+    project_score: null,
+    cs_fundamentals_score: null,
+    aptitude_score: null,
+    hr_score: null,
+    resume_ats_score: null,
+    hackathon_wins: 0,
+    cgpa: null
+  },
+  
+  // Predictions from API
+  predictions: null,
+  
+  // Loading progress
+  loadingProgress: 0            // 0-100
+}
+```
+
+---
+
+## VALIDATION RULES
+
+| Field | Type | Range | Required |
+|-------|------|-------|----------|
+| Student ID | Number | 200000-200100 | Yes |
+| DSA Score | Number | 0-100 | Yes |
+| Project Score | Number | 0-100 | Yes |
+| CS Fundamentals | Number | 0-100 | Yes |
+| Aptitude | Number | 0-100 | Yes |
+| HR Score | Number | 0-100 | Yes |
+| Resume ATS | Number | 0-100 | Yes |
+| Hackathon Wins | Number | 0+ (integer) | Yes |
+| CGPA | Decimal | 0.0-10.0 | Yes |
+
+---
+
+## DESIGN REQUIREMENTS
+
+**Color Scheme:**
+- Primary Blue: #2563EB
+- Success Green: #10B981
+- Error Red: #EF4444
+- Background Gray: #F9FAFB
+
+**UI Elements:**
+- Cards: Rounded 8-12px, subtle shadow, padding 20px
+- Buttons: Primary (solid), Secondary (outline), Disabled state
+- Progress Bar: Visual 0-100% indicator
+- Charts: Horizontal bars for salary thresholds, Circular for placement
+
+**Responsive:**
+- Mobile (≤640px): Single column, stacked layout
+- Tablet (641-1024px): Two columns where appropriate
+- Desktop (>1024px): Full layout with sidebars if needed
+- Touch-friendly buttons: 44px minimum tap area
+
+**Accessibility:**
+- ARIA labels on inputs
+- Keyboard navigation (Tab, Enter, Escape)
+- Focus indicators visible
+- Error messages in color + text
+- Color contrast WCAG AA (4.5:1)
+
+---
+
+## ERROR HANDLING
+
+**Handle These Cases:**
+- Invalid Student ID: "Student not found. Please check and try again."
+- LeetCode not found: "Username not found. Please enter score manually."
+- GitHub not found: "Username not found. Please enter score manually."
+- Resume upload failed: "File upload failed. Please try again."
+- API timeout: "Connection timeout. Please check your network."
+- Validation error: "Please fill all required fields with valid values."
+- Prediction failed: "Could not generate predictions. Try again later."
+
+**UI Behavior:**
+- Show error messages inline near the field
+- Highlight invalid fields                                                                                                            
+- Disable Submit/Next button until fixed
+- Show retry button for API failures
+
+---
+
+## USER INTERACTIONS
+
+**Input Fields:**
+- Type validation (numbers only where needed)
+- Min/max value enforcement
+- Real-time error messages
+- "Clear" button for optional fields
+
+**Buttons:**
+- Previous: Go back one step
+- Next: Go to next step (disabled if validation fails)
+- Skip: Skip optional field and continue
+- Submit: Submit wizard and generate predictions
+
+**API Integration:**
+- Show loading spinner while fetching
+- Handle network errors gracefully
+- Show success/failure messages
+- Retry option on failure
+
+**Data Persistence:**
+- Cache results for 24 hours
+- Save wizard progress to localStorage
+- Allow user to resume if interrupted
+- Clear data after export
+
+---
+
+## PERFORMANCE TARGETS
+
+- Initial load: < 3 seconds
+- API response: < 1 second each
+- Results display: < 500ms
+- PDF generation: < 2 seconds
+- Mobile Lighthouse: > 80
+
+---
+
+## TESTING
+
+Test these scenarios:
+1. New student → Full flow → Display results
+2. Existing student → Update? → Modify data → New results
+3. LeetCode/GitHub API fails → Fallback to manual
+4. Resume upload → Success
+5. Validation errors → Show messages
+6. Mobile view → Responsive layout
+7. Accessibility → Keyboard navigation works
+8. Export → PDF and CSV work
+
+---
+
+## DELIVERABLES
+
+- [x] 5 React components
+- [x] State management (Context/Redux)
+- [x] API service layer
+- [x] 6 backend endpoints
+- [x] Full responsive design
+- [x] Error handling
+- [x] Accessibility compliance
+- [x] PDF/CSV export
+- [x] Mobile optimized
+- [x] Unit tests
+- [x] E2E tests
+
+---
+
+## START BUILDING
+
+**Phase 1**: StudentIdInput + SkillsCollectionWizard + API integration
+**Phase 2**: ResultsDisplay + Visualizations
+**Phase 3**: UpdateConfirmation + Loading states
+**Phase 4**: Polish, test, optimize
+
+---
+
+**READY TO CODE?** Start with the folder structure and components list above. Good luck! 🚀

@@ -1,0 +1,25 @@
+[DEBUG] resolve_company | match_source: slot_company | value: Amazon
+[DEBUG] resolve_company | match_source: context | value: Google
+[DEBUG] resolve_company | No company resolved | Intent: ask_avg_package | Text: package
+[DEBUG] resolve_company | match_source: context | value: IBM
+[DEBUG] resolve_company | No company resolved | Intent: ask_interview_process | Text: interview process
+[DIAGNOSTIC] Company: Google | Target Column: prep_dbms_topics
+[DIAGNOSTIC] Columns in DF: ['company_id', 'company_name', 'company_tier', 'avg_package_lpa', 'max_package_lpa', 'min_cgpa', 'allowed_departments', 'required_skills', 'max_backlogs', 'backlogs_allowed', 'hiring_roles_description', 'round1_name', 'round1_duration_min', 'round1_focus', 'round2_name', 'round2_duration_min', 'round2_focus', 'round3_name', 'round3_duration_min', 'round3_focus', 'round4_name', 'round4_duration_min', 'round4_focus', 'prep_dsa_topics', 'prep_system_design_topics', 'prep_oops_topics', 'prep_dbms_topics', 'prep_hr_topics']
+[DEBUG] Action: action_prep_topics_by_area | Content: Normalization,SQL
+[DIAGNOSTIC] Company: TCS | Target Column: prep_dsa_topics
+[DIAGNOSTIC] Columns in DF: ['company_id', 'company_name', 'company_tier', 'avg_package_lpa', 'max_package_lpa', 'min_cgpa', 'allowed_departments', 'required_skills', 'max_backlogs', 'backlogs_allowed', 'hiring_roles_description', 'round1_name', 'round1_duration_min', 'round1_focus', 'round2_name', 'round2_duration_min', 'round2_focus', 'round3_name', 'round3_duration_min', 'round3_focus', 'round4_name', 'round4_duration_min', 'round4_focus', 'prep_dsa_topics', 'prep_system_design_topics', 'prep_oops_topics', 'prep_dbms_topics', 'prep_hr_topics']
+[DEBUG] Action: action_prep_topics_by_area | Content: Basic Arrays
+[DEBUG] resolve_company | match_source: context | value: TCS
+[DIAGNOSTIC] Company: TCS | Target Column: prep_hr_topics
+[DIAGNOSTIC] Columns in DF: ['company_id', 'company_name', 'company_tier', 'avg_package_lpa', 'max_package_lpa', 'min_cgpa', 'allowed_departments', 'required_skills', 'max_backlogs', 'backlogs_allowed', 'hiring_roles_description', 'round1_name', 'round1_duration_min', 'round1_focus', 'round2_name', 'round2_duration_min', 'round2_focus', 'round3_name', 'round3_duration_min', 'round3_focus', 'round4_name', 'round4_duration_min', 'round4_focus', 'prep_dsa_topics', 'prep_system_design_topics', 'prep_oops_topics', 'prep_dbms_topics', 'prep_hr_topics']
+[DEBUG] Action: action_prep_topics_by_area | Content: HR
+[DIAGNOSTIC] Company: Accenture | Target Column: prep_dsa_topics
+[DIAGNOSTIC] Columns in DF: ['company_id', 'company_name', 'company_tier', 'avg_package_lpa', 'max_package_lpa', 'min_cgpa', 'allowed_departments', 'required_skills', 'max_backlogs', 'backlogs_allowed', 'hiring_roles_description', 'round1_name', 'round1_duration_min', 'round1_focus', 'round2_name', 'round2_duration_min', 'round2_focus', 'round3_name', 'round3_duration_min', 'round3_focus', 'round4_name', 'round4_duration_min', 'round4_focus', 'prep_dsa_topics', 'prep_system_design_topics', 'prep_oops_topics', 'prep_dbms_topics', 'prep_hr_topics']
+[DEBUG] Action: action_prep_topics_by_area | Content: Basic DSA
+[DEBUG] resolve_company | match_source: context | value: Razorpay
+[DEBUG] resolve_company | No company resolved | Intent: inform_company | Text: gogle
+[DEBUG] resolve_company | No company resolved | Intent: ask_min_cgpa | Text: gogle cgpa
+[DEBUG] resolve_company | No company resolved | Intent: ask_min_cgpa | Text: goggle cgpa
+[DEBUG] resolve_company | match_source: slot_company | value: Google
+[DEBUG] resolve_company | No company resolved | Intent: ask_avg_package | Text: gogle package'
+[DEBUG] resolve_company | No company resolved | Intent: ask_avg_package | Text: goggel package'
