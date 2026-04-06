@@ -1,0 +1,1430 @@
+{
+  "200001": {
+    "active_chat_id": "chat_c775a8a8481e",
+    "chats": [
+      {
+        "chat_id": "chat_35da99b29f28",
+        "title": "What is my CGPA?",
+        "created_at": "2026-03-14T19:17:40Z",
+        "updated_at": "2026-03-15T10:24:17Z",
+        "messages": [
+          {
+            "sender": "bot",
+            "text": "Hello! I'm your AI Placement Assistant. I can help you understand your profile data, placement chances, salary predictions, recommended companies, and skill assessments. What would you like to know?",
+            "timestamp": "2026-03-14T19:17:40Z",
+            "intent": null,
+            "source": "system",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "What is my CGPA?",
+            "timestamp": "2026-03-14T19:23:14Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "Which company's CGPA requirement?",
+            "timestamp": "2026-03-14T19:23:18Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "google",
+            "timestamp": "2026-03-14T19:23:26Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "I'm sorry, I didn't quite catch that. Please start by providing your student ID. Or you can ask about general company information (e.g., 'Tell me about Google').",
+            "timestamp": "2026-03-14T19:23:30Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "my placement probality",
+            "timestamp": "2026-03-15T10:24:12Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "I'm sorry, I didn't quite catch that. Please start by providing your student ID. Or you can ask about general company information (e.g., 'Tell me about Google').",
+            "timestamp": "2026-03-15T10:24:17Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          }
+        ]
+      },
+      {
+        "chat_id": "chat_c35075520cf1",
+        "title": "give me leetcode interview questions for amazon",
+        "created_at": "2026-03-15T10:40:47Z",
+        "updated_at": "2026-03-15T11:37:33Z",
+        "messages": [
+          {
+            "sender": "bot",
+            "text": "Hello! I'm your AI Placement Assistant. I can help you understand your profile data, placement chances, salary predictions, recommended companies, and skill assessments. What would you like to know?",
+            "timestamp": "2026-03-15T10:40:47Z",
+            "intent": null,
+            "source": "system",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "give me leetcode interview questions for amazon",
+            "timestamp": "2026-03-15T11:24:04Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "I did not understand that. Please try again.",
+            "timestamp": "2026-03-15T11:24:09Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "Which companies are hiring the most students?",
+            "timestamp": "2026-03-15T11:26:25Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "You asked which companies are hiring the most students. Based on the placement dataset, the companies with the highest hiring intensity include: • TCS – Hiring intensity: 300.0\n• Infosys – Hiring intensity: 280.0\n• Wipro – Hiring intensity: 250.0 These companies usually recruit a larger number of candidates during the placement season, which can increase the chances of selection. If you'd like, I can also show you their package ranges and eligibility criteria.",
+            "timestamp": "2026-03-15T11:26:29Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "give me leetcode interview questions for amazon",
+            "timestamp": "2026-03-15T11:31:35Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "Below is your report for Amazon (All Time).\nQuestions: 1938 | Easy: 530 | Medium: 1057 | Hard: 351\nDownloadable PDF: http://localhost:5000/api/reports/leetcode_amazon_all_20260315113140_909ae6e4.pdf Below is your report for Amazon (All Time).\nQuestions: 1938 | Easy: 530 | Medium: 1057 | Hard: 351\nDownloadable PDF: http://localhost:5000/api/reports/leetcode_amazon_all_20260315113141_e8b537ae.pdf",
+            "timestamp": "2026-03-15T11:31:42Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "give me leetcode interview questions for amazon",
+            "timestamp": "2026-03-15T11:32:40Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "Below is your report for Amazon (All Time).\nQuestions: 1938 | Easy: 530 | Medium: 1057 | Hard: 351\nDownloadable PDF: http://localhost:5000/api/reports/leetcode_amazon_all_20260315113245_69de7d97.pdf Below is your report for Amazon (All Time).\nQuestions: 1938 | Easy: 530 | Medium: 1057 | Hard: 351\nDownloadable PDF: http://localhost:5000/api/reports/leetcode_amazon_all_20260315113246_82fed66e.pdf",
+            "timestamp": "2026-03-15T11:32:47Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "give me leetcode interview questions for amazon",
+            "timestamp": "2026-03-15T11:37:27Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "Below is your report for Amazon (All Time).\nQuestions: 1938 | Easy: 530 | Medium: 1057 | Hard: 351\nDownloadable PDF: http://localhost:5000/api/reports/leetcode_amazon_all_20260315113732_89145be1.pdf",
+            "timestamp": "2026-03-15T11:37:33Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          }
+        ]
+      },
+      {
+        "chat_id": "chat_c1a3d70bd6fd",
+        "title": "My placement probability?",
+        "created_at": "2026-03-15T11:40:40Z",
+        "updated_at": "2026-03-15T11:52:52Z",
+        "messages": [
+          {
+            "sender": "bot",
+            "text": "Hello! I'm your AI Placement Assistant. I can help you understand your profile data, placement chances, salary predictions, recommended companies, and skill assessments. What would you like to know?",
+            "timestamp": "2026-03-15T11:40:40Z",
+            "intent": null,
+            "source": "system",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "My placement probability?",
+            "timestamp": "2026-03-15T11:51:44Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "Please provide your student ID first.",
+            "timestamp": "2026-03-15T11:51:49Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "My placement probability?",
+            "timestamp": "2026-03-15T11:52:48Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "Please provide your student ID first.",
+            "timestamp": "2026-03-15T11:52:52Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          }
+        ]
+      },
+      {
+        "chat_id": "chat_c775a8a8481e",
+        "title": "My placement probability?",
+        "created_at": "2026-03-15T11:58:39Z",
+        "updated_at": "2026-03-20T09:43:03Z",
+        "messages": [
+          {
+            "sender": "bot",
+            "text": "Hello! I'm your AI Placement Assistant. I can help you understand your profile data, placement chances, salary predictions, recommended companies, and skill assessments. What would you like to know?",
+            "timestamp": "2026-03-15T11:58:39Z",
+            "intent": null,
+            "source": "system",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "My placement probability?",
+            "timestamp": "2026-03-15T11:58:40Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "Your placement probability needs to be updated before I can answer this query.\nPlease go to the Placement Prediction Model page and generate/update your prediction, then try again.\n[[PREDICTION_UPDATE_REQUIRED]]",
+            "timestamp": "2026-03-15T11:58:45Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "give me leetcode interview questions for amazon",
+            "timestamp": "2026-03-15T11:59:31Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "Below is your report for Amazon (All Time).\nQuestions: 1938 | Easy: 530 | Medium: 1057 | Hard: 351\nDownloadable PDF: http://localhost:5000/api/reports/leetcode_amazon_all_20260315115937_fa43ccec.pdf",
+            "timestamp": "2026-03-15T11:59:38Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "give me latest question asked by google",
+            "timestamp": "2026-03-15T12:57:19Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "I'm sorry, I didn't quite catch that. You can ask me about:\n- Your placement predictions (e.g., 'will I get placed?')\n- Company details (e.g., 'Google package')\n- Your profile (e.g., 'show my summary')",
+            "timestamp": "2026-03-15T12:57:23Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "last 30 days question asked by google",
+            "timestamp": "2026-03-15T12:57:41Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "I'm sorry, I didn't quite catch that. You can ask me about:\n- Your placement predictions (e.g., 'will I get placed?')\n- Company details (e.g., 'Google package')\n- Your profile (e.g., 'show my summary')",
+            "timestamp": "2026-03-15T12:57:46Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "give me leetcode interview questions for google",
+            "timestamp": "2026-03-15T12:57:58Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "Below is your report for Google (All Time).\nQuestions: 2217 | Easy: 588 | Medium: 1153 | Hard: 476\nDownloadable PDF: http://localhost:5000/api/reports/leetcode_google_all_20260315125803_604053c2.pdf",
+            "timestamp": "2026-03-15T12:58:05Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "last 30 days questions asked by Google",
+            "timestamp": "2026-03-15T13:07:18Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "Below is your report for Google (Last 30 Days).\nQuestions: 182 | Easy: 68 | Medium: 84 | Hard: 30\nDownloadable PDF: http://localhost:5000/api/reports/leetcode_google_thirty-days_20260315130723_49bebc7c.pdf",
+            "timestamp": "2026-03-15T13:07:23Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "latest questions asked by Google",
+            "timestamp": "2026-03-15T13:07:41Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "Below is your report for Google (Last 30 Days).\nQuestions: 182 | Easy: 68 | Medium: 84 | Hard: 30\nDownloadable PDF: http://localhost:5000/api/reports/leetcode_google_thirty-days_20260315130746_b3f8f806.pdf",
+            "timestamp": "2026-03-15T13:07:46Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "6 month questions of blinket",
+            "timestamp": "2026-03-15T13:08:14Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "Below is your report for Blinkit (All Time).\nQuestions: 5 | Easy: 0 | Medium: 4 | Hard: 1\nDownloadable PDF: http://localhost:5000/api/reports/leetcode_blinkit_all_20260315130819_4becde32.pdf",
+            "timestamp": "2026-03-15T13:08:19Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "last 30 days questions asked by amazon",
+            "timestamp": "2026-03-15T13:41:18Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "Below is your report for Amazon (Last 30 Days).\nQuestions: 154 | Easy: 43 | Medium: 94 | Hard: 17\nDownloadable PDF: http://localhost:5000/api/reports/leetcode_amazon_thirty-days_20260315134123_fbbfe847.pdf",
+            "timestamp": "2026-03-15T13:41:23Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "last 30 days questions asked by Google",
+            "timestamp": "2026-03-20T09:42:58Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "Please specify a valid topic area (DSA, DBMS, OOPS, System Design, HR) for Google.",
+            "timestamp": "2026-03-20T09:43:03Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          }
+        ]
+      },
+      {
+        "chat_id": "chat_276af5ac0692",
+        "title": "My placement probability?",
+        "created_at": "2026-03-15T13:40:15Z",
+        "updated_at": "2026-03-15T13:40:23Z",
+        "messages": [
+          {
+            "sender": "bot",
+            "text": "Hello! I'm your AI Placement Assistant. I can help you understand your profile data, placement chances, salary predictions, recommended companies, and skill assessments. What would you like to know?",
+            "timestamp": "2026-03-15T13:40:15Z",
+            "intent": null,
+            "source": "system",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "My placement probability?",
+            "timestamp": "2026-03-15T13:40:19Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "Your placement probability needs to be updated before I can answer this query.\nPlease go to the Placement Prediction Model page and generate/update your prediction, then try again.\n[[PREDICTION_UPDATE_REQUIRED]]",
+            "timestamp": "2026-03-15T13:40:23Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          }
+        ]
+      },
+      {
+        "chat_id": "chat_9c3dbb503700",
+        "title": "Which companies are best for CSE students with 7 CGPA?",
+        "created_at": "2026-03-20T09:12:57Z",
+        "updated_at": "2026-03-20T09:14:18Z",
+        "messages": [
+          {
+            "sender": "bot",
+            "text": "Hello! I'm your AI Placement Assistant. I can help you understand your profile data, placement chances, salary predictions, recommended companies, and skill assessments. What would you like to know?",
+            "timestamp": "2026-03-20T09:12:57Z",
+            "intent": null,
+            "source": "system",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "Which companies are best for CSE students with 7 CGPA?",
+            "timestamp": "2026-03-20T09:13:00Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "You asked which companies are best for CSE students with around 7.00 CGPA. According to the placement dataset, suitable options include: • TCS - Avg package: 4.50 LPA | Min CGPA: 5.50 | Rounds: 3\n• Infosys - Avg package: 4.80 LPA | Min CGPA: 5.50 | Rounds: 3\n• Wipro - Avg package: 4.20 LPA | Min CGPA: 5.50 | Rounds: 3\n• HCL - Avg package: 4.00 LPA | Min CGPA: 5.50 | Rounds: 3\n• Tech Mahindra - Avg package: 4.30 LPA | Min CGPA: 5.50 | Rounds: 3 This ranking balances eligibility, package potential, and interview complexity for a CSE profile.",
+            "timestamp": "2026-03-20T09:13:04Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "Show companies with CGPA requirement below 7.5",
+            "timestamp": "2026-03-20T09:13:14Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "You asked to see companies where cgpa requirement below 7.5. Based on the placement dataset, the companies that match this condition include: • Microsoft – Minimum CGPA: 7.0\n• Flipkart – Minimum CGPA: 7.0\n• Walmart Global Tech – Minimum CGPA: 7.2\n• Adobe – Minimum CGPA: 7.0\n• Oracle – Minimum CGPA: 6.8 These companies meet the specified requirement and may be suitable options depending on your eligibility. If you'd like, I can also help you compare these companies based on salary or hiring chances.",
+            "timestamp": "2026-03-20T09:13:19Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "Show companies with hiring intensity above 10",
+            "timestamp": "2026-03-20T09:13:27Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "You asked to see companies where hiring intensity above 10. Based on the placement dataset, the companies that match this condition include: • Amazon – Hiring intensity: 25.0\n• Microsoft – Hiring intensity: 15.0\n• Flipkart – Hiring intensity: 12.0\n• Paytm – Hiring intensity: 20.0\n• Zomato – Hiring intensity: 18.0 These companies meet the specified requirement and may be suitable options depending on your eligibility. If you'd like, I can also help you compare these companies based on salary or hiring chances.",
+            "timestamp": "2026-03-20T09:13:32Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "How likely am I to get a placement?",
+            "timestamp": "2026-03-20T09:13:52Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "I'm sorry, I didn't quite catch that. You can ask me about:\n- Your placement predictions (e.g., 'will I get placed?')\n- Company details (e.g., 'Google package')\n- Your profile (e.g., 'show my summary')",
+            "timestamp": "2026-03-20T09:13:56Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "What is my placement probality",
+            "timestamp": "2026-03-20T09:14:13Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "I'm sorry, I didn't quite catch that. You can ask me about:\n- Your placement predictions (e.g., 'will I get placed?')\n- Company details (e.g., 'Google package')\n- Your profile (e.g., 'show my summary')",
+            "timestamp": "2026-03-20T09:14:18Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          }
+        ]
+      },
+      {
+        "chat_id": "chat_d9cd8df9fa74",
+        "title": "My placement probability?",
+        "created_at": "2026-03-20T09:14:23Z",
+        "updated_at": "2026-03-20T09:14:32Z",
+        "messages": [
+          {
+            "sender": "bot",
+            "text": "Hello! I'm your AI Placement Assistant. I can help you understand your profile data, placement chances, salary predictions, recommended companies, and skill assessments. What would you like to know?",
+            "timestamp": "2026-03-20T09:14:23Z",
+            "intent": null,
+            "source": "system",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "My placement probability?",
+            "timestamp": "2026-03-20T09:14:28Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "Based on the current prediction model, your estimated placement probability is: 31.1% This means that, according to the available data and model analysis, you currently have a low chance of getting placed. Why the probability looks like this: - The model predicts that you are most likely to be placed in the role of: Support.\n- Your expected salary is around 5.41 LPA, with a possible range between 3.79 and 7.03 LPA.\n- Based on your profile, companies such as Zensar, Tech Mahindra, TCS, Zensar, Tech Mahindra are considered suitable matches. Please note that this is only a prediction generated by the model based on historical data and patterns. Actual placement outcomes may vary depending on interviews, skill development, and company requirements.",
+            "timestamp": "2026-03-20T09:14:32Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          }
+        ]
+      },
+      {
+        "chat_id": "chat_981f89fb3d72",
+        "title": "New Chat",
+        "created_at": "2026-03-20T09:41:50Z",
+        "updated_at": "2026-03-20T09:41:50Z",
+        "messages": [
+          {
+            "sender": "bot",
+            "text": "Hello! I'm your AI Placement Assistant. I can help you understand your profile data, placement chances, salary predictions, recommended companies, and skill assessments. What would you like to know?",
+            "timestamp": "2026-03-20T09:41:50Z",
+            "intent": null,
+            "source": "system",
+            "value": null
+          }
+        ]
+      }
+    ]
+  },
+  "200051": {
+    "active_chat_id": "chat_8119dea75d45",
+    "chats": [
+      {
+        "chat_id": "chat_06fc9cd84d44",
+        "title": "Which companies are coming for placements?",
+        "created_at": "2026-03-14T19:23:54Z",
+        "updated_at": "2026-03-14T21:03:13Z",
+        "messages": [
+          {
+            "sender": "bot",
+            "text": "Hello! I'm your AI Placement Assistant. I can help you understand your profile data, placement chances, salary predictions, recommended companies, and skill assessments. What would you like to know?",
+            "timestamp": "2026-03-14T19:23:54Z",
+            "intent": null,
+            "source": "system",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "Which companies are coming for placements?",
+            "timestamp": "2026-03-14T21:00:01Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "Here are the companies currently available in the placement dataset: Amazon, Google, Microsoft, Flipkart, Walmart Global Tech, Adobe, Atlassian, Oracle, Paytm, Zomato, ... These companies belong to different tiers and offer roles in areas like software development, data engineering, and other technical positions. If you'd like, I can also help you:\n• see which companies offer the highest packages\n• check eligibility criteria\n• compare companies Just tell me what you'd like to know.",
+            "timestamp": "2026-03-14T21:00:06Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "Tell me about Amazon.",
+            "timestamp": "2026-03-14T21:00:37Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "Sure! Here's a quick overview of Amazon. Amazon is categorized as a Tier-1 company in the dataset. • Average Package: 18.0 LPA\n• Maximum Package: 55 LPA\n• Minimum CGPA Required: 7.5\n• Allowed Departments: CS, IT, AI, DS\n• Hiring Roles: SDE roles, strong DSA & system design required The company mainly looks for skills such as DSA, System Design, OOPS, DBMS, Projects. If you'd like, I can also explain the interview process or preparation topics for this company.",
+            "timestamp": "2026-03-14T21:00:42Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "What tier is Google in?",
+            "timestamp": "2026-03-14T21:01:40Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "You asked about the tier for Google. According to the placement dataset, Google is categorized as Tier-1. Tier classification helps estimate expected package level and interview competitiveness. If you'd like, I can also show this company's package details and eligibility criteria.",
+            "timestamp": "2026-03-14T21:01:44Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "What roles does Microsoft offer?",
+            "timestamp": "2026-03-14T21:01:50Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "Sure! Microsoft hires for roles such as: • Strong coding and design skills These roles usually involve working on areas described as: Strong coding and design skills. To prepare for these roles, students generally need strong skills in DSA, OOPS, System Design, Projects. If you're interested, I can also explain the interview rounds or preparation topics for these roles.",
+            "timestamp": "2026-03-14T21:01:52Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "What companies hire Software Engineers?",
+            "timestamp": "2026-03-14T21:01:57Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "Sure! Microsoft hires for roles such as: • Strong coding and design skills These roles usually involve working on areas described as: Strong coding and design skills. To prepare for these roles, students generally need strong skills in DSA, OOPS, System Design, Projects. If you're interested, I can also explain the interview rounds or preparation topics for these roles.",
+            "timestamp": "2026-03-14T21:02:01Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "What companies offer packages between 10 and 20 LPA?",
+            "timestamp": "2026-03-14T21:02:09Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "You asked which companies offer packages between 10 and 20 LPA. From the placement dataset, the companies that fall within this salary range include: • Netflix – Average package around 20.0 LPA\n• Amazon – Average package around 18.0 LPA\n• Uber – Average package around 18.0 LPA\n• Atlassian – Average package around 17.0 LPA\n• LinkedIn – Average package around 17.0 LPA\n• Microsoft – Average package around 16.0 LPA\n• Twitter(X) – Average package around 16.0 LPA\n• Walmart Global Tech – Average package around 15.0 LPA\n• Flipkart – Average package around 14.0 LPA\n• SAP Labs – Average package around 14.0 LPA\n• Adobe – Average package around 13.0 LPA\n• Razorpay – Average package around 13.0 LPA These companies usually provide good opportunities for students entering technical roles. If you'd like, I can also help you compare these companies based on eligibility or interview difficulty.",
+            "timestamp": "2026-03-14T21:02:13Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "What companies hire Software Engineers?",
+            "timestamp": "2026-03-14T21:02:26Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "Several companies in the dataset hire for the role of Software Engineer. Some of the companies include:\n• Adobe\n• Netflix These companies typically look for strong skills in areas like DSA, OOPS, C++. If you want, I can also show you which of these companies offer the highest packages or have easier eligibility criteria.",
+            "timestamp": "2026-03-14T21:02:31Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "Can IT students apply for Google?",
+            "timestamp": "2026-03-14T21:02:50Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "You asked whether IT students can apply for Google. According to the dataset, the allowed departments for this company include: CS, IT, AI, DS. If your department is listed above, you are eligible to apply for this company. If you'd like, I can also help you find companies that accept your department.",
+            "timestamp": "2026-03-14T21:02:54Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "Can I apply with 1 backlog?",
+            "timestamp": "2026-03-14T21:03:03Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "You asked whether you can apply with 1 backlog(s). Companies that allow this backlog count include: • IBM\n• Accenture\n• Cognizant\n• Capgemini\n• TCS\n• Infosys\n• Wipro\n• HCL\n• Tech Mahindra\n• Bosch\n• Dell\n• HP\n• L&T Infotech\n• Mindtree\n• Mphasis You may still be eligible for these companies as long as your backlog count is within their allowed limit. If you'd like, I can also help you find companies that match your CGPA and department eligibility.",
+            "timestamp": "2026-03-14T21:03:07Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "How long is Round 1 of Amazon?",
+            "timestamp": "2026-03-14T21:03:11Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "I'm sorry, I didn't quite catch that. You can ask me about:\n- Your placement predictions (e.g., 'will I get placed?')\n- Company details (e.g., 'Google package')\n- Your profile (e.g., 'show my summary')",
+            "timestamp": "2026-03-14T21:03:13Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          }
+        ]
+      },
+      {
+        "chat_id": "chat_f34fafcfa5da",
+        "title": "Show companies with hiring intensity above 10",
+        "created_at": "2026-03-14T21:24:36Z",
+        "updated_at": "2026-03-14T21:35:10Z",
+        "messages": [
+          {
+            "sender": "bot",
+            "text": "Hello! I'm your AI Placement Assistant. I can help you understand your profile data, placement chances, salary predictions, recommended companies, and skill assessments. What would you like to know?",
+            "timestamp": "2026-03-14T21:24:36Z",
+            "intent": null,
+            "source": "system",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "Show companies with hiring intensity above 10",
+            "timestamp": "2026-03-14T21:24:39Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "I'm sorry, I didn't quite catch that. You can ask me about:\n- Your placement predictions (e.g., 'will I get placed?')\n- Company details (e.g., 'Google package')\n- Your profile (e.g., 'show my summary')",
+            "timestamp": "2026-03-14T21:24:44Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "Show companies that allow backlogs",
+            "timestamp": "2026-03-14T21:25:02Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "You asked which companies allow students with existing backlogs. Based on the placement dataset, the companies that allow backlogs include: • IBM – Maximum allowed: 1\n• Accenture – Maximum allowed: 1\n• Cognizant – Maximum allowed: 1\n• Capgemini – Maximum allowed: 1\n• TCS – Maximum allowed: 2\n• Infosys – Maximum allowed: 2\n• Wipro – Maximum allowed: 2\n• HCL – Maximum allowed: 2\n• Tech Mahindra – Maximum allowed: 2\n• Bosch – Maximum allowed: 1\n• Dell – Maximum allowed: 1\n• HP – Maximum allowed: 1\n• L&T Infotech – Maximum allowed: 1\n• Mindtree – Maximum allowed: 1\n• Mphasis – Maximum allowed: 1 These companies are relatively more flexible in their eligibility criteria. If you'd like, I can also help you identify companies that match your CGPA and department.",
+            "timestamp": "2026-03-14T21:25:06Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "Rank companies by average package",
+            "timestamp": "2026-03-14T21:25:12Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "I'm sorry, I didn't quite catch that. You can ask me about:\n- Your placement predictions (e.g., 'will I get placed?')\n- Company details (e.g., 'Google package')\n- Your profile (e.g., 'show my summary')",
+            "timestamp": "2026-03-14T21:25:16Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "Rank companies by hiring intensity",
+            "timestamp": "2026-03-14T21:25:20Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "You asked to rank companies based on hiring intensity. Here is the ranking according to the placement dataset: 1. TCS – 300\n2. Infosys – 280\n3. Wipro – 250\n4. HCL – 220\n5. Tech Mahindra – 200 This ranking helps compare companies based on hiring intensity. If you'd like, I can also show you rankings based on salary, hiring intensity, or eligibility criteria.",
+            "timestamp": "2026-03-14T21:25:22Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "Rank companies by CGPA requirement",
+            "timestamp": "2026-03-14T21:25:32Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "I'm sorry, I didn't quite catch that. You can ask me about:\n- Your placement predictions (e.g., 'will I get placed?')\n- Company details (e.g., 'Google package')\n- Your profile (e.g., 'show my summary')",
+            "timestamp": "2026-03-14T21:25:36Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "Top 5 highest paying companies",
+            "timestamp": "2026-03-14T21:25:43Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "I'm sorry, I didn't quite catch that. You can ask me about:\n- Your placement predictions (e.g., 'will I get placed?')\n- Company details (e.g., 'Google package')\n- Your profile (e.g., 'show my summary')",
+            "timestamp": "2026-03-14T21:25:47Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "Which companies require the most preparation topics?",
+            "timestamp": "2026-03-14T21:26:10Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "Please ask one of the template-based queries on hiring intensity, comparison, recommendation, strategy, advanced filters, or ranking.",
+            "timestamp": "2026-03-14T21:26:14Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "Which company has the best chance of selection?",
+            "timestamp": "2026-03-14T21:34:42Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "You asked which companies have easier selection processes. Based on the dataset, companies with relatively easier selection usually have: • Lower CGPA requirements\n• Higher hiring intensity\n• Fewer interview rounds Examples include: • TCS\n• Infosys These companies can be a good starting point for placement preparation. If you'd like, I can also suggest companies that match your eligibility criteria.",
+            "timestamp": "2026-03-14T21:34:47Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "Which companies have high hiring intensity but fewer interview rounds?",
+            "timestamp": "2026-03-14T21:35:06Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "You asked which companies have shorter interview processes. From the placement dataset, the companies with fewer interview rounds include: • SAP Labs – 3 rounds\n• Intel – 3 rounds These companies typically complete their hiring process faster compared to companies with multiple technical rounds. If you'd like, I can also show you companies with the highest salary packages.",
+            "timestamp": "2026-03-14T21:35:10Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          }
+        ]
+      },
+      {
+        "chat_id": "chat_6eabc1bd7c54",
+        "title": "Show companies with hiring intensity above 10.",
+        "created_at": "2026-03-14T21:32:29Z",
+        "updated_at": "2026-03-14T21:33:23Z",
+        "messages": [
+          {
+            "sender": "bot",
+            "text": "Hello! I'm your AI Placement Assistant. I can help you understand your profile data, placement chances, salary predictions, recommended companies, and skill assessments. What would you like to know?",
+            "timestamp": "2026-03-14T21:32:29Z",
+            "intent": null,
+            "source": "system",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "Show companies with hiring intensity above 10.",
+            "timestamp": "2026-03-14T21:32:39Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "You asked to see companies where hiring intensity above 10.. Based on the placement dataset, the companies that match this condition include: • Amazon – Hiring intensity: 25.0\n• Microsoft – Hiring intensity: 15.0\n• Flipkart – Hiring intensity: 12.0\n• Paytm – Hiring intensity: 20.0\n• Zomato – Hiring intensity: 18.0 These companies meet the specified requirement and may be suitable options depending on your eligibility. If you'd like, I can also help you compare these companies based on salary or hiring chances. You asked to see companies where hiring intensity above 10.. Based on the placement dataset, the companies that match this condition include: • Amazon – Hiring intensity: 25.0\n• Microsoft – Hiring intensity: 15.0\n• Flipkart – Hiring intensity: 12.0\n• Paytm – Hiring intensity: 20.0\n• Zomato – Hiring intensity: 18.0 These companies meet the specified requirement and may be suitable options depending on your eligibility. If you'd like, I can also help you compare these companies based on salary or hiring chances.",
+            "timestamp": "2026-03-14T21:32:44Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "Rank companies by average package",
+            "timestamp": "2026-03-14T21:32:48Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "You asked to rank companies based on average package. Here is the ranking according to the placement dataset: 1. Google – 22.00\n2. Netflix – 20.00\n3. Amazon – 18.00\n4. Uber – 18.00\n5. Atlassian – 17.00 This ranking helps compare companies based on average package. If you'd like, I can also show you rankings based on salary, hiring intensity, or eligibility criteria. You asked to rank companies based on average package. Here is the ranking according to the placement dataset: 1. Google – 22.00\n2. Netflix – 20.00\n3. Amazon – 18.00\n4. Uber – 18.00\n5. Atlassian – 17.00 This ranking helps compare companies based on average package. If you'd like, I can also show you rankings based on salary, hiring intensity, or eligibility criteria.",
+            "timestamp": "2026-03-14T21:32:50Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "Rank companies by CGPA requirement",
+            "timestamp": "2026-03-14T21:32:57Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "You asked to rank companies based on cgpa requirement. Here is the ranking according to the placement dataset: 1. Google – 8.00\n2. Netflix – 7.80\n3. Amazon – 7.50\n4. Atlassian – 7.50\n5. LinkedIn – 7.50 This ranking helps compare companies based on CGPA requirement. If you'd like, I can also show you rankings based on salary, hiring intensity, or eligibility criteria. You asked to rank companies based on cgpa requirement. Here is the ranking according to the placement dataset: 1. Google – 8.00\n2. Netflix – 7.80\n3. Amazon – 7.50\n4. Atlassian – 7.50\n5. LinkedIn – 7.50 This ranking helps compare companies based on CGPA requirement. If you'd like, I can also show you rankings based on salary, hiring intensity, or eligibility criteria.",
+            "timestamp": "2026-03-14T21:33:01Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "Top 5 highest paying companies",
+            "timestamp": "2026-03-14T21:33:04Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "You asked for the top 5 highest paying companies. Based on the placement dataset, the companies offering the highest salary packages include: 1. Amazon – Maximum package: 55.00 LPA\n2. Netflix – Maximum package: 55.00 LPA\n3. Google – Maximum package: 55.00 LPA\n4. Microsoft – Maximum package: 50.00 LPA\n5. Atlassian – Maximum package: 50.00 LPA These companies usually belong to higher placement tiers and have competitive interview processes. If you'd like, I can also show you companies with higher hiring chances. You asked for the top 5 highest paying companies. Based on the placement dataset, the companies offering the highest salary packages include: 1. Amazon – Maximum package: 55.00 LPA\n2. Netflix – Maximum package: 55.00 LPA\n3. Google – Maximum package: 55.00 LPA\n4. Microsoft – Maximum package: 50.00 LPA\n5. Atlassian – Maximum package: 50.00 LPA These companies usually belong to higher placement tiers and have competitive interview processes. If you'd like, I can also show you companies with higher hiring chances.",
+            "timestamp": "2026-03-14T21:33:06Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "Which companies require the most preparation topics?",
+            "timestamp": "2026-03-14T21:33:19Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "You asked which companies require the most preparation topics. Based on the placement dataset, the companies with the broadest preparation coverage include: • Amazon – Preparation topics tracked: 12\n• Google – Preparation topics tracked: 9\n• Microsoft – Preparation topics tracked: 7\n• Flipkart – Preparation topics tracked: 7\n• Zoho – Preparation topics tracked: 6 These companies typically test across multiple areas such as DSA, OOPS, DBMS, system design, and HR communication. If you'd like, I can also show you a company-wise preparation plan for any one of them.",
+            "timestamp": "2026-03-14T21:33:23Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          }
+        ]
+      },
+      {
+        "chat_id": "chat_f6765700e25f",
+        "title": "My placement probability?",
+        "created_at": "2026-03-15T11:52:15Z",
+        "updated_at": "2026-03-15T11:52:21Z",
+        "messages": [
+          {
+            "sender": "bot",
+            "text": "Hello! I'm your AI Placement Assistant. I can help you understand your profile data, placement chances, salary predictions, recommended companies, and skill assessments. What would you like to know?",
+            "timestamp": "2026-03-15T11:52:15Z",
+            "intent": null,
+            "source": "system",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "My placement probability?",
+            "timestamp": "2026-03-15T11:52:17Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "Based on the current prediction model, your estimated placement probability is: 29.2% This means that, according to the available data and model analysis, you currently have a low chance of getting placed. Why the probability looks like this: - The model predicts that you are most likely to be placed in the role of: Support.\n- Your expected salary is around 5.07 LPA, with a possible range between 3.55 and 6.60 LPA.\n- Based on your profile, companies such as TCS, CGI, DXC Technology, HCL, Tech Mahindra are considered suitable matches. Please note that this is only a prediction generated by the model based on historical data and patterns. Actual placement outcomes may vary depending on interviews, skill development, and company requirements.",
+            "timestamp": "2026-03-15T11:52:21Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          }
+        ]
+      },
+      {
+        "chat_id": "chat_2860598d552d",
+        "title": "What are my placement chances of getting placed with a sa...",
+        "created_at": "2026-03-15T13:40:47Z",
+        "updated_at": "2026-03-15T14:46:17Z",
+        "messages": [
+          {
+            "sender": "bot",
+            "text": "Hello! I'm your AI Placement Assistant. I can help you understand your profile data, placement chances, salary predictions, recommended companies, and skill assessments. What would you like to know?",
+            "timestamp": "2026-03-15T13:40:47Z",
+            "intent": null,
+            "source": "system",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "What are my placement chances of getting placed with a salary above 10 LPA?",
+            "timestamp": "2026-03-15T14:30:04Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "Your overall placement probability is 5.0%. Among those placements, the probability of receiving a salary above 10 LPA is estimated to be 1.3%. This means that while your overall chance of getting placed is 5.0%, the likelihood of receiving a package above 10 LPA depends on company selection and role demand. The model predicts that your most likely role is Analyst, where salaries typically fall between 4.58 and 8.50 LPA.",
+            "timestamp": "2026-03-15T14:30:08Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "Can you explain my salary prediction",
+            "timestamp": "2026-03-15T14:30:54Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "📊 **Your Complete Placement & Salary Analysis:** 🎯 **Placement Outlook:**\nChallenging. You need to focus on improvement. Probability: 5.0% 💰 **Salary Outlook:**\nYou can expect entry-level starting salary.\n• Expected Range: 4.6 - 8.5 LPA\n• Mid-salary Prediction: 6.5 LPA 👔 **Expected Role:**\n**Analyst** ✅ **Action Plan:**\n1. Focus on interview preparation for Analyst position\n2. Target companies offering 6.5+ LPA\n3. Practice negotiation skills\n4. Build a strong portfolio",
+            "timestamp": "2026-03-15T14:30:58Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "What are my placement chances and expected salary",
+            "timestamp": "2026-03-15T14:31:50Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "Here is a summary of your placement prediction based on the current model: Placement probability:\n5.0% Predicted job role:\nAnalyst Expected salary:\nAround 6.54 LPA Estimated salary range:\nBetween 4.58 LPA and 8.50 LPA. Recommended companies:\nWipro, Tech Mahindra, CGI, Birlasoft, Sopra Steria Explanation: - The model predicts that your profile aligns most closely with the role of Analyst.\n- Based on similar placement data from previous years, candidates in this role usually receive salary offers within the predicted range.\n- Companies listed above frequently recruit for this role and salary bracket. Please note that these results are predictions based on historical placement patterns and model analysis. Actual outcomes may vary depending on interviews, skills, and company hiring conditions.",
+            "timestamp": "2026-03-15T14:31:54Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "will I get placed this year",
+            "timestamp": "2026-03-15T14:32:51Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "📊 **Your Complete Placement & Salary Analysis:** 🎯 **Placement Outlook:**\nChallenging. You need to focus on improvement. Probability: 5.0% 💰 **Salary Outlook:**\nYou can expect entry-level starting salary.\n• Expected Range: 4.6 - 8.5 LPA\n• Mid-salary Prediction: 6.5 LPA 👔 **Expected Role:**\n**Analyst** ✅ **Action Plan:**\n1. Focus on interview preparation for Analyst position\n2. Target companies offering 6.5+ LPA\n3. Practice negotiation skills\n4. Build a strong portfolio",
+            "timestamp": "2026-03-15T14:32:55Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "Can you explain my salary prediction",
+            "timestamp": "2026-03-15T14:45:46Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "Your current placement prediction is based on the following factors: - Predicted job role: Analyst\n- Expected salary: around 6.54 LPA\n- Most likely salary (mid): 6.54 LPA\n- Placement probability: 5.0% These predictions are generated using patterns observed in historical placement data for similar profiles. Ways to improve your placement chances may include: - Strengthening technical skills related to your predicted role\n- Practicing interview preparation\n- Applying to companies that match your profile, such as: Wipro, Tech Mahindra, CGI, Birlasoft, Sopra Steria Please remember that predictions are estimates and can improve with preparation and skill development.",
+            "timestamp": "2026-03-15T14:45:51Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "Will I get placed this year",
+            "timestamp": "2026-03-15T14:46:12Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "Your predicted placement probability is currently: 5.0%. This means there is a reasonable chance of getting placed based on the current prediction model. However, placement outcomes also depend on interview performance, preparation, and company hiring conditions.",
+            "timestamp": "2026-03-15T14:46:17Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          }
+        ]
+      },
+      {
+        "chat_id": "chat_a0d91789f2c1",
+        "title": "- Which is better: Amazon or Microsoft?",
+        "created_at": "2026-03-15T18:45:07Z",
+        "updated_at": "2026-03-15T20:33:50Z",
+        "messages": [
+          {
+            "sender": "bot",
+            "text": "Hello! I'm your AI Placement Assistant. I can help you understand your profile data, placement chances, salary predictions, recommended companies, and skill assessments. What would you like to know?",
+            "timestamp": "2026-03-15T18:45:07Z",
+            "intent": null,
+            "source": "system",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "- Which is better: Amazon or Microsoft?",
+            "timestamp": "2026-03-15T18:45:09Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "Here is a comparison between Amazon and Microsoft: Average Package:\n  • Amazon : 18.0 LPA\n  • Microsoft : 16.0 LPA\n  → Amazon offers a higher average salary. Difficulty Level:\n  • Amazon : 8.5/10\n  • Microsoft : 8.5/10\n  → Amazon has a relatively easier selection process. Minimum CGPA:\n  • Amazon : 7.5\n  • Microsoft : 7.0\n  → Microsoft has a lower CGPA requirement.",
+            "timestamp": "2026-03-15T18:45:13Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "Which companies offer the best package with the lowest CGPA requirement?",
+            "timestamp": "2026-03-15T18:45:31Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "I'm sorry, I didn't quite catch that. You can ask me about:\n- Your placement predictions (e.g., 'will I get placed?')\n- Company details (e.g., 'Google package')\n- Your profile (e.g., 'show my summary')",
+            "timestamp": "2026-03-15T18:45:36Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "- Which companies have high packages and short interview processes?",
+            "timestamp": "2026-03-15T18:45:52Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "Please ask one of the template-based queries on hiring intensity, comparison, recommendation, strategy, advanced filters, or ranking.",
+            "timestamp": "2026-03-15T18:45:57Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "Which companies require the most preparation topics?",
+            "timestamp": "2026-03-15T18:46:07Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "Below is your report for The-Trade-Desk (All Time).\nQuestions: 6 | Easy: 0 | Medium: 5 | Hard: 1\nTop N applied: 30 | Sorted by frequency\nDownloadable PDF: http://localhost:5000/api/reports/leetcode_the-trade-desk_all_20260315184613_a8ea3f18.pdf",
+            "timestamp": "2026-03-15T18:46:13Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "Which companies offer the best package with the lowest CGPA requirement?",
+            "timestamp": "2026-03-15T19:01:32Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "You asked which companies offer the best package with lower CGPA requirements. Based on the placement dataset, strong package-to-CGPA options include: • Amazon - Max package: 55.00 LPA | Min CGPA: 7.50 | Package/CGPA score: 7.33\n• Microsoft - Max package: 50.00 LPA | Min CGPA: 7.00 | Package/CGPA score: 7.14\n• Netflix - Max package: 55.00 LPA | Min CGPA: 7.80 | Package/CGPA score: 7.05\n• Google - Max package: 55.00 LPA | Min CGPA: 8.00 | Package/CGPA score: 6.88\n• Atlassian - Max package: 50.00 LPA | Min CGPA: 7.50 | Package/CGPA score: 6.67 These companies provide a better salary upside relative to their CGPA threshold. If you'd like, I can also rank these by interview rounds to find faster hiring paths.",
+            "timestamp": "2026-03-15T19:01:37Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "Which companies require the most preparation topics?",
+            "timestamp": "2026-03-15T19:01:50Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "Below is your report for The-Trade-Desk (All Time).\nQuestions: 6 | Easy: 0 | Medium: 5 | Hard: 1\nTop N applied: 30 | Sorted by frequency\nDownloadable PDF: http://localhost:5000/api/reports/leetcode_the-trade-desk_all_20260315190154_dc67e3fc.pdf",
+            "timestamp": "2026-03-15T19:01:55Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "Which companies require the most preparation topics?",
+            "timestamp": "2026-03-15T19:02:06Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "Below is your report for The-Trade-Desk (All Time).\nQuestions: 6 | Easy: 0 | Medium: 5 | Hard: 1\nTop N applied: 30 | Sorted by frequency\nDownloadable PDF: http://localhost:5000/api/reports/leetcode_the-trade-desk_all_20260315190210_bac052c7.pdf",
+            "timestamp": "2026-03-15T19:02:11Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "Which companies have high packages and short interview processes?",
+            "timestamp": "2026-03-15T19:02:18Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "You asked which companies combine high packages with shorter interview processes. According to the placement dataset, good options include: • Netflix - Max package: 55.00 LPA | Interview rounds: 3\n• Amazon - Max package: 55.00 LPA | Interview rounds: 4\n• Google - Max package: 55.00 LPA | Interview rounds: 4\n• Microsoft - Max package: 50.00 LPA | Interview rounds: 3\n• Atlassian - Max package: 50.00 LPA | Interview rounds: 3 These companies offer stronger salary potential while keeping the interview pipeline relatively shorter.",
+            "timestamp": "2026-03-15T19:02:23Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "- Which companies offer high salary but allow backlogs?",
+            "timestamp": "2026-03-15T19:02:30Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "You asked which companies allow backlogs while still offering strong salary packages. From the dataset, the companies that meet these conditions include: • IBM – Max package: 20.00 LPA | Backlogs allowed: 1\n• KPMG – Max package: 20.00 LPA | Backlogs allowed: 1\n• Bosch – Max package: 18.00 LPA | Backlogs allowed: 1\n• Accenture – Max package: 18.00 LPA | Backlogs allowed: 1\n• Cognizant – Max package: 16.00 LPA | Backlogs allowed: 1 These companies provide good opportunities for students who meet technical requirements despite having backlogs. If you'd like, I can also show you their eligibility criteria or hiring intensity.",
+            "timestamp": "2026-03-15T19:02:34Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "- Which companies are best for CSE students with 7 CGPA?",
+            "timestamp": "2026-03-15T19:02:38Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "You asked which companies are best for CSE students with around 7.00 CGPA. According to the placement dataset, suitable options include: • TCS - Avg package: 4.50 LPA | Min CGPA: 5.50 | Rounds: 3\n• Infosys - Avg package: 4.80 LPA | Min CGPA: 5.50 | Rounds: 3\n• Wipro - Avg package: 4.20 LPA | Min CGPA: 5.50 | Rounds: 3\n• HCL - Avg package: 4.00 LPA | Min CGPA: 5.50 | Rounds: 3\n• Tech Mahindra - Avg package: 4.30 LPA | Min CGPA: 5.50 | Rounds: 3 This ranking balances eligibility, package potential, and interview complexity for a CSE profile.",
+            "timestamp": "2026-03-15T19:02:41Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "- Which companies have high packages and short interview processes?",
+            "timestamp": "2026-03-15T19:02:50Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "You asked which companies combine high packages with shorter interview processes. According to the placement dataset, good options include: • Netflix - Max package: 55.00 LPA | Interview rounds: 3\n• Amazon - Max package: 55.00 LPA | Interview rounds: 4\n• Google - Max package: 55.00 LPA | Interview rounds: 4\n• Microsoft - Max package: 50.00 LPA | Interview rounds: 3\n• Atlassian - Max package: 50.00 LPA | Interview rounds: 3 These companies offer stronger salary potential while keeping the interview pipeline relatively shorter.",
+            "timestamp": "2026-03-15T19:02:54Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "Which Tier 1 companies offer more than 20 LPA?",
+            "timestamp": "2026-03-15T20:33:44Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "You asked which Tier 1 companies offer packages higher than 1.0 LPA. Based on the placement dataset, the companies that meet both criteria include: • Amazon – Tier: 1 | Average package: 18.00 LPA\n• Google – Tier: 1 | Average package: 22.00 LPA\n• Microsoft – Tier: 1 | Average package: 16.00 LPA\n• Flipkart – Tier: 1 | Average package: 14.00 LPA\n• Walmart Global Tech – Tier: 1 | Average package: 15.00 LPA These companies belong to the top placement tier and offer competitive salary packages. If you'd like, I can also show you their interview processes or eligibility requirements.",
+            "timestamp": "2026-03-15T20:33:50Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          }
+        ]
+      },
+      {
+        "chat_id": "chat_8119dea75d45",
+        "title": "New Chat",
+        "created_at": "2026-03-20T09:21:55Z",
+        "updated_at": "2026-03-20T09:21:55Z",
+        "messages": [
+          {
+            "sender": "bot",
+            "text": "Hello! I'm your AI Placement Assistant. I can help you understand your profile data, placement chances, salary predictions, recommended companies, and skill assessments. What would you like to know?",
+            "timestamp": "2026-03-20T09:21:55Z",
+            "intent": null,
+            "source": "system",
+            "value": null
+          }
+        ]
+      }
+    ]
+  },
+  "200002": {
+    "active_chat_id": "chat_f37f50f1edda",
+    "chats": [
+      {
+        "chat_id": "chat_f37f50f1edda",
+        "title": "New Chat",
+        "created_at": "2026-03-15T14:23:39Z",
+        "updated_at": "2026-03-15T14:23:39Z",
+        "messages": [
+          {
+            "sender": "bot",
+            "text": "Hello! I'm your AI Placement Assistant. I can help you understand your profile data, placement chances, salary predictions, recommended companies, and skill assessments. What would you like to know?",
+            "timestamp": "2026-03-15T14:23:39Z",
+            "intent": null,
+            "source": "system",
+            "value": null
+          }
+        ]
+      }
+    ]
+  },
+  "200006": {
+    "active_chat_id": "chat_d2cce7d6851a",
+    "chats": [
+      {
+        "chat_id": "chat_d2cce7d6851a",
+        "title": "My placement probability?",
+        "created_at": "2026-03-20T08:14:13Z",
+        "updated_at": "2026-03-20T08:14:24Z",
+        "messages": [
+          {
+            "sender": "bot",
+            "text": "Hello! I'm your AI Placement Assistant. I can help you understand your profile data, placement chances, salary predictions, recommended companies, and skill assessments. What would you like to know?",
+            "timestamp": "2026-03-20T08:14:13Z",
+            "intent": null,
+            "source": "system",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "My placement probability?",
+            "timestamp": "2026-03-20T08:14:19Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "Your placement probability needs to be updated before I can answer this query.\nPlease go to the Placement Prediction Model page and generate/update your prediction, then try again.\n[[PREDICTION_UPDATE_REQUIRED]]",
+            "timestamp": "2026-03-20T08:14:24Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,11 +1,12 @@
 import { useState, useRef, useEffect } from "react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
-import { Brain, Send, Mic, Paperclip, Home, MessageSquare, LogOut, User, Menu, X, AlertCircle, Loader2 } from "lucide-react";
+import { Brain, Send, Mic, Paperclip, Home, MessageSquare, LogOut, User, Menu, X, AlertCircle, Loader2, Trash2, Download } from "lucide-react";
 import { Link } from "react-router";
 import { motion, AnimatePresence } from "motion/react";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+const PREDICTION_UPDATE_TOKEN = "[[PREDICTION_UPDATE_REQUIRED]]";
 
 interface Message {
   id: number;
@@ -15,15 +16,96 @@ interface Message {
   intent?: string;
   source?: string;
   value?: any;
+  requiresPredictionUpdate?: boolean;
 }
 
-interface ChatHistory {
-  id: number;
-  title: string;
+interface StoredMessage {
+  sender: "user" | "bot";
+  text: string;
   timestamp: string;
+  intent?: string | null;
+  source?: string | null;
+  value?: any;
+}
+
+interface ChatSession {
+  chat_id: string;
+  title: string;
+  created_at: string;
+  updated_at: string;
+  messages: StoredMessage[];
+}
+
+interface ChatHistoryResponse {
+  student_id: string;
+  active_chat_id: string | null;
+  chats: ChatSession[];
 }
 
 export function ChatbotInterface() {
+  const welcomeText = "Hello! I'm your AI Placement Assistant. I can help you understand your profile data, placement chances, salary predictions, recommended companies, and skill assessments. What would you like to know?";
+
+  const getInitialMessages = (): Message[] => [
+    {
+      id: 1,
+      text: welcomeText,
+      sender: "bot",
+      timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
+    }
+  ];
+
+  const toDisplayTime = (raw: string) => {
+    const parsed = new Date(raw);
+    if (Number.isNaN(parsed.getTime())) {
+      return "Just now";
+    }
+    return parsed.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+  };
+
+  const toRelativeTime = (raw: string) => {
+    const parsed = new Date(raw);
+    if (Number.isNaN(parsed.getTime())) {
+      return "Just now";
+    }
+    const diffMs = Date.now() - parsed.getTime();
+    const minutes = Math.max(1, Math.floor(diffMs / 60000));
+    if (minutes < 60) return `${minutes}m ago`;
+    const hours = Math.floor(minutes / 60);
+    if (hours < 24) return `${hours}h ago`;
+    const days = Math.floor(hours / 24);
+    return `${days}d ago`;
+  };
+
+  const extractReportUrl = (text: string): string | null => {
+    const match = text.match(/https?:\/\/[^\s]+\/api\/reports\/[A-Za-z0-9._-]+\.pdf/i);
+    return match ? match[0] : null;
+  };
+
+  const containsPredictionUpdateToken = (text: string): boolean => text.includes(PREDICTION_UPDATE_TOKEN);
+
+  const stripPredictionToken = (text: string): string => text.replace(PREDICTION_UPDATE_TOKEN, "").trim();
+
+  const mapStoredMessages = (stored: StoredMessage[]): Message[] => {
+    if (!stored || stored.length === 0) {
+      return getInitialMessages();
+    }
+    return stored.map((m, index) => {
+      const rawText = m.text || "";
+      const requiresPredictionUpdate = containsPredictionUpdateToken(rawText);
+
+      return {
+        id: index + 1,
+        text: stripPredictionToken(rawText),
+        sender: m.sender,
+        timestamp: toDisplayTime(m.timestamp),
+        intent: m.intent || undefined,
+        source: m.source || undefined,
+        value: m.value,
+        requiresPredictionUpdate
+      };
+    });
+  };
+
   // Student ID state
   const [studentId, setStudentId] = useState<number | null>(null);
   const [studentIdInput, setStudentIdInput] = useState("");
@@ -31,28 +113,16 @@ export function ChatbotInterface() {
   const [studentIdError, setStudentIdError] = useState<string | null>(null);
   const [validatingStudentId, setValidatingStudentId] = useState(false);
   const [studentName, setStudentName] = useState<string | null>(null);
+  const [chatSessions, setChatSessions] = useState<ChatSession[]>([]);
+  const [activeChatId, setActiveChatId] = useState<string | null>(null);
+  const [historyLoading, setHistoryLoading] = useState(false);
 
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      id: 1,
-      text: "Hello! I'm your AI Placement Assistant. I can help you understand your profile data, placement chances, salary predictions, recommended companies, and skill assessments. What would you like to know?",
-      sender: "bot",
-      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-    }
-  ]);
+  const [messages, setMessages] = useState<Message[]>(getInitialMessages());
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [loadingResponse, setLoadingResponse] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-
-  const chatHistory: ChatHistory[] = [
-    { id: 1, title: "Profile information check", timestamp: "2 hours ago" },
-    { id: 2, title: "Placement probability", timestamp: "1 day ago" },
-    { id: 3, title: "Salary predictions", timestamp: "2 days ago" },
-    { id: 4, title: "Skill assessment", timestamp: "3 days ago" },
-    { id: 5, title: "Company recommendations", timestamp: "5 days ago" },
-  ];
 
   const suggestionChips = [
     "What is my CGPA?",
@@ -71,6 +141,125 @@ export function ChatbotInterface() {
     scrollToBottom();
   }, [messages]);
 
+  const selectChat = (chatId: string, sessions?: ChatSession[]) => {
+    const source = sessions || chatSessions;
+    const selected = source.find((c) => c.chat_id === chatId);
+    if (!selected) {
+      setMessages(getInitialMessages());
+      setActiveChatId(null);
+      return;
+    }
+    setActiveChatId(chatId);
+    setMessages(mapStoredMessages(selected.messages));
+  };
+
+  const loadHistory = async (sid: number, preferredChatId?: string | null) => {
+    setHistoryLoading(true);
+    try {
+      const response = await fetch(`${API_BASE_URL}/chat-history/${sid}`);
+      const data: ChatHistoryResponse = await response.json();
+
+      if (!response.ok) {
+        throw new Error((data as any)?.error || "Failed to load chat history");
+      }
+
+      const sessions = data.chats || [];
+      setChatSessions(sessions);
+
+      if (sessions.length === 0) {
+        await createNewChatForStudent(sid);
+        return;
+      }
+
+      const targetChatId = preferredChatId || data.active_chat_id || sessions[0].chat_id;
+      selectChat(targetChatId, sessions);
+    } catch (error) {
+      console.error("[ChatBot] Failed to load history:", error);
+      setMessages(getInitialMessages());
+      setChatSessions([]);
+      setActiveChatId(null);
+    } finally {
+      setHistoryLoading(false);
+    }
+  };
+
+  const createNewChatForStudent = async (sid: number) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/chat-history/${sid}/new`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ title: "New Chat" })
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data?.error || "Unable to create new chat");
+      }
+
+      const history = data.history as ChatHistoryResponse;
+      const sessions = history?.chats || [];
+      setChatSessions(sessions);
+      const newChatId = data.chat_id || history?.active_chat_id || (sessions[0] ? sessions[0].chat_id : null);
+      if (newChatId) {
+        selectChat(newChatId, sessions);
+      } else {
+        setMessages(getInitialMessages());
+        setActiveChatId(null);
+      }
+    } catch (error) {
+      console.error("[ChatBot] Failed to create new chat:", error);
+    }
+  };
+
+  const handleNewChat = async () => {
+    if (!studentId) return;
+    await createNewChatForStudent(studentId);
+    setInput("");
+  };
+
+  const handleDeleteChat = async (chatId: string) => {
+    if (!studentId) return;
+    try {
+      const response = await fetch(`${API_BASE_URL}/chat-history/${studentId}/${chatId}`, {
+        method: "DELETE"
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data?.error || "Unable to delete chat");
+      }
+
+      const history = data.history as ChatHistoryResponse;
+      const sessions = history?.chats || [];
+      setChatSessions(sessions);
+      if (sessions.length === 0) {
+        await createNewChatForStudent(studentId);
+      } else {
+        const nextChatId = history.active_chat_id || sessions[0].chat_id;
+        selectChat(nextChatId, sessions);
+      }
+    } catch (error) {
+      console.error("[ChatBot] Failed to delete chat:", error);
+    }
+  };
+
+  const handleClearHistory = async () => {
+    if (!studentId) return;
+    try {
+      const response = await fetch(`${API_BASE_URL}/chat-history/${studentId}`, {
+        method: "DELETE"
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data?.error || "Unable to clear history");
+      }
+      setChatSessions([]);
+      setActiveChatId(null);
+      setMessages(getInitialMessages());
+      await createNewChatForStudent(studentId);
+    } catch (error) {
+      console.error("[ChatBot] Failed to clear history:", error);
+    }
+  };
+
   const validateStudentId = async () => {
     if (!studentIdInput.trim()) {
       setStudentIdError("Please enter a student ID");
@@ -85,9 +274,11 @@ export function ChatbotInterface() {
       const data = await response.json();
 
       if (response.ok) {
-        setStudentId(parseInt(studentIdInput));
+        const parsedStudentId = parseInt(studentIdInput);
+        setStudentId(parsedStudentId);
         setStudentName(data.name || data.student?.name || "Student");
         setShowStudentIdModal(false);
+        await loadHistory(parsedStudentId);
         console.log("[ChatBot] Student validated:", data.name || data.student?.name);
       } else {
         setStudentIdError(data.message || "Student ID not found");
@@ -103,8 +294,12 @@ export function ChatbotInterface() {
   const handleSend = async () => {
     if (!input.trim() || !studentId) return;
 
+    if (!activeChatId) {
+      await createNewChatForStudent(studentId);
+    }
+
     const userMessage: Message = {
-      id: messages.length + 1,
+      id: Date.now(),
       text: input,
       sender: "user",
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
@@ -125,6 +320,7 @@ export function ChatbotInterface() {
         },
         body: JSON.stringify({
           student_id: studentId,
+          chat_id: activeChatId,
           message: userMessage.text
         })
       });
@@ -133,6 +329,8 @@ export function ChatbotInterface() {
       console.log("[ChatBot] Response:", data);
 
       let botResponse = data.answer || "I couldn't process that request. Please try again.";
+      const requiresPredictionUpdate = containsPredictionUpdateToken(botResponse);
+      botResponse = stripPredictionToken(botResponse);
 
       // Format response with metadata if available
       if (data.source === 'student_profile') {
@@ -148,21 +346,23 @@ export function ChatbotInterface() {
       }
 
       const botMessage: Message = {
-        id: messages.length + 2,
+        id: Date.now() + 1,
         text: botResponse,
         sender: "bot",
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
         intent: data.intent,
         source: data.source,
-        value: data.value
+        value: data.value,
+        requiresPredictionUpdate
       };
 
       setMessages(prev => [...prev, botMessage]);
+      await loadHistory(studentId, data.chat_id || activeChatId);
     } catch (error) {
       console.error("[ChatBot] Error:", error);
 
       const errorMessage: Message = {
-        id: messages.length + 2,
+        id: Date.now() + 1,
         text: "I encountered an error while processing your request. Please try again.",
         sender: "bot",
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
@@ -284,25 +484,46 @@ export function ChatbotInterface() {
             </div>
 
             {/* New Chat Button */}
-            <div className="p-4">
-              <Button className="w-full bg-primary hover:bg-primary/90">
+            <div className="p-4 space-y-2">
+              <Button className="w-full bg-primary hover:bg-primary/90" onClick={handleNewChat}>
                 <MessageSquare className="w-4 h-4 mr-2" />
                 New Chat
+              </Button>
+              <Button variant="outline" className="w-full" onClick={handleClearHistory}>
+                <Trash2 className="w-4 h-4 mr-2" />
+                Delete All History
               </Button>
             </div>
 
             {/* Chat History List */}
             <div className="flex-1 overflow-y-auto p-4 space-y-2">
-              {chatHistory.map((chat) => (
-                <button
-                  key={chat.id}
-                  className="w-full text-left p-3 rounded-lg hover:bg-muted transition-colors"
-                >
-                  <p className="text-sm truncate mb-1" style={{ fontWeight: 500 }}>
-                    {chat.title}
-                  </p>
-                  <p className="text-xs text-muted-foreground">{chat.timestamp}</p>
-                </button>
+              {historyLoading && (
+                <p className="text-xs text-muted-foreground">Loading chats...</p>
+              )}
+              {!historyLoading && chatSessions.length === 0 && (
+                <p className="text-xs text-muted-foreground">No chat history yet.</p>
+              )}
+              {!historyLoading && chatSessions.map((chat) => (
+                <div key={chat.chat_id} className="flex items-start gap-2">
+                  <button
+                    onClick={() => selectChat(chat.chat_id)}
+                    className={`flex-1 text-left p-3 rounded-lg transition-colors ${activeChatId === chat.chat_id ? 'bg-muted' : 'hover:bg-muted'}`}
+                  >
+                    <p className="text-sm truncate mb-1" style={{ fontWeight: 500 }}>
+                      {chat.title}
+                    </p>
+                    <p className="text-xs text-muted-foreground">{toRelativeTime(chat.updated_at)}</p>
+                  </button>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-8 w-8 mt-1"
+                    onClick={() => handleDeleteChat(chat.chat_id)}
+                    title="Delete chat"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </Button>
+                </div>
               ))}
             </div>
 
@@ -403,6 +624,32 @@ export function ChatbotInterface() {
                           }`}
                         >
                           <p className="whitespace-pre-line text-sm leading-relaxed">{message.text}</p>
+                          {message.sender === 'bot' && (() => {
+                            const reportUrl = extractReportUrl(message.text);
+                            if (!reportUrl) return null;
+                            return (
+                              <div className="mt-3">
+                                <Button
+                                  size="sm"
+                                  className="h-8"
+                                  onClick={() => window.open(reportUrl, "_blank")}
+                                >
+                                  <Download className="w-4 h-4 mr-2" />
+                                  Download PDF
+                                </Button>
+                              </div>
+                            );
+                          })()}
+
+                          {message.sender === 'bot' && message.requiresPredictionUpdate && (
+                            <div className="mt-3">
+                              <Link to="/placement-probability">
+                                <Button size="sm" className="h-8">
+                                  Go to Placement Prediction Model
+                                </Button>
+                              </Link>
+                            </div>
+                          )}
                         </div>
                         <p
                           className={`text-xs text-muted-foreground px-2 ${

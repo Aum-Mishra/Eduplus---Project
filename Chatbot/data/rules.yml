@@ -17,6 +17,12 @@ rules:
   - intent: goodbye
   - action: utter_goodbye
 
+# ==================== STUDENT ID HANDLING ====================
+- rule: Handle Student ID
+  steps:
+  - intent: inform_student_id
+  - action: action_handle_student_id
+
 # ==================== LAYER 1: COMPANY-SPECIFIC RULES ====================
 - rule: Get Average Package
   steps:
@@ -71,6 +77,11 @@ rules:
 - rule: Get Interview Process
   steps:
   - intent: ask_interview_process
+  - action: action_get_interview_process
+
+- rule: Get Round Duration
+  steps:
+  - intent: ask_round_duration
   - action: action_get_interview_process
 
 - rule: Area specific prep topics (HIGH PRIORITY)
@@ -131,6 +142,67 @@ rules:
   steps:
   - intent: list_companies_by_category
   - action: action_list_companies_by_category
+
+# ==================== TEMPLATE-DRIVEN ADVANCED RULES ====================
+- rule: Handle Hiring Intensity Templates
+  steps:
+  - intent: ask_hiring_intensity_templates
+  - action: action_handle_template_queries
+
+- rule: Handle Comparison Templates
+  steps:
+  - intent: ask_comparison_templates
+  - action: action_handle_template_queries
+
+- rule: Handle Recommendation Templates
+  steps:
+  - intent: ask_recommendation_templates
+  - action: action_handle_template_queries
+
+- rule: Handle Strategy Templates
+  steps:
+  - intent: ask_strategy_templates
+  - action: action_handle_template_queries
+
+- rule: Handle Eligibility Strategy Templates
+  steps:
+  - intent: ask_eligibility_strategy_templates
+  - action: action_handle_template_queries
+
+- rule: Handle Salary Hiring Templates
+  steps:
+  - intent: ask_salary_hiring_templates
+  - action: action_handle_template_queries
+
+- rule: Handle Advanced Analytics Templates
+  steps:
+  - intent: ask_advanced_analytics_templates
+  - action: action_handle_template_queries
+
+- rule: Handle Decision Templates
+  steps:
+  - intent: ask_decision_templates
+  - action: action_handle_template_queries
+
+- rule: Handle Complex Templates
+  steps:
+  - intent: ask_complex_templates
+  - action: action_handle_template_queries
+
+- rule: Handle Filter Templates
+  steps:
+  - intent: ask_filter_templates
+  - action: action_handle_template_queries
+
+- rule: Handle Ranking Templates
+  steps:
+  - intent: ask_ranking_templates
+  - action: action_handle_template_queries
+
+- rule: Handle Top Paying Templates
+  steps:
+  - intent: ask_top_paying_templates
+  - action: action_handle_template_queries
 
 # ==================== LAYER 2: AGGREGATE RULES ====================
 - rule: List Companies by CGPA
@@ -204,25 +276,145 @@ rules:
   - intent: ask_general_hr_question
   - action: utter_general_hr_question
 
-# ==================== PHASE 4: PLACEMENT PREDICTION RULES ====================
-- rule: Get Placement Probability
+# ==================== PHASE 4: STUDENT PLACEMENT PREDICTION RULES ====================
+- rule: Get Student Placement Probability
   steps:
-  - intent: placement_probability
-  - action: action_get_placement_probability
+  - intent: ask_student_placement_probability
+  - action: action_get_student_placement_probability
 
-- rule: Get Eligible Companies
+- rule: Get Student Placement Status
   steps:
-  - intent: eligible_companies
-  - action: action_get_eligible_companies
+  - intent: ask_student_placement_status
+  - action: action_get_student_placement_status
 
-- rule: Get Skill Gap Analysis
+- rule: Get Student Predicted Company
   steps:
-  - intent: skill_gap_analysis
-  - action: action_get_skill_gap
+  - intent: ask_student_predicted_company
+  - action: action_get_student_predicted_company
 
+- rule: Get Student Predicted Job Role
+  steps:
+  - intent: ask_student_predicted_job_role
+  - action: action_get_student_predicted_job_role
+
+- rule: Get Student Predicted Salary
+  steps:
+  - intent: ask_student_predicted_salary
+  - action: action_get_student_predicted_salary
+
+- rule: Get Student Profile Summary
+  steps:
+  - intent: ask_student_profile_summary
+  - action: action_get_student_profile_summary
+
+- rule: Get Student Areas to Improve
+  steps:
+  - intent: ask_student_areas_to_improve
+  - action: action_get_student_areas_to_improve
+
+- rule: Get Student Company Fit
+  steps:
+  - intent: ask_student_company_fit
+  - action: action_get_student_company_fit
+
+- rule: Get Salary Range
+  steps:
+  - intent: ask_salary_range
+  - action: action_get_salary_range
+
+- rule: Get Salary Threshold Probability
+  steps:
+  - intent: ask_salary_threshold
+  - action: action_get_salary_threshold
+
+- rule: Get Placement and Salary
+  steps:
+  - intent: ask_placement_and_salary
+  - action: action_get_placement_and_salary
+
+- rule: Get Recommended Companies
+  steps:
+  - intent: ask_recommended_companies
+  - action: action_get_student_predicted_company
+
+- rule: Get Salary Comparison
+  steps:
+  - intent: ask_salary_comparison
+  - action: action_get_salary_comparison
+
+- rule: Get Placement Advice
+  steps:
+  - intent: ask_placement_advice
+  - action: action_get_placement_advice
+
+- rule: Explain Predictions
+  steps:
+  - intent: ask_explanation
+  - action: action_get_placement_explanation
+
+- rule: Realistic Placement Questions
+  steps:
+  - intent: ask_realistic_placement
+  - action: action_get_realistic_student_response
+
+- rule: Placement Probability Query Intent
+  steps:
+  - intent: placement_probability_query
+  - action: action_get_student_placement_probability
+
+- rule: Salary Prediction Query Intent
+  steps:
+  - intent: salary_prediction_query
+  - action: action_get_student_predicted_salary
+
+- rule: Salary Range Query Intent
+  steps:
+  - intent: salary_range_query
+  - action: action_get_salary_range
+
+- rule: Recommended Companies Query Intent
+  steps:
+  - intent: recommended_companies_query
+  - action: action_get_student_predicted_company
+
+- rule: Placement Summary Query Intent
+  steps:
+  - intent: placement_summary_query
+  - action: action_get_placement_summary
+
+- rule: Placement Analytical Query Intent
+  steps:
+  - intent: placement_analytical_query
+  - action: action_get_placement_analytical
+
+- rule: Salary Comparison Query Intent
+  steps:
+  - intent: salary_comparison_query
+  - action: action_get_salary_comparison
+
+- rule: Placement Advice Query Intent
+  steps:
+  - intent: placement_advice_query
+  - action: action_get_placement_advice
+
+- rule: Placement Explanation Query Intent
+  steps:
+  - intent: placement_explanation_query
+  - action: action_get_placement_explanation
+
+- rule: Realistic Student Query Intent
+  steps:
+  - intent: realistic_student_query
+  - action: action_get_realistic_student_response
+
+- rule: LeetCode Companywise Questions Report
+  steps:
+  - intent: ask_leetcode_company_questions
+  - action: action_get_leetcode_company_questions
 
 # ==================== FALLBACK ====================
 - rule: Handle Fallback
   steps:
   - intent: nlu_fallback
   - action: action_default_fallback
+

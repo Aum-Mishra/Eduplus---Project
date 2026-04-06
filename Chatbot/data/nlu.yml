@@ -1423,3 +1423,662 @@ nlu:
     - Which offers better return on effort: [Capgemini](company) or [Infosys](company)?
     - Salary vs difficulty [TCS](company) vs [Amazon](company)
     - Is the difficulty of [Google](company) worth the salary compared to [Wipro](company)?
+
+# ==================== STUDENT ID & PERSONALIZED PLACEMENT QUERIES ====================
+
+# --- Student ID Extraction ---
+- intent: inform_student_id
+  examples: |
+    - My student ID is [200001](student_id)
+    - My ID is [200051](student_id)
+    - I am [200001](student_id)
+    - I'm student [200050](student_id)
+    - My student number is [200010](student_id)
+    - ID: [200001](student_id)
+    - Student ID [200051](student_id)
+    - I have ID [200025](student_id)
+    - My enrollment is [200001](student_id)
+    - Register me as [200001](student_id)
+    - Register my ID [200051](student_id)
+    - My ID number is [200025](student_id)
+    - [200001](student_id) is my ID
+    - I'm [200050](student_id)
+    - Register [200001](student_id)
+    - my id [200051](student_id)
+
+# --- Overall Placement Probability ---
+- intent: ask_student_placement_probability
+  examples: |
+    - What is my placement probability?
+    - What are my placement chances?
+    - Check my placement probability
+    - Will I get placed?
+    - What's my chance of getting placed?
+    - Show my placement stats
+    - Calculate my placement probability
+    - What's the probability I'll get placed?
+    - What is my placement likelihood?
+    - Tell me my placement probability
+    - Get my placement prediction
+    - My placement chances
+    - Will I be placed?
+    - What is the difference between my minimum and maximum salary prediction?
+    - What are the chances that I will get placed?
+    - How likely am I to get a placement?
+    - Can you tell me my chances of getting placed?
+    - What percentage chance do I have of getting a job?
+    - Am I likely to get placed this year?
+    - Based on my profile, what is my placement probability?
+    - What is my predicted chance of placement?
+    - How confident is the model about my placement?
+    - What are my job chances?
+
+# --- Placement Status ---
+- intent: ask_student_placement_status
+  examples: |
+    - What is my placement status?
+    - Should I target high paying companies?
+    - Am I likely to get placed?
+    - What's my placement status?
+    - Check my status
+    - Is my profile good for placements?
+    - What is my placement readiness?
+    - Will my profile get selected?
+    - Status of my placement chances
+    - My placement likelihood
+    - Get my placement assessment
+    - Evaluate my placement prospects
+    - will i get a job?
+    - chances of my placement
+
+# --- Predicted Company ---
+- intent: ask_student_predicted_company
+  examples: |
+    - Which company am I likely to get?
+    - What companies should I target?
+    - Predict my company
+    - Which companies are best for me?
+    - What company matches my profile?
+    - Which company will I likely get?
+    - Show my matching companies
+    - What companies fit my profile?
+    - Recommended companies for me
+    - Which companies should I focus on?
+    - My ideal companies
+    - Companies that will hire me
+    - Which companies should I apply to?
+    - What companies are recommended for me?
+    - Which recruiters match my profile?
+    - Which companies are most suitable for me?
+    - Where should I apply for placements?
+    - Which companies might hire me?
+    - What companies can I get into?
+
+# --- Predicted Job Role ---
+- intent: ask_student_predicted_job_role
+  examples: |
+    - What job role will I get?
+    - What role am I likely to get?
+    - Predict my job role
+    - What position can I get?
+    - What role suits me?
+    - What job will I get?
+    - Predicted role for me
+    - My ideal job role
+    - What position should I target?
+    - What role matches my profile?
+    - Recommended role for me
+    - Software engineer role prediction
+    - What job role am I most likely to get?
+    - What role does the model predict for me?
+    - Which job position suits my profile?
+    - What role can I expect during placements?
+    - What job title is predicted for me?
+    - What position might I get placed in?
+
+# --- Predicted Salary ---
+- intent: ask_student_predicted_salary
+  examples: |
+    - What salary will I get?
+    - What's my predicted salary?
+    - Predict my salary
+    - What package can I expect?
+    - What CTC will I get?
+    - Salary prediction for me
+    - What salary range fits me?
+    - My expected salary
+    - What package should I expect?
+    - Give me my salary prediction
+    - What minimum salary will I get?
+    - What maximum salary is possible?
+    - My salary range
+    - Expected LPA for me
+    - What salary package can I expect?
+    - What is my predicted salary in LPA?
+    - What package should I expect during placement?
+    - What is the estimated salary offered to me?
+    - What is my expected salary range?
+
+# --- Profile Summary ---
+- intent: ask_student_profile_summary
+  examples: |
+    - Show my profile
+    - What is my profile summary?
+    - Get my profile details
+    - Show my overall profile
+    - My profile analysis
+    - Give me my profile report
+    - What does my profile look like?
+    - Summarize my profile
+    - My complete profile
+    - Profile evaluation
+    - Overall assessment of my profile
+    - My student profile
+
+# --- Areas to Improve ---
+- intent: ask_student_areas_to_improve
+  examples: |
+    - What should I improve?
+    - Areas to improve in my profile
+    - What are my weak areas?
+    - Where do I need to improve?
+    - What skills should I develop?
+    - What should I work on?
+    - My improvement areas
+    - Skills to develop
+    - How can I improve my chances?
+    - What should I focus on?
+    - My skill gaps
+    - Weaknesses in my profile
+    - What do I need to learn?
+
+# --- Company Fit ---
+- intent: ask_student_company_fit
+  examples: |
+    - How well do I fit with [Google](company)?
+    - Am I a good fit for [Amazon](company)?
+    - Do I match [Microsoft](company) requirements?
+    - What's my fit with [TCS](company)?
+    - How suitable am I for [Infosys](company)?
+    - Am I compatible with [Adobe](company)?
+    - Check my fit with [Accenture](company)?
+    - My compatibility with [Zoho](company)
+    - How well do I match [Wipro](company)?
+    - Fit analysis with [Flipkart](company)
+    - My profile fit for [Oracle](company)
+    - Suitability for [IBM](company)
+    - Am I a match for [HCL](company)?
+    - Profile compatibility with [Cognizant](company)
+
+# ==================== ENHANCED STUDENT QUERIES - SALARY RANGES ====================
+
+# --- Salary Range (Min/Mid/Max) ---
+- intent: ask_salary_range
+  examples: |
+    - What is my salary range?
+    - What salary range can I expect?
+    - What is the minimum salary I can get?
+    - What is the maximum salary I can get?
+    - What is my mid-range salary prediction?
+    - Between what salary do I fall?
+    - What is the lowest and highest salary predicted for me?
+    - Show my salary range
+    - My minimum and maximum salary
+    - Salary boundaries for me
+    - What's the lowest I can get paid?
+    - What's the highest I can get paid?
+    - Can you show my expected salary range?
+    - What bracket of salary am I in?
+    - What is the salary range predicted for me?
+    - What's the salary range between min and max?
+    - Between what salary range can I expect offers?
+    - Can you show my expected salary range?
+
+# --- Salary Threshold Probabilities ---
+- intent: ask_salary_threshold
+  examples: |
+    - What is the probability that I will get more than 5 LPA?
+    - What are my chances of getting above 10 LPA?
+    - What is the probability that I get a package above 20 LPA?
+    - What are the chances of getting a salary higher than 15 LPA?
+    - How likely am I to get more than 2 LPA?
+    - What is my probability of getting above 25 LPA?
+    - Do I have a chance of getting above 30 LPA?
+    - What are my chances of a 40 LPA package?
+    - Can I get a 10 LPA package?
+    - Do I have chances for a 15 LPA offer?
+    - Am I likely to get a high paying job?
+    - What's the chance I get above 5 LPA?
+    - Probability of earning more than 20 LPA
+    - Will I get above average salary?
+    - My chances of crossing 15 LPA
+    - Can I climb to 25 LPA?
+    - What are my chances of getting a package higher than 20 LPA?
+    - Can I expect more than 30 LPA?
+    - What's the likelihood of getting 15 LPA+?
+    - Will I get a high salary?
+    - Is there a chance for 40 LPA?
+    - What's the probability of 25 LPA or more?
+
+# --- Recommended Companies ---
+- intent: ask_recommended_companies
+  examples: |
+    - Which companies should I apply to?
+    - What companies are recommended for me?
+    - Which recruiters match my profile?
+    - Which companies are most suitable for me?
+    - Where should I apply for placements?
+    - Which companies might hire me?
+    - What companies can I get into?
+    - Which companies should I target?
+    - Companies I should focus on
+    - My matching companies
+    - Which companies will likely hire me?
+    - Best companies for my profile
+    - Companies that fit my profile
+    - Where would I be a good fit?
+
+# --- Combined Multi-Intent Questions ---
+- intent: ask_placement_and_salary
+  examples: |
+    - What are my placement chances and expected salary?
+    - Can you tell me my predicted role and salary?
+    - What companies should I apply to and what salary can I expect?
+    - What are my chances of getting placed and which companies should I target?
+    - What job role and salary is predicted for me?
+    - What is my placement probability and expected salary range?
+    - Tell me about my placement and salary together
+    - My placement status and predicted salary
+    - Get my full placement prediction including salary
+    - What will I earn and where will I work?
+
+# --- Comparison Questions ---
+- intent: ask_salary_comparison
+  examples: |
+    - Is it more likely that I will get above 5 LPA or above 10 LPA?
+    - What is the difference between my minimum and maximum salary prediction?
+    - Is my probability higher for 5 LPA or 15 LPA?
+    - Which salary bracket am I most likely to fall into?
+    - How much higher is my max salary compared to min?
+    - What's the spread between my minimum and maximum salary?
+    - Compare my minimum and maximum salary
+    - Am I more likely to get 10 LPA or 20 LPA?
+    - Which salary level is more probable for me?
+    - What's more realistic for me: 5 LPA or 10 LPA?
+
+# --- Decision-Making Questions ---
+- intent: ask_placement_advice
+  examples: |
+    - Should I target high paying companies?
+    - Am I likely to get into top tech companies?
+    - Based on my prediction, should I focus on product companies or service companies?
+    - Should I expect a high salary offer?
+    - What kind of companies should I prepare for?
+    - Is my profile suitable for FAANG companies?
+    - Should I focus on startups or established companies?
+    - Am I competitive enough for premium companies?
+    - What should be my target salary?
+    - Which tier companies should I apply to?
+    - Will I get tier-1 companies?
+    - Should I be optimistic about my chances?
+
+# --- Follow-Up Conversation Questions ---
+- intent: ask_explanation
+  examples: |
+    - Can you explain my salary prediction?
+    - Why is my placement probability low?
+    - Why is my predicted salary high?
+    - Can I improve my placement chances?
+    - How can I increase my expected salary?
+    - Why am I fit for these companies?
+    - What factors affect my salary prediction?
+    - Explain my job role prediction
+    - How did you calculate my probability?
+    - What makes me likely or unlikely for placement?
+    - How does my profile impact my salary?
+    - Why was I assigned this role?
+
+# --- Very Realistic Student Questions ---
+- intent: ask_realistic_placement
+  examples: |
+    - Will I get placed this year?
+    - Can I get a 10 LPA package?
+    - Which companies can I realistically get into?
+    - Is my profile good for product companies?
+    - Do I have a chance of getting a high package?
+    - Will anyone hire me?
+    - What's my realistic job market value?
+    - Can I beat the average?
+    - Do I have decent placement chances?
+    - What companies won't reject me?
+    - Realistically, what can I expect?
+    - Am I in the safe zone for placements?
+    - What is a realistic salary for me?
+    - Will I get any good offers?
+
+# --- Required Integration Intents ---
+- intent: placement_probability_query
+  examples: |
+    - Please show my placement probability in percentage format
+    - Give me my model placement confidence with explanation
+    - Placement probability query for my profile
+    - I want my placement chance report from prediction model
+    - Tell me my predicted placement percentage and reason
+    - Show placement probability analysis with role and salary context
+    - Explain my placement chance category from the model
+    - What does the model say about my placement likelihood today?
+    - Provide placement confidence report based on my student record
+    - Share my predicted placement percent and matching companies
+
+- intent: salary_prediction_query
+  examples: |
+    - Give me the salary prediction report for my profile
+    - Show my expected CTC with explanation from the model
+    - Salary prediction query for my student profile
+    - I want model-based salary estimate in LPA with reasons
+    - Provide my estimated package and probability breakdown
+    - Explain why this salary is predicted for me
+    - Show my salary expectation using historical placement model
+    - Share my predicted salary details and confidence insights
+
+- intent: salary_range_query
+  examples: |
+    - Show min mid max salary range from my prediction row
+    - Salary range query with conservative and optimistic values
+    - I need my minimum mid and maximum salary estimate
+    - Give my salary bracket report in LPA
+    - Explain my lower and upper salary bounds from model output
+    - What is my predicted salary interval according to the model?
+    - Provide salary range analysis for my student id
+
+- intent: recommended_companies_query
+  examples: |
+    - Give me recommended companies from my prediction model
+    - Recommended companies query for my placement profile
+    - Show recruiters mapped to my predicted role and salary
+    - Provide a company recommendation list with reasoning
+    - Which matching companies are suggested by the model output?
+    - Share my recommended recruiters with placement probability context
+
+- intent: placement_summary_query
+  examples: |
+    - What are my placement chances and expected salary?
+    - Can you tell me my predicted role and salary?
+    - What companies should I apply to and what salary can I expect?
+    - What are my chances of getting placed and which companies should I target?
+    - What job role and salary is predicted for me?
+    - What is my placement probability and expected salary range?
+
+- intent: placement_analytical_query
+  examples: |
+    - What are my chances of getting placed with a salary above 10 LPA?
+    - If my placement probability is high, what salary should I expect?
+    - Which companies offer the salary range predicted for me?
+    - What role can help me achieve more than 15 LPA?
+    - What are my chances of getting a package above 20 LPA in recommended companies?
+    - If I get placed, what is the most likely salary I will get?
+
+- intent: salary_comparison_query
+  examples: |
+    - Is it more likely that I will get above 5 LPA or above 10 LPA?
+    - What is the difference between my minimum and maximum salary prediction?
+    - Is my probability higher for 5 LPA or 15 LPA?
+    - Which salary bracket am I most likely to fall into?
+
+- intent: placement_advice_query
+  examples: |
+    - Should I target high paying companies?
+    - Am I likely to get into top tech companies?
+    - Based on my prediction, should I focus on product companies or service companies?
+    - Should I expect a high salary offer?
+
+- intent: placement_explanation_query
+  examples: |
+    - Can you explain my salary prediction?
+    - Why is my placement probability low?
+    - Why is my predicted salary high?
+    - Can I improve my placement chances?
+    - How can I increase my expected salary?
+
+- intent: realistic_student_query
+  examples: |
+    - Will I get placed this year?
+    - Can I get a 10 LPA package?
+    - Which companies can I realistically get into?
+    - Is my profile good for product companies?
+    - Do I have a chance of getting a high package?
+
+# ==================== COMPANY PLACEMENT DB INTEGRATION EXAMPLES ====================
+
+- intent: list_tier1_companies
+  examples: |
+    - Which companies are coming for placements?
+    - Show me the list of companies in the dataset.
+    - Which companies are Tier 1?
+    - Which companies are Tier 2?
+    - Which companies are Tier 3?
+
+- intent: ask_company_overview
+  examples: |
+    - Tell me about Amazon.
+
+- intent: ask_company_tier
+  examples: |
+    - What tier is Google in?
+
+- intent: ask_hiring_roles
+  examples: |
+    - What roles does Microsoft offer?
+    - What kind of roles does Flipkart hire for?
+    - What companies hire Software Engineers?
+
+- intent: ask_avg_package
+  examples: |
+    - What is the average package offered by Amazon?
+    - What is the average salary offered by Microsoft?
+    - Compare Amazon and Microsoft packages.
+
+- intent: ask_max_package
+  examples: |
+    - What is the maximum package offered by Google?
+    - Which company has the highest max package?
+
+- intent: list_high_paying_companies
+  examples: |
+    - What companies offer more than 20 LPA?
+    - Which companies offer the highest salary?
+    - What companies offer packages between 10 and 20 LPA?
+    - Which companies offer the lowest packages?
+    - Which companies offer more than 15 LPA average?
+
+- intent: ask_min_cgpa
+  examples: |
+    - What is the minimum CGPA required for Amazon?
+    - Can I sit for Google if my CGPA is 7.5?
+    - Which companies have the highest CGPA requirement?
+    - Which companies have the lowest CGPA requirement?
+
+- intent: list_companies_by_cgpa
+  examples: |
+    - Which companies allow CGPA above 7?
+    - Which companies allow CGPA above 6.5?
+    - Which companies allow low CGPA students?
+    - What companies require CGPA above 8?
+
+- intent: ask_allowed_departments
+  examples: |
+    - Which departments are allowed for Amazon?
+    - Can IT students apply for Google?
+    - Which companies allow CSE students?
+    - Which companies allow ECE students?
+    - Which companies allow multiple departments?
+    - Which companies are open for all branches?
+
+- intent: ask_company_backlogs
+  examples: |
+    - Does Amazon allow backlogs?
+    - What is the maximum backlog allowed for Google?
+    - Which companies do not allow any backlogs?
+
+- intent: list_companies_allowing_backlogs
+  examples: |
+    - Which companies allow students with backlogs?
+    - Can I apply with 1 backlog?
+
+- intent: ask_required_skills
+  examples: |
+    - What skills are required for Amazon?
+    - What skills are required for Google?
+    - Which companies require Python?
+    - Which companies require Data Structures?
+    - Which companies require Machine Learning?
+    - What skills should I learn to get into Microsoft?
+    - Which companies require strong DSA?
+
+- intent: ask_interview_process
+  examples: |
+    - What is the interview process for Amazon?
+    - How many rounds does Google have?
+    - What is Round 1 for Microsoft?
+    - What happens in the first round of Flipkart?
+    - What is the focus of Round 2 for Amazon?
+    - What happens in the HR round?
+    - Which companies have 4 interview rounds?
+    - Which companies have the longest interview process?
+
+- intent: ask_round_duration
+  examples: |
+    - How long is Round 1 of Amazon?
+    - What is the duration of the Google coding round?
+    - Which companies have the longest interviews?
+    - Which companies have the shortest interview rounds?
+
+- intent: ask_prep_topics_by_area
+  examples: |
+    - What DSA topics should I prepare for Amazon?
+    - Which DSA topics are required for Google?
+    - What DSA topics should I focus on?
+    - What system design topics should I study?
+    - Which companies ask system design questions?
+    - What OOPS topics should I prepare for interviews?
+    - What DBMS topics should I prepare?
+    - What HR questions are asked by companies?
+
+# ==================== TEMPLATE-DRIVEN ADVANCED QUERIES ====================
+
+- intent: ask_hiring_intensity_templates
+  examples: |
+    - Which companies are hiring the most students?
+    - Which company has the highest hiring intensity?
+    - Which companies hire the least students?
+    - Which companies have high hiring chances?
+
+- intent: ask_comparison_templates
+  examples: |
+    - Compare Amazon and Google packages.
+    - Which is better: Amazon or Microsoft?
+    - Which company has a higher average package: Flipkart or Walmart?
+    - Which company has easier eligibility: Amazon or Flipkart?
+    - Which company has more interview rounds?
+
+- intent: ask_recommendation_templates
+  examples: |
+    - Which companies should I target?
+    - Which companies are best for high salary?
+    - Which companies have easier selection?
+    - Which companies have fewer interview rounds?
+    - Which companies have high hiring intensity?
+
+- intent: ask_strategy_templates
+  examples: |
+    - How should I prepare for Amazon?
+    - What should I study for Google interviews?
+    - What topics are most important for Microsoft?
+    - What preparation is required for Flipkart?
+
+- intent: ask_eligibility_strategy_templates
+  examples: |
+    - Can I apply for Amazon with 7.5 CGPA and 1 backlog?
+    - Which companies can I apply to with 7 CGPA?
+    - Which companies are best for students with low CGPA?
+    - Which companies are easiest to get into?
+
+- intent: ask_salary_hiring_templates
+  examples: |
+    - Which companies offer high salary and high hiring?
+    - Which companies offer good packages but hire many students?
+    - Which companies offer high salary but low hiring?
+
+- intent: ask_advanced_analytics_templates
+  examples: |
+    - Which Tier 1 companies offer more than 20 LPA?
+    - Which companies require DSA and System Design both?
+    - Which companies have more than 3 interview rounds?
+    - Which companies allow backlogs and offer high salary?
+    - Which companies require CGPA above 8 and offer more than 25 LPA?
+    - Which companies hire the most students and offer good packages?
+
+- intent: ask_decision_templates
+  examples: |
+    - Should I focus on Amazon or Microsoft?
+    - Which company is easier to crack?
+    - Which company gives the best salary vs difficulty ratio?
+    - Which company has the best chance of selection?
+
+- intent: ask_complex_templates
+  examples: |
+    - Which Tier 1 companies offer more than 20 LPA and require CGPA above 8?
+    - Which companies have high hiring intensity but fewer interview rounds?
+    - Which companies offer high salary but allow backlogs?
+    - Which companies require strong DSA and System Design preparation?
+    - Which companies are best for CSE students with 7 CGPA?
+    - Which companies offer the best package with the lowest CGPA requirement?
+    - Which companies have high packages and short interview processes?
+    - Which companies require the most preparation topics?
+    - Top package companies with low CGPA requirement
+    - best salary with minimum cgpa companies
+    - high package and short interview process companies
+    - companies with shorter interviews and strong packages
+    - companies needing both dsa and system design prep
+    - companies that require dsa plus system design
+    - best companies for cse with 7 cgpa
+    - suitable companies for cse students around 7 cgpa
+    - tier 1 companies above 20 lpa and cgpa above 8
+    - companies with high hiring intensity and short rounds
+    - high salary companies that still allow backlogs
+    - which firms need the maximum preparation topics
+
+- intent: ask_filter_templates
+  examples: |
+    - Show companies with CGPA requirement below 7.5
+    - Show companies with max package above 25 LPA
+    - Show companies with hiring intensity above 10
+    - Show companies that allow backlogs
+
+- intent: ask_ranking_templates
+  examples: |
+    - Rank companies by average package
+    - Rank companies by hiring intensity
+    - Rank companies by CGPA requirement
+
+- intent: ask_top_paying_templates
+  examples: |
+    - Top 5 highest paying companies
+    - Top 3 highest paying companies
+
+- intent: ask_leetcode_company_questions
+  examples: |
+    - give me leetcode interview questions for [amazon](company)
+    - show companywise leetcode questions for [google](company)
+    - generate leetcode report for [microsoft](company)
+    - get all leetcode questions asked in [meta](company)
+    - show latest leetcode questions for [amazon](company)
+    - newest interview questions for [google](company)
+    - recent leetcode questions for [adobe](company)
+    - leetcode questions for [uber](company) in last 30 days
+    - leetcode questions for [netflix](company) in last 3 months
+    - leetcode questions for [apple](company) in 6 months
+    - questions for [flipkart](company) older than six months
+    - build downloadable pdf report for [microsoft](company) leetcode questions
+    - I need companywise coding questions for [meta](company)
+    - interview question roadmap for [amazon](company)

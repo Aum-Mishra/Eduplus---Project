@@ -14,6 +14,18 @@ interface StudentData {
   name: string;
 }
 
+interface PredictionInputSummary {
+  available: boolean;
+  missing_fields: string[];
+  scores: {
+    dsa_score: number | null;
+    project_score: number | null;
+    aptitude_score: number | null;
+    hr_score: number | null;
+    resume_ats_score: number | null;
+  };
+}
+
 interface FormData {
   dsa_score: number | null;
   project_score: number | null;
@@ -64,7 +76,12 @@ export function PlacementProbability() {
   const [hrQuestions, setHrQuestions] = useState<HRQuestion[]>([]);
   const [evaluatingHR, setEvaluatingHR] = useState(false);
 
-  const [predictions, setPredictions] = useState(null);
+  const [predictions, setPredictions] = useState<any>(null);
+  const [existingInputInfo, setExistingInputInfo] = useState<PredictionInputSummary | null>(null);
+  const [showExistingInputChoice, setShowExistingInputChoice] = useState(false);
+
+  const aptitudeLink = aptitudeAtsInfo?.aptitude?.link || aptitudeAtsInfo?.aptitude_url || null;
+  const atsLink = aptitudeAtsInfo?.ats?.link || aptitudeAtsInfo?.ats_url || null;
 
   const steps = [
     { title: "Validate Student", subtitle: "Enter your student ID" },
@@ -128,7 +145,35 @@ export function PlacementProbability() {
       
       if (data.exists && data.name) {
         setStudent({ studentId: parseInt(studentId), name: data.name });
-        setStep(1);
+        const profileData = data.data || {};
+        const fallbackSummary: PredictionInputSummary = {
+          available: [
+            profileData.dsa_score,
+            profileData.project_score,
+            profileData.aptitude_score,
+            profileData.hr_score,
+            profileData.resume_ats_score,
+          ].every((v) => Number.isFinite(Number(v))),
+          missing_fields: [],
+          scores: {
+            dsa_score: Number.isFinite(Number(profileData.dsa_score)) ? Number(profileData.dsa_score) : null,
+            project_score: Number.isFinite(Number(profileData.project_score)) ? Number(profileData.project_score) : null,
+            aptitude_score: Number.isFinite(Number(profileData.aptitude_score)) ? Number(profileData.aptitude_score) : null,
+            hr_score: Number.isFinite(Number(profileData.hr_score)) ? Number(profileData.hr_score) : null,
+            resume_ats_score: Number.isFinite(Number(profileData.resume_ats_score)) ? Number(profileData.resume_ats_score) : null,
+          }
+        };
+
+        const summary: PredictionInputSummary = data.prediction_input || fallbackSummary;
+        setExistingInputInfo(summary);
+
+        if (summary.available) {
+          setShowExistingInputChoice(true);
+          setStep(0);
+        } else {
+          setShowExistingInputChoice(false);
+          setStep(1);
+        }
         setError(null);
       } else if (!data.exists) {
         setError("Student not found. Please check your ID. Valid IDs: 200000-200099");
@@ -140,6 +185,39 @@ export function PlacementProbability() {
     } finally {
       setLoading(false);
     }
+  };
+
+  const buildPrefilledFormData = (): FormData => {
+    const profileScores = existingInputInfo?.scores || {
+      dsa_score: null,
+      project_score: null,
+      aptitude_score: null,
+      hr_score: null,
+      resume_ats_score: null,
+    };
+
+    return {
+      ...formData,
+      dsa_score: profileScores.dsa_score,
+      project_score: profileScores.project_score,
+      aptitude_score: profileScores.aptitude_score,
+      hr_score: profileScores.hr_score,
+      resume_ats_score: profileScores.resume_ats_score,
+    };
+  };
+
+  const handleGenerateDirectly = async () => {
+    const prefilled = buildPrefilledFormData();
+    setFormData(prefilled);
+    setShowExistingInputChoice(false);
+    await generatePredictions(prefilled);
+  };
+
+  const handleUpdateData = () => {
+    const prefilled = buildPrefilledFormData();
+    setFormData(prefilled);
+    setShowExistingInputChoice(false);
+    setStep(1);
   };
 
   const fetchLeetcodeScore = async () => {
@@ -281,13 +359,14 @@ export function PlacementProbability() {
     }
   };
 
-  const generatePredictions = async () => {
+  const generatePredictions = async (inputOverride?: FormData) => {
     if (!student) return;
+    const predictionInput = inputOverride || formData;
     
     // Validation - only 5 required scores
-    if (formData.dsa_score === null || formData.project_score === null || 
-        formData.aptitude_score === null ||
-        formData.hr_score === null || formData.resume_ats_score === null) {
+    if (predictionInput.dsa_score === null || predictionInput.project_score === null || 
+        predictionInput.aptitude_score === null ||
+        predictionInput.hr_score === null || predictionInput.resume_ats_score === null) {
       setError("Please fill all required fields");
       return;
     }
@@ -302,13 +381,13 @@ export function PlacementProbability() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           studentId: student.studentId,
-          dsa_score: formData.dsa_score,
-          project_score: formData.project_score,
-          aptitude_score: formData.aptitude_score,
-          hr_score: formData.hr_score,
-          resume_ats_score: formData.resume_ats_score,
-          github_projects: formData.github_projects,
-          github_project_links: githubRepoLinks
+          dsa_score: predictionInput.dsa_score,
+          project_score: predictionInput.project_score,
+          aptitude_score: predictionInput.aptitude_score,
+          hr_score: predictionInput.hr_score,
+          resume_ats_score: predictionInput.resume_ats_score,
+          github_projects: predictionInput.github_projects,
+          github_project_links: predictionInput.github_project_links
         })
       });
 
@@ -368,7 +447,7 @@ export function PlacementProbability() {
     <div className="min-h-screen bg-gradient-to-br from-[#003366]/5 via-background to-[#0055A4]/5">
       {/* Header */}
       <div className="bg-card border-b border-border">
-        <div className="max-w-4xl mx-auto px-6 py-6">
+        <div className="max-w-[1400px] mx-auto px-6 py-6">
           <Link to="/" className="flex items-center gap-2 text-primary hover:text-primary/80 mb-4 w-fit">
             <ArrowLeft className="w-4 h-4" />
             <span className="text-sm">Back</span>
@@ -386,35 +465,42 @@ export function PlacementProbability() {
       </div>
 
       {/* Main Content */}
-      <div className="max-w-4xl mx-auto px-6 py-8">
-        {/* Progress Steps */}
-        <div className="mb-8">
-          <div className="flex items-center justify-between mb-4">
-            <span className="text-sm font-medium text-muted-foreground">
-              Step {step + 1} of {steps.length}
-            </span>
-            <div className="w-64 h-2 bg-muted rounded-full overflow-hidden">
+      <div className="max-w-[1400px] mx-auto w-full px-6 py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-[320px_minmax(0,1fr)] gap-6">
+          {/* Progress Steps */}
+          <Card className="p-6 h-fit">
+            <div className="flex items-center justify-between mb-4">
+              <span className="text-sm font-medium text-muted-foreground">
+                Step {step + 1} of {steps.length}
+              </span>
+            </div>
+            <div className="w-full h-2 bg-muted rounded-full overflow-hidden mb-4">
               <div 
                 className="h-full bg-gradient-to-r from-[#003366] to-[#0055A4] transition-all duration-300"
                 style={{ width: `${((step + 1) / steps.length) * 100}%` }}
               />
             </div>
-          </div>
-          <div>
-            <h2 className="text-2xl font-bold">{steps[step]?.title}</h2>
+            <h2 className="text-xl font-bold">{steps[step]?.title}</h2>
             <p className="text-sm text-muted-foreground mt-1">{steps[step]?.subtitle}</p>
-          </div>
-        </div>
 
-        {/* Content Area */}
-        <motion.div
-          key={step}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          transition={{ duration: 0.3 }}
-        >
-          <Card className="p-8">
+            {student && (
+              <div className="mt-6 p-4 rounded-lg bg-muted/40 border">
+                <p className="text-xs text-muted-foreground">Student</p>
+                <p className="font-medium">{student.name}</p>
+                <p className="text-sm text-muted-foreground">ID: {student.studentId}</p>
+              </div>
+            )}
+          </Card>
+
+          {/* Content Area */}
+          <motion.div
+            key={step}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+          >
+            <Card className="p-8">
             {step === 0 && (
               <div className="space-y-4">
                 <div>
@@ -427,6 +513,33 @@ export function PlacementProbability() {
                     className="h-12"
                   />
                 </div>
+
+                {showExistingInputChoice && existingInputInfo?.available && (
+                  <Card className="p-4 border-[#003366]/20 bg-[#003366]/5">
+                    <h3 className="font-semibold text-[#003366] mb-2">Existing Prediction Inputs Found</h3>
+                    <p className="text-sm text-muted-foreground mb-4">
+                      This student already has DSA, Project, Aptitude, ATS, and HR scores in the profile dataset.
+                      You can generate prediction directly or update the scores first.
+                    </p>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      <Button
+                        onClick={handleUpdateData}
+                        variant="outline"
+                        className="h-11"
+                      >
+                        Update Data
+                      </Button>
+                      <Button
+                        onClick={handleGenerateDirectly}
+                        disabled={loading}
+                        className="h-11 bg-gradient-to-r from-[#003366] to-[#0055A4] hover:opacity-90"
+                      >
+                        {loading ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : null}
+                        Generate Prediction
+                      </Button>
+                    </div>
+                  </Card>
+                )}
               </div>
             )}
 
@@ -555,7 +668,8 @@ export function PlacementProbability() {
                     Visit the website to take the aptitude test and note your score.
                   </p>
                   <Button 
-                    onClick={() => aptitudeAtsInfo && openLink(aptitudeAtsInfo.aptitude.link)}
+                    onClick={() => aptitudeLink && openLink(aptitudeLink)}
+                    disabled={!aptitudeLink}
                     className="w-full gap-2 bg-blue-600 hover:bg-blue-700"
                   >
                     <ExternalLink className="w-4 h-4" />
@@ -586,7 +700,8 @@ export function PlacementProbability() {
                     Upload your resume to get your ATS compatibility score.
                   </p>
                   <Button 
-                    onClick={() => aptitudeAtsInfo && openLink(aptitudeAtsInfo.ats.link)}
+                    onClick={() => atsLink && openLink(atsLink)}
+                    disabled={!atsLink}
                     className="w-full gap-2 bg-purple-600 hover:bg-purple-700"
                   >
                     <ExternalLink className="w-4 h-4" />
@@ -713,11 +828,12 @@ export function PlacementProbability() {
                 <span className="text-sm">{error}</span>
               </div>
             )}
-          </Card>
-        </motion.div>
+            </Card>
+          </motion.div>
+        </div>
 
         {/* Action Buttons */}
-        {step < 7 && (
+        {step < 7 && !showExistingInputChoice && (
           <div className="flex gap-4 mt-8">
             <Button 
               variant="outline"

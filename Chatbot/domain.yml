@@ -17,6 +17,7 @@ intents:
   - ask_hiring_roles
   - ask_eligibility_summary
   - ask_interview_process
+  - ask_round_duration
   - ask_preparation_roadmap
   - ask_company_eligibility
   - ask_prep_topics_by_area
@@ -50,19 +51,63 @@ intents:
   - ask_company_preparation
   - compare_companies
 
+  # Template-Driven Advanced Intents
+  - ask_hiring_intensity_templates
+  - ask_comparison_templates
+  - ask_recommendation_templates
+  - ask_strategy_templates
+  - ask_eligibility_strategy_templates
+  - ask_salary_hiring_templates
+  - ask_advanced_analytics_templates
+  - ask_decision_templates
+  - ask_complex_templates
+  - ask_filter_templates
+  - ask_ranking_templates
+  - ask_top_paying_templates
+  - ask_leetcode_company_questions
+
   # Layer 4: User Input
   - inform_company
+  - inform_student_id
 
-  # Phase 4: Placement Prediction (New)
+  # Phase 4: Student Placement Prediction
   - placement_probability
   - eligible_companies
   - skill_gap_analysis
-
-  # Phase 3: Clarification Intents (Implemented via Context Logic)
+  - ask_salary_difficulty
+  - ask_multi_factor
+  - count_companies_by_criteria
+  - ask_student_placement_probability
+  - ask_student_placement_status
+  - ask_student_predicted_company
+  - ask_student_predicted_job_role
+  - ask_student_predicted_salary
+  - ask_student_profile_summary
+  - ask_student_areas_to_improve
+  - ask_student_company_fit
+  - ask_salary_range
+  - ask_salary_threshold
+  - ask_placement_and_salary
+  - ask_recommended_companies
+  - ask_salary_comparison
+  - ask_placement_advice
+  - ask_explanation
+  - ask_realistic_placement
+  - placement_probability_query
+  - salary_prediction_query
+  - salary_range_query
+  - recommended_companies_query
+  - placement_summary_query
+  - placement_analytical_query
+  - salary_comparison_query
+  - placement_advice_query
+  - placement_explanation_query
+  - realistic_student_query
   
 entities:
   - company
   - prep_area
+  - student_id
 
 slots:
   company:
@@ -81,9 +126,10 @@ slots:
   
   student_id:
     type: text
-    influence_conversation: false
+    influence_conversation: true
     mappings:
-      - type: custom
+      - type: from_entity
+        entity: student_id
   
   last_company_asked:
     type: text
@@ -94,16 +140,16 @@ slots:
 
 responses:
   utter_greet:
-    - text: "Hi! I'm EduPlus PlaceMate AI.\nAsk me about:\n- Company packages, eligibility, skills\n- Aggregate queries (e.g., 'List Tier-1 companies')\n- Placement rules and preparation tips"
+    - text: "Hi! I'm EduPlus PlaceMate AI.\nPlease provide your student ID to get personalized placement predictions, or ask general questions about companies."
 
   utter_thank_you:
     - text: "You're welcome! Feel free to ask more questions."
 
   utter_goodbye:
-    - text: "Goodbye! Best of luck with placements!"
+    - text: "Goodbye! Best of luck with your placements!"
 
   utter_default:
-    - text: "I didn't understand that. Try asking about:\n- Specific company (e.g., 'Google package')\n- Aggregate query (e.g., 'List Tier-1 companies')\n- Placement policy (e.g., 'Placement rules')"
+    - text: "I didn't understand that. Try asking about:\n- Your predictions (e.g., 'will I get placed?')\n- Specific company (e.g., 'Google package')\n- Your profile (e.g., 'show my summary')"
   
   utter_ask_company_clarification:
     - text: "Please specify which company you are asking about."
@@ -157,6 +203,8 @@ actions:
   - action_get_company_tier_info
   - action_get_company_preparation
   - action_compare_companies
+  - action_handle_template_queries
+  - action_get_leetcode_company_questions
 
   # Layer 2: Aggregate Actions
   - action_list_companies_by_cgpa
@@ -167,8 +215,28 @@ actions:
   - action_count_companies
   - action_provide_company_options
   
-  # Phase 4: Placement Prediction Actions
-  - action_get_placement_probability
-  - action_get_eligible_companies
-  - action_get_skill_gap
+  # Phase 4: Student Placement Prediction Actions
+  - action_handle_student_id
+  - action_activate_student_session
+  - action_get_student_placement_probability
+  - action_get_student_placement_status
+  - action_get_student_predicted_company
+  - action_get_student_predicted_job_role
+  - action_get_student_predicted_salary
+  - action_get_student_profile_summary
+  - action_get_student_areas_to_improve
+  - action_get_student_company_fit
+  - action_get_salary_range
+  - action_get_salary_threshold
+  - action_get_placement_and_salary
+  - action_get_placement_summary
+  - action_get_placement_analytical
+  - action_get_salary_comparison
+  - action_get_placement_advice
+  - action_get_placement_explanation
+  - action_get_realistic_student_response
+  
+  # Utility
+  - action_default_fallback
+
   

@@ -23,3 +23,9 @@
 [DEBUG] resolve_company | match_source: slot_company | value: Google
 [DEBUG] resolve_company | No company resolved | Intent: ask_avg_package | Text: gogle package'
 [DEBUG] resolve_company | No company resolved | Intent: ask_avg_package | Text: goggel package'
+[DIAGNOSTIC] Company: Amazon | Target Column: prep_dbms_topics
+[DIAGNOSTIC] Columns in DF: ['company_id', 'company_name', 'company_tier', 'avg_package_lpa', 'max_package_lpa', 'min_cgpa', 'allowed_departments', 'required_skills', 'backlogs_allowed', 'hiring_intensity', 'job_role_notes', 'difficulty_factor', 'company_cat', 'weight_dsa', 'weight_projects', 'weight_cs', 'weight_aptitude', 'weight_hr']
+[DEBUG] Action: action_prep_topics_by_area | Content: 
+[DEBUG] resolve_company | No company resolved | Intent: ask_min_cgpa | Text: What is my CGPA?
+[DEBUG] resolve_company | match_source: context | value: Microsoft
+[DEBUG] resolve_company | No company resolved | Intent: ask_hiring_roles | Text: What companies hire Software Engineers?
