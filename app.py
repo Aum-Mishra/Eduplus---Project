@@ -14,6 +14,7 @@ import json
 import uuid
 import re
 import math
+import numpy as np
 from datetime import datetime, timezone
 import requests
 from modules.leetcode_dsa import LeetCodeDSA
@@ -30,6 +31,7 @@ CORS(app, resources={r"/api/*": {"origins": "*"}})
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 STUDENT_CSV = os.path.join(BASE_DIR, 'data', 'student_profiles_100.csv')
 PREDICTIONS_CSV = os.path.join(BASE_DIR, 'data', 'Predicted_Data.csv')
+BENCHMARK_CSV = os.path.join(BASE_DIR, 'data', 'campus_placement_dataset_final_academic_4000.csv')
 CHAT_HISTORY_JSON = os.path.join(BASE_DIR, 'data', 'chat_history.json')
 REPORTS_DIR = os.path.join(BASE_DIR, 'data', 'generated_reports')
 REQUIRED_PREDICTION_SCORE_COLUMNS = [
@@ -45,6 +47,11 @@ print(f"[STARTUP] STUDENT_CSV: {STUDENT_CSV}")
 print(f"[STARTUP] PREDICTIONS_CSV: {PREDICTIONS_CSV}")
 print(f"[STARTUP] STUDENT_CSV exists: {os.path.exists(STUDENT_CSV)}")
 print(f"[STARTUP] PREDICTIONS_CSV exists: {os.path.exists(PREDICTIONS_CSV)}")
+
+_BENCHMARK_CACHE = {
+    'df': None,
+    'mtime': None,
+}
 
 
 def _now_iso():
@@ -318,6 +325,48 @@ def _serialize_student_history(student_id, student_history):
 def health():
     """Health check endpoint"""
     return jsonify({'status': 'ok', 'message': 'EduPlus API is running'}), 200
+
+
+@app.route('/api/auth/login', methods=['POST'])
+def login_student():
+    """Unified login endpoint for student portal.
+
+    Current rule for this deployment: password must match student ID.
+    """
+    try:
+        payload = request.json or {}
+        raw_student_id = str(payload.get('student_id', '')).strip()
+        raw_password = str(payload.get('password', '')).strip()
+
+        if not raw_student_id or not raw_password:
+            return jsonify({'success': False, 'message': 'Student ID and password are required'}), 400
+
+        if raw_password != raw_student_id:
+            return jsonify({'success': False, 'message': 'Invalid credentials'}), 401
+
+        if not os.path.exists(STUDENT_CSV):
+            return jsonify({'success': False, 'message': 'Student database is not available'}), 500
+
+        df = pd.read_csv(STUDENT_CSV)
+        if 'student_id' not in df.columns:
+            return jsonify({'success': False, 'message': 'Student database schema is invalid'}), 500
+
+        df['student_id'] = df['student_id'].astype(str).str.strip()
+        student = df[df['student_id'] == raw_student_id]
+        if student.empty:
+            return jsonify({'success': False, 'message': 'Student ID not found'}), 404
+
+        student_row = student.iloc[0].to_dict()
+        student_name = str(student_row.get('name', f'Student {raw_student_id}'))
+
+        return jsonify({
+            'success': True,
+            'student_id': int(raw_student_id) if raw_student_id.isdigit() else raw_student_id,
+            'name': student_name,
+            'student': _json_safe(student_row),
+        }), 200
+    except Exception as e:
+        return jsonify({'success': False, 'message': str(e)}), 500
 
 # ==================== STUDENT VALIDATION ====================
 
@@ -594,6 +643,528 @@ def evaluate_hr_round():
 
 # ==================== PREDICTIONS ====================
 
+def _as_float(value, default=0.0):
+    try:
+        if value is None or pd.isna(value):
+            return float(default)
+        return float(value)
+    except Exception:
+        return float(default)
+
+
+def _load_benchmark_df():
+    """Load benchmark dataset with a small file-mtime cache."""
+    try:
+        if not os.path.exists(BENCHMARK_CSV):
+            return pd.DataFrame()
+
+        mtime = os.path.getmtime(BENCHMARK_CSV)
+        if _BENCHMARK_CACHE['df'] is not None and _BENCHMARK_CACHE['mtime'] == mtime:
+            return _BENCHMARK_CACHE['df'].copy()
+
+        df = pd.read_csv(BENCHMARK_CSV)
+        _BENCHMARK_CACHE['df'] = df
+        _BENCHMARK_CACHE['mtime'] = mtime
+        return df.copy()
+    except Exception:
+        return pd.DataFrame()
+
+
+def _empirical_percentile(series, value):
+    vals = pd.to_numeric(series, errors='coerce').dropna()
+    if vals.empty:
+        return None
+    return round(float((vals <= float(value)).mean() * 100.0), 2)
+
+
+def _build_feature_vector_row(raw):
+    dsa = _as_float(raw.get('dsa_score'), 50)
+    project = _as_float(raw.get('project_score'), 50)
+    cs = _as_float(raw.get('cs_fundamentals_score'), 50)
+    aptitude = _as_float(raw.get('aptitude_score'), 50)
+    hr = _as_float(raw.get('hr_score'), 50)
+
+    return {
+        'cgpa': _as_float(raw.get('cgpa'), 7.0),
+        'project_score': project,
+        'dsa_score': dsa,
+        'hackathon_wins': _as_float(raw.get('hackathon_wins'), 0),
+        'aptitude_score': aptitude,
+        'hr_score': hr,
+        'resume_ats_score': _as_float(raw.get('resume_ats_score'), 50),
+        'cs_fundamentals_score': cs,
+        'technical_score': (dsa + project + cs) / 3.0,
+        'soft_skill_score': (aptitude + hr) / 2.0,
+    }
+
+
+def _estimate_prediction_snapshot(student_data, models_obj):
+    """Compute placement probability and salary estimate using the current model stack."""
+    fe = FeatureEngineering()
+    fe.fitted = True
+    fe.scaler = models_obj.scaler
+    student_features = fe.prepare_student_input(student_data)
+
+    # Placement probability
+    try:
+        raw_prob = float(models_obj.placement_model.predict_proba([student_features])[0][1])
+    except Exception:
+        raw_prob = 0.5
+
+    raw_prob_pct = raw_prob * 100.0
+    p = raw_prob
+
+    if raw_prob_pct > 30.0:
+        skill_avg = (
+            _as_float(student_data.get('dsa_score'), 50) +
+            _as_float(student_data.get('project_score'), 50) +
+            _as_float(student_data.get('cs_fundamentals_score'), 50)
+        ) / 3.0
+        soft_avg = (_as_float(student_data.get('aptitude_score'), 50) + _as_float(student_data.get('hr_score'), 50)) / 2.0
+        ats_score = _as_float(student_data.get('resume_ats_score'), 50)
+        cgpa = _as_float(student_data.get('cgpa'), 7.0)
+
+        if skill_avg < 40.0:
+            p *= 0.4
+        if ats_score < 35.0:
+            p *= 0.5
+        if soft_avg < 40.0:
+            p *= 0.6
+        if cgpa < 6.0:
+            p *= 0.5
+
+    placement_pct = round(max(0.05, min(1.0, p)) * 100.0, 2)
+
+    # Salary estimate
+    try:
+        if models_obj.salary_model:
+            salary_pred_raw = float(models_obj.salary_model.predict([student_features])[0])
+            salary_lpa = round(max(3.0, min(50.0, salary_pred_raw)), 2)
+        else:
+            salary_lpa = 5.0
+    except Exception:
+        salary_lpa = 5.0
+
+    return {
+        'placement_probability_pct': placement_pct,
+        'predicted_salary_lpa': salary_lpa,
+    }
+
+
+def _build_peer_comparison(student_data, benchmark_df):
+    if benchmark_df.empty:
+        return {
+            'available': False,
+            'message': 'Benchmark dataset not available for peer comparison.',
+        }
+
+    work = benchmark_df.copy()
+    for col, fallback in [
+        ('dsa_score', 50), ('project_score', 50), ('cs_fundamentals_score', 50),
+        ('aptitude_score', 50), ('hr_score', 50), ('resume_ats_score', 50), ('cgpa', 7.0)
+    ]:
+        if col not in work.columns:
+            work[col] = fallback
+
+    work['technical_score'] = (
+        pd.to_numeric(work['dsa_score'], errors='coerce').fillna(50) +
+        pd.to_numeric(work['project_score'], errors='coerce').fillna(50) +
+        pd.to_numeric(work['cs_fundamentals_score'], errors='coerce').fillna(50)
+    ) / 3.0
+
+    dsa = _as_float(student_data.get('dsa_score'), 50)
+    project = _as_float(student_data.get('project_score'), 50)
+    cs = _as_float(student_data.get('cs_fundamentals_score'), 50)
+    technical = (dsa + project + cs) / 3.0
+
+    p_technical = _empirical_percentile(work['technical_score'], technical)
+    p_dsa = _empirical_percentile(work['dsa_score'], dsa)
+    p_project = _empirical_percentile(work['project_score'], project)
+
+    dsa_q75 = round(float(pd.to_numeric(work['dsa_score'], errors='coerce').dropna().quantile(0.75)), 2)
+    project_q75 = round(float(pd.to_numeric(work['project_score'], errors='coerce').dropna().quantile(0.75)), 2)
+    technical_q75 = round(float(pd.to_numeric(work['technical_score'], errors='coerce').dropna().quantile(0.75)), 2)
+
+    bottom_pct = p_technical if p_technical is not None else None
+
+    return {
+        'available': True,
+        'student_percentiles': {
+            'technical_percentile': p_technical,
+            'dsa_percentile': p_dsa,
+            'project_percentile': p_project,
+        },
+        'bottom_bucket_statement': (
+            f"You are currently in the bottom {round(bottom_pct, 1)}% for technical score among benchmark students."
+            if bottom_pct is not None else
+            'Technical percentile could not be computed.'
+        ),
+        'top_25_percent_thresholds': {
+            'dsa_score_q75': dsa_q75,
+            'project_score_q75': project_q75,
+            'technical_score_q75': technical_q75,
+        },
+    }
+
+
+def _build_confidence_reliability(student_data, models_obj, benchmark_df):
+    if benchmark_df.empty or not getattr(models_obj, 'scaler', None):
+        return {
+            'available': False,
+            'confidence_label': 'Unknown',
+            'uncertainty_pct': None,
+            'reason': 'Insufficient benchmark data to estimate reliability.',
+        }
+
+    work = benchmark_df.copy()
+    for col, fallback in [
+        ('cgpa', 7.0), ('project_score', 50), ('dsa_score', 50), ('hackathon_wins', 0),
+        ('aptitude_score', 50), ('hr_score', 50), ('resume_ats_score', 50), ('cs_fundamentals_score', 50),
+        ('salary_lpa', np.nan), ('expected_salary', np.nan)
+    ]:
+        if col not in work.columns:
+            work[col] = fallback
+
+    work['salary_reference'] = pd.to_numeric(work.get('salary_lpa'), errors='coerce')
+    if work['salary_reference'].isna().all():
+        work['salary_reference'] = pd.to_numeric(work.get('expected_salary'), errors='coerce')
+
+    high_salary = work[work['salary_reference'] >= 10].copy()
+    if high_salary.empty:
+        high_salary = work.copy()
+
+    # Build feature matrices.
+    feature_rows = high_salary.apply(_build_feature_vector_row, axis=1, result_type='expand')
+    try:
+        X_ref = models_obj.scaler.transform(feature_rows)
+    except Exception:
+        return {
+            'available': False,
+            'confidence_label': 'Unknown',
+            'uncertainty_pct': None,
+            'reason': 'Scaler transformation failed while estimating reliability.',
+        }
+
+    student_row = _build_feature_vector_row(student_data)
+    X_student = models_obj.scaler.transform(pd.DataFrame([student_row]))[0]
+
+    distances = np.linalg.norm(X_ref - X_student, axis=1)
+    if len(distances) == 0:
+        return {
+            'available': False,
+            'confidence_label': 'Unknown',
+            'uncertainty_pct': None,
+            'reason': 'Not enough comparable profiles for reliability estimate.',
+        }
+
+    k = min(25, len(distances))
+    nearest_mean = float(np.mean(np.partition(distances, k - 1)[:k]))
+    distance_scale = float(np.percentile(distances, 90)) if len(distances) > 5 else float(np.max(distances))
+    distance_scale = max(distance_scale, 1e-6)
+    d_norm = max(0.0, min(1.5, nearest_mean / distance_scale))
+
+    sigma_model = 8.0
+    alpha = 0.8
+    uncertainty = round(max(6.0, min(20.0, sigma_model * (1.0 + alpha * d_norm))), 1)
+
+    if uncertainty <= 9.5:
+        label = 'High'
+    elif uncertainty <= 14.0:
+        label = 'Medium'
+    else:
+        label = 'Low'
+
+    return {
+        'available': True,
+        'confidence_label': label,
+        'uncertainty_pct': uncertainty,
+        'nearest_profile_distance': round(nearest_mean, 3),
+        'distance_normalized': round(d_norm, 3),
+        'reason': (
+            'Low data similarity with high-salary benchmark profiles.'
+            if d_norm >= 0.9 else
+            'Moderate similarity with benchmark profiles used during model learning.'
+            if d_norm >= 0.6 else
+            'Strong similarity with benchmark profiles used during model learning.'
+        ),
+    }
+
+
+def _build_risk_alerts(student_data):
+    alerts = []
+
+    dsa = _as_float(student_data.get('dsa_score'), 50)
+    project = _as_float(student_data.get('project_score'), 50)
+    ats = _as_float(student_data.get('resume_ats_score'), 50)
+    cgpa = _as_float(student_data.get('cgpa'), 7.0)
+    github_projects = int(_as_float(student_data.get('github_projects'), 0))
+
+    if dsa < 10:
+        alerts.append({
+            'severity': 'Critical',
+            'title': 'DSA score below 10',
+            'risk': 'High rejection probability in OA and coding rounds.',
+        })
+    elif dsa < 30:
+        alerts.append({
+            'severity': 'High',
+            'title': 'Very low DSA score',
+            'risk': 'Low coding-round conversion probability in technical hiring pipelines.',
+        })
+
+    if github_projects <= 0 or project <= 10:
+        alerts.append({
+            'severity': 'Critical',
+            'title': 'No project depth',
+            'risk': 'Resume shortlisting risk due to limited project evidence.',
+        })
+    elif project < 40:
+        alerts.append({
+            'severity': 'High',
+            'title': 'Low project score',
+            'risk': 'Weak project quality can hurt resume and interview discussion outcomes.',
+        })
+
+    if ats < 35:
+        alerts.append({
+            'severity': 'High',
+            'title': 'Low ATS score',
+            'risk': 'Profile may be filtered out before interview rounds.',
+        })
+
+    if cgpa < 6.0:
+        alerts.append({
+            'severity': 'High',
+            'title': 'CGPA below common cutoffs',
+            'risk': 'Eligibility risk for multiple companies with strict academic criteria.',
+        })
+
+    return alerts
+
+
+def _build_projected_improvement(student_data, models_obj):
+    current_snapshot = _estimate_prediction_snapshot(student_data, models_obj)
+
+    scenario = dict(student_data)
+    scenario['dsa_score'] = max(_as_float(student_data.get('dsa_score'), 50), 50.0)
+    scenario['project_score'] = max(_as_float(student_data.get('project_score'), 50), 60.0)
+    scenario['cs_fundamentals_score'] = max(_as_float(student_data.get('cs_fundamentals_score'), 50), 55.0)
+    scenario['resume_ats_score'] = max(_as_float(student_data.get('resume_ats_score'), 50), 60.0)
+    scenario['aptitude_score'] = max(_as_float(student_data.get('aptitude_score'), 50), 55.0)
+    scenario['hr_score'] = max(_as_float(student_data.get('hr_score'), 50), 55.0)
+
+    projected_snapshot = _estimate_prediction_snapshot(scenario, models_obj)
+
+    return {
+        'available': True,
+        'simulation_note': 'Projected values are scenario-based estimates using the same model pipeline, not guaranteed outcomes.',
+        'changes_assumed': {
+            'dsa_score': {
+                'current': round(_as_float(student_data.get('dsa_score'), 0), 2),
+                'projected': round(_as_float(scenario.get('dsa_score'), 0), 2),
+            },
+            'project_score': {
+                'current': round(_as_float(student_data.get('project_score'), 0), 2),
+                'projected': round(_as_float(scenario.get('project_score'), 0), 2),
+            },
+        },
+        'placement_probability': {
+            'current': current_snapshot['placement_probability_pct'],
+            'projected': projected_snapshot['placement_probability_pct'],
+            'delta': round(projected_snapshot['placement_probability_pct'] - current_snapshot['placement_probability_pct'], 2),
+        },
+        'predicted_salary_lpa': {
+            'current': current_snapshot['predicted_salary_lpa'],
+            'projected': projected_snapshot['predicted_salary_lpa'],
+            'delta': round(projected_snapshot['predicted_salary_lpa'] - current_snapshot['predicted_salary_lpa'], 2),
+        },
+    }
+
+
+def _has_advanced_low_report_sections(report_obj):
+    if not isinstance(report_obj, dict):
+        return False
+    required = ['peer_comparison', 'confidence_reliability', 'risk_alerts', 'projected_improvement']
+    return all(k in report_obj for k in required)
+
+def _build_low_probability_report(student_data, placement_probability_pct, models_obj):
+    """Build data-grounded reasons and practical actions for low placement probability."""
+    prob = float(placement_probability_pct)
+    is_low = prob < 30.0
+
+    dsa = float(student_data.get('dsa_score', 0.0))
+    project = float(student_data.get('project_score', 0.0))
+    cs = float(student_data.get('cs_fundamentals_score', 0.0))
+    aptitude = float(student_data.get('aptitude_score', 0.0))
+    hr = float(student_data.get('hr_score', 0.0))
+    ats = float(student_data.get('resume_ats_score', 0.0))
+    cgpa = float(student_data.get('cgpa', 0.0))
+
+    technical_avg = round((dsa + project + cs) / 3.0, 2)
+    soft_avg = round((aptitude + hr) / 2.0, 2)
+
+    reasons = []
+    actions = []
+
+    def add_reason(parameter, current, target, impact, why_it_matters):
+        reasons.append({
+            'parameter': parameter,
+            'current': round(float(current), 2),
+            'target': round(float(target), 2),
+            'gap': round(float(target) - float(current), 2),
+            'impact': impact,
+            'why_it_matters': why_it_matters,
+        })
+
+    def add_action(focus_area, action, target, timeline):
+        actions.append({
+            'focus_area': focus_area,
+            'action': action,
+            'target': target,
+            'timeline': timeline,
+        })
+
+    if technical_avg < 40.0:
+        add_reason(
+            'Technical Foundation (DSA + Projects + CS Fundamentals)',
+            technical_avg,
+            60.0,
+            'High',
+            'Low technical depth significantly reduces shortlisting and coding-round conversion.'
+        )
+        add_action(
+            'Technical Foundation',
+            'Practice 120 structured DSA problems and complete CS fundamentals revision with weekly coding mocks.',
+            'Raise technical average to 60+',
+            '6-8 weeks'
+        )
+
+    if ats < 35.0:
+        add_reason(
+            'Resume ATS Score',
+            ats,
+            60.0,
+            'High',
+            'Low ATS score blocks resume shortlisting before interviews start.'
+        )
+        add_action(
+            'Resume and ATS',
+            'Rewrite resume with role keywords, quantified project outcomes, and clean one-page structure; run ATS check each week.',
+            'Increase ATS score to 60+',
+            '2-3 weeks'
+        )
+
+    if soft_avg < 40.0:
+        add_reason(
+            'Aptitude and HR Readiness',
+            soft_avg,
+            55.0,
+            'Medium',
+            'Weak aptitude/HR readiness lowers performance in screening and interview rounds.'
+        )
+        add_action(
+            'Aptitude and HR',
+            'Take timed aptitude practice and 10 mock HR answers using STAR format with mentor feedback.',
+            'Raise soft-skill average to 55+',
+            '4-6 weeks'
+        )
+
+    if cgpa < 6.0:
+        add_reason(
+            'CGPA Eligibility',
+            cgpa,
+            6.5,
+            'High',
+            'Lower CGPA can make you ineligible for many companies and reduces opportunities.'
+        )
+        add_action(
+            'Academic Eligibility',
+            'Prioritize upcoming semester GPA and clear any backlogs to meet more company cutoffs.',
+            'Reach CGPA 6.5+',
+            '1-2 semesters'
+        )
+
+    if dsa < 55.0:
+        add_reason(
+            'DSA Score',
+            dsa,
+            70.0,
+            'High',
+            'DSA heavily influences online assessments and technical interview rounds.'
+        )
+        add_action(
+            'DSA',
+            'Follow a company-focused roadmap: arrays/strings, trees, graphs, DP; attempt 5 timed problems daily.',
+            'Raise DSA score to 70+',
+            '8-10 weeks'
+        )
+
+    if project < 60.0:
+        add_reason(
+            'Project Quality',
+            project,
+            70.0,
+            'Medium',
+            'Low-impact projects weaken profile credibility during resume and interview discussion.'
+        )
+        add_action(
+            'Projects',
+            'Upgrade 2 projects with deployment, measurable outcomes, and clear architecture explanation.',
+            'Raise project score to 70+',
+            '4-6 weeks'
+        )
+
+    if not reasons:
+        add_reason(
+            'Overall Profile Consistency',
+            prob,
+            45.0,
+            'Medium',
+            'Current scores are moderate but not strong enough yet for consistent placement conversion.'
+        )
+        add_action(
+            'Consistency Sprint',
+            'Improve weakest two scores by at least 10 points with weekly tracking and mock test reviews.',
+            'Move placement probability above 45%',
+            '6 weeks'
+        )
+
+    reasons = sorted(reasons, key=lambda x: {'High': 0, 'Medium': 1, 'Low': 2}.get(x['impact'], 3))
+
+    benchmark_df = _load_benchmark_df()
+    peer_comparison = _build_peer_comparison(student_data, benchmark_df)
+    confidence_reliability = _build_confidence_reliability(student_data, models_obj, benchmark_df)
+    risk_alerts = _build_risk_alerts(student_data)
+    projected_improvement = _build_projected_improvement(student_data, models_obj)
+
+    return {
+        'is_low_probability_case': is_low,
+        'threshold_pct': 30.0,
+        'current_probability_pct': round(prob, 2),
+        'data_snapshot': {
+            'dsa_score': round(dsa, 2),
+            'project_score': round(project, 2),
+            'cs_fundamentals_score': round(cs, 2),
+            'aptitude_score': round(aptitude, 2),
+            'hr_score': round(hr, 2),
+            'resume_ats_score': round(ats, 2),
+            'cgpa': round(cgpa, 2),
+            'technical_average': technical_avg,
+            'soft_skill_average': soft_avg,
+        },
+        'summary': (
+            'Your placement probability is currently below 30% because one or more core profile factors '
+            'are below practical hiring expectations. Improve the high-impact gaps first.'
+        ) if is_low else 'Your probability is not in the low band.',
+        'reasons': reasons,
+        'practical_changes': actions,
+        'peer_comparison': peer_comparison,
+        'confidence_reliability': confidence_reliability,
+        'risk_alerts': risk_alerts,
+        'projected_improvement': projected_improvement,
+        'final_note': 'If you implement these changes consistently, your prediction can improve in the next update cycle.',
+    }
+
 @app.route('/api/predictions/generate', methods=['POST'])
 def generate_predictions():
     """Generate placement predictions from input scores."""
@@ -675,6 +1246,8 @@ def generate_predictions():
             print(f"[PREDICTION] Raw probability {raw_prob_pct:.2f}% <= 30%, penalties skipped")
 
         ml_placement_prob = max(0.05, min(1.0, p))
+        placement_probability_pct = float(round(ml_placement_prob * 100, 2))
+        low_probability_report = _build_low_probability_report(student_data, placement_probability_pct, models_obj)
 
         # Salary prediction
         try:
@@ -759,7 +1332,7 @@ def generate_predictions():
 
         response_data = {
             'success': True,
-            'overall_placement_probability': float(round(ml_placement_prob * 100, 2)),
+            'overall_placement_probability': placement_probability_pct,
             'predicted_salary_lpa': float(round(salary_pred, 2)),
             'salary_range_min_lpa': float(round(salary_min, 2)),
             'salary_range_mid_lpa': float(round(salary_mid, 2)),
@@ -775,6 +1348,8 @@ def generate_predictions():
             'prob_salary_gt_40_lpa': float(derived_probs.get(">40 LPA", 0.0)),
             'predicted_job_role': role_name,
             'recommended_companies': recommended_companies,
+            'is_low_probability_case': bool(low_probability_report.get('is_low_probability_case')),
+            'low_probability_report': low_probability_report,
         }
 
         return jsonify(response_data), 200
@@ -824,6 +1399,8 @@ def save_predictions():
             'prob_salary_gt_40_lpa': predictions.get('prob_salary_gt_40_lpa', 0),
             'predicted_job_role': predictions.get('predicted_job_role', ''),
             'recommended_companies': ','.join([str(x) for x in recommended]),
+            'is_low_probability_case': bool(predictions.get('is_low_probability_case', False)),
+            'low_probability_report_json': json.dumps(predictions.get('low_probability_report') or {}, ensure_ascii=False),
         }
 
         if os.path.exists(PREDICTIONS_CSV):
@@ -894,7 +1471,56 @@ def get_predictions(student_id):
         if match.empty:
             return jsonify({'predictions': None}), 200
 
-        return jsonify({'predictions': _json_safe(match.iloc[0].to_dict())}), 200
+        row = match.iloc[0].to_dict()
+        report_raw = row.get('low_probability_report_json')
+        if isinstance(report_raw, str) and report_raw.strip():
+            try:
+                row['low_probability_report'] = json.loads(report_raw)
+            except Exception:
+                row['low_probability_report'] = None
+        elif isinstance(report_raw, dict):
+            row['low_probability_report'] = report_raw
+
+        # Backward-compatible upgrade path:
+        # If a saved low-probability report was generated before advanced sections were added,
+        # rebuild the report at read time from current student/profile + model pipeline.
+        is_low = bool(row.get('is_low_probability_case', False)) or _as_float(row.get('overall_placement_probability', 100), 100) < 30.0
+        current_report = row.get('low_probability_report')
+        if is_low and not _has_advanced_low_report_sections(current_report):
+            try:
+                student_df = pd.read_csv(STUDENT_CSV)
+                student_df['student_id'] = student_df['student_id'].astype(str)
+                smatch = student_df[student_df['student_id'] == str(student_id)]
+                if not smatch.empty:
+                    srow = smatch.iloc[0].to_dict()
+                    student_data = {
+                        'student_id': str(student_id),
+                        'dsa_score': _as_float(srow.get('dsa_score', row.get('dsa_score', 50)), 50),
+                        'project_score': _as_float(srow.get('project_score', row.get('project_score', 50)), 50),
+                        'aptitude_score': _as_float(srow.get('aptitude_score', row.get('aptitude_score', 50)), 50),
+                        'hr_score': _as_float(srow.get('hr_score', row.get('hr_score', 50)), 50),
+                        'resume_ats_score': _as_float(srow.get('resume_ats_score', row.get('resume_ats_score', 50)), 50),
+                        'cs_fundamentals_score': _as_float(srow.get('cs_fundamentals_score', row.get('cs_fundamentals_score', 50)), 50),
+                        'cgpa': _as_float(srow.get('cgpa', row.get('cgpa', 7.0)), 7.0),
+                        'hackathon_wins': int(_as_float(srow.get('hackathon_wins', row.get('hackathon_wins', 0)), 0)),
+                        'github_projects': int(_as_float(srow.get('github_projects', row.get('github_projects', 0)), 0)),
+                        'github_project_links': [],
+                    }
+
+                    models_obj = MLModels()
+                    if models_obj.load_models():
+                        upgraded_report = _build_low_probability_report(
+                            student_data,
+                            _as_float(row.get('overall_placement_probability', 0), 0),
+                            models_obj,
+                        )
+                        row['low_probability_report'] = upgraded_report
+                        row['is_low_probability_case'] = bool(upgraded_report.get('is_low_probability_case', True))
+                        row['low_probability_report_json'] = json.dumps(upgraded_report, ensure_ascii=False)
+            except Exception as rebuild_err:
+                print(f"[WARN] Could not rebuild advanced low-probability report for student {student_id}: {rebuild_err}")
+
+        return jsonify({'predictions': _json_safe(row)}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 

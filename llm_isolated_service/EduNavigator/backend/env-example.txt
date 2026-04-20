@@ -1,0 +1,10 @@
+GOOGLE_API_KEY=AIzaSyAhMyDRp8TyzHVmizppK6S8JPQRfyXstx4
+DATA_ROADMAP_DIR=E:\\College\\EDI\\Roadmap_dataset
+DATA_MINDMAP_DIR=E:\\College\\EDI\\Mindmaps
+STORAGE_DIR=backend/storage
+EMBEDDING_MODEL=sentence-transformers/all-MiniLM-L6-v2
+TOP_K=6
+FETCH_K=20
+MMR_LAMBDA=0.6
+PORT=8000
+

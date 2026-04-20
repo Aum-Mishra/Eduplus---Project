@@ -1,0 +1,39 @@
+{
+    "nodes": [
+        {"id": "Software Developer", "group": 1},
+        {"id": "Programming", "group": 2},
+        {"id": "JavaScript", "group": 3},
+        {"id": "Python", "group": 3},
+        {"id": "Java", "group": 3},
+        {"id": "Web Technologies", "group": 2},
+        {"id": "HTML/CSS", "group": 3},
+        {"id": "React", "group": 3},
+        {"id": "Node.js", "group": 3},
+        {"id": "Core Concepts", "group": 2},
+        {"id": "Data Structures", "group": 3},
+        {"id": "Algorithms", "group": 3},
+        {"id": "System Design", "group": 3},
+        {"id": "Tools", "group": 2},
+        {"id": "Git", "group": 3},
+        {"id": "VS Code", "group": 3},
+        {"id": "Docker", "group": 3}
+    ],
+    "links": [
+        {"source": "Software Developer", "target": "Programming"},
+        {"source": "Programming", "target": "JavaScript"},
+        {"source": "Programming", "target": "Python"},
+        {"source": "Programming", "target": "Java"},
+        {"source": "Software Developer", "target": "Web Technologies"},
+        {"source": "Web Technologies", "target": "HTML/CSS"},
+        {"source": "Web Technologies", "target": "React"},
+        {"source": "Web Technologies", "target": "Node.js"},
+        {"source": "Software Developer", "target": "Core Concepts"},
+        {"source": "Core Concepts", "target": "Data Structures"},
+        {"source": "Core Concepts", "target": "Algorithms"},
+        {"source": "Core Concepts", "target": "System Design"},
+        {"source": "Software Developer", "target": "Tools"},
+        {"source": "Tools", "target": "Git"},
+        {"source": "Tools", "target": "VS Code"},
+        {"source": "Tools", "target": "Docker"}
+    ]
+}

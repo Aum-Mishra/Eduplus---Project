@@ -6,8 +6,9 @@ import { Textarea } from "./ui/textarea";
 import { Brain, ArrowLeft, Loader2, CheckCircle2, AlertCircle, ExternalLink } from "lucide-react";
 import { Link } from "react-router";
 import { motion } from "motion/react";
+import { StudentSession } from "../auth";
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+const API_BASE_URL = ((import.meta as any)?.env?.VITE_API_URL as string) || "http://localhost:5000/api";
 
 interface StudentData {
   studentId: number;
@@ -42,10 +43,13 @@ interface HRQuestion {
   answer: string;
 }
 
-export function PlacementProbability() {
+interface PlacementProbabilityProps {
+  session: StudentSession;
+}
+
+export function PlacementProbability({ session }: PlacementProbabilityProps) {
   const [step, setStep] = useState(0);
   const [student, setStudent] = useState<StudentData | null>(null);
-  const [studentId, setStudentId] = useState("");
   const [formData, setFormData] = useState<FormData>({
     dsa_score: null,
     project_score: null,
@@ -84,7 +88,7 @@ export function PlacementProbability() {
   const atsLink = aptitudeAtsInfo?.ats?.link || aptitudeAtsInfo?.ats_url || null;
 
   const steps = [
-    { title: "Validate Student", subtitle: "Enter your student ID" },
+    { title: "Student Context", subtitle: "Using your logged-in student profile" },
     { title: "DSA Score", subtitle: "From LeetCode or manual entry" },
     { title: "GitHub Projects", subtitle: "Analyze GitHub repository links" },
     { title: "Aptitude Score", subtitle: "Take test and enter score" },
@@ -130,21 +134,21 @@ export function PlacementProbability() {
     loadHRQuestions();
   }, []);
 
-  const validateStudent = async () => {
-    if (!studentId.trim()) {
-      setError("Please enter a student ID");
-      return;
-    }
-    
-    setLoading(true);
-    setError(null);
-    
-    try {
-      const res = await fetch(`${API_BASE_URL}/student/${studentId}`);
-      const data = await res.json();
-      
-      if (data.exists && data.name) {
-        setStudent({ studentId: parseInt(studentId), name: data.name });
+  useEffect(() => {
+    const initializeStudentContext = async () => {
+      setLoading(true);
+      setError(null);
+
+      try {
+        const res = await fetch(`${API_BASE_URL}/student/${session.studentId}`);
+        const data = await res.json();
+
+        if (!res.ok || !data.exists) {
+          throw new Error(data?.message || "Unable to load student profile");
+        }
+
+        setStudent({ studentId: session.studentId, name: data.name || session.name });
+
         const profileData = data.data || {};
         const fallbackSummary: PredictionInputSummary = {
           available: [
@@ -161,31 +165,25 @@ export function PlacementProbability() {
             aptitude_score: Number.isFinite(Number(profileData.aptitude_score)) ? Number(profileData.aptitude_score) : null,
             hr_score: Number.isFinite(Number(profileData.hr_score)) ? Number(profileData.hr_score) : null,
             resume_ats_score: Number.isFinite(Number(profileData.resume_ats_score)) ? Number(profileData.resume_ats_score) : null,
-          }
+          },
         };
 
         const summary: PredictionInputSummary = data.prediction_input || fallbackSummary;
         setExistingInputInfo(summary);
+        setShowExistingInputChoice(summary.available);
 
-        if (summary.available) {
-          setShowExistingInputChoice(true);
-          setStep(0);
-        } else {
-          setShowExistingInputChoice(false);
+        if (!summary.available) {
           setStep(1);
         }
-        setError(null);
-      } else if (!data.exists) {
-        setError("Student not found. Please check your ID. Valid IDs: 200000-200099");
-      } else {
-        setError("Failed to validate student. Please try again.");
+      } catch (err) {
+        setError(`Unable to load logged-in student: ${err instanceof Error ? err.message : "Unknown error"}`);
+      } finally {
+        setLoading(false);
       }
-    } catch (err) {
-      setError(`Error validating student: ${err instanceof Error ? err.message : "Unknown error"}`);
-    } finally {
-      setLoading(false);
-    }
-  };
+    };
+
+    initializeStudentContext();
+  }, [session.studentId, session.name]);
 
   const buildPrefilledFormData = (): FormData => {
     const profileScores = existingInputInfo?.scores || {
@@ -425,7 +423,11 @@ export function PlacementProbability() {
     setError(null);
     
     if (step === 0) {
-      validateStudent();
+      if (showExistingInputChoice) {
+        setError("Choose either 'Update Data' or 'Generate Prediction'.");
+        return;
+      }
+      setStep(1);
     } else if (step === 1 && formData.dsa_score === null) {
       setError("Please enter DSA score");
     } else if (step === 2 && formData.project_score === null) {
@@ -503,16 +505,11 @@ export function PlacementProbability() {
             <Card className="p-8">
             {step === 0 && (
               <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium mb-2">Student ID</label>
-                  <Input
-                    type="number"
-                    placeholder="Enter your student ID (e.g., 200001)"
-                    value={studentId}
-                    onChange={(e) => setStudentId(e.target.value)}
-                    className="h-12"
-                  />
-                </div>
+                <Card className="p-4 border-[#003366]/20 bg-[#003366]/5">
+                  <p className="text-sm text-muted-foreground">Logged in as</p>
+                  <p className="font-semibold text-[#003366]">{session.name}</p>
+                  <p className="text-sm text-muted-foreground">Student ID: {session.studentId}</p>
+                </Card>
 
                 {showExistingInputChoice && existingInputInfo?.available && (
                   <Card className="p-4 border-[#003366]/20 bg-[#003366]/5">
@@ -784,34 +781,92 @@ export function PlacementProbability() {
                   <CheckCircle2 className="w-6 h-6" />
                   <span className="font-medium">Predictions Generated Successfully!</span>
                 </div>
-                
-                <div className="grid grid-cols-2 gap-4">
-                  <Card className="bg-gradient-to-br from-[#003366]/10 to-[#0055A4]/10 p-4">
-                    <p className="text-sm text-muted-foreground">Placement Probability</p>
-                    <p className="text-3xl font-bold text-[#003366]">{predictions.overall_placement_probability}%</p>
-                  </Card>
-                  
-                  <Card className="bg-gradient-to-br from-[#10B981]/10 to-[#059669]/10 p-4">
-                    <p className="text-sm text-muted-foreground">Predicted Salary</p>
-                    <p className="text-3xl font-bold text-[#10B981]">₹{predictions.predicted_salary_lpa} LPA</p>
-                  </Card>
-                </div>
 
-                <Card className="p-4 bg-gradient-to-br from-[#FFC107]/10 to-[#F59E0B]/10">
-                  <p className="text-sm text-muted-foreground mb-2">Predicted Job Role</p>
-                  <p className="text-xl font-bold text-[#FFC107]">{predictions.predicted_job_role}</p>
-                </Card>
+                {(() => {
+                  const isLowProbabilityCase =
+                    !!predictions?.is_low_probability_case ||
+                    Number(predictions?.overall_placement_probability || 0) < 30;
+                  const lowReport = predictions?.low_probability_report;
 
-                <Card className="p-4">
-                  <p className="text-sm text-muted-foreground mb-3">Top Recommended Companies</p>
-                  <div className="flex flex-wrap gap-2">
-                    {predictions.recommended_companies?.map((company: string) => (
-                      <span key={company} className="px-3 py-1 bg-[#003366]/10 text-[#003366] rounded-full text-sm font-medium">
-                        {company}
-                      </span>
-                    ))}
-                  </div>
-                </Card>
+                  if (isLowProbabilityCase) {
+                    return (
+                      <div className="space-y-4">
+                        <div className="grid grid-cols-1 gap-4">
+                          <Card className="bg-gradient-to-br from-[#003366]/10 to-[#0055A4]/10 p-4">
+                            <p className="text-sm text-muted-foreground">Placement Probability</p>
+                            <p className="text-3xl font-bold text-[#003366]">{predictions.overall_placement_probability}%</p>
+                            <p className="text-xs text-muted-foreground mt-1">Low probability case detected (&lt;30%)</p>
+                          </Card>
+
+                          <Card className="p-4 border-[#D97706]/30 bg-gradient-to-br from-[#D97706]/10 to-[#F59E0B]/10">
+                            <p className="text-sm text-muted-foreground mb-2">Why Probability Is Low</p>
+                            <p className="text-sm mb-3">
+                              {lowReport?.summary || "Your current profile has high-impact gaps in one or more core placement parameters."}
+                            </p>
+
+                            <div className="space-y-2">
+                              {(lowReport?.reasons || []).slice(0, 3).map((reason: any, idx: number) => (
+                                <div key={`${reason.parameter}-${idx}`} className="text-sm rounded-md bg-white/60 border border-[#D97706]/20 px-3 py-2">
+                                  <span className="font-semibold">{reason.parameter}</span>
+                                  <span className="text-muted-foreground"> | Current: {reason.current} | Target: {reason.target}</span>
+                                </div>
+                              ))}
+                            </div>
+                          </Card>
+
+                          <Card className="p-4 border-[#10B981]/30 bg-gradient-to-br from-[#10B981]/10 to-[#059669]/10">
+                            <p className="text-sm text-muted-foreground mb-2">What You Should Do Next</p>
+                            <div className="space-y-2">
+                              {(lowReport?.practical_changes || []).slice(0, 3).map((item: any, idx: number) => (
+                                <div key={`${item.focus_area}-${idx}`} className="text-sm rounded-md bg-white/70 border border-[#10B981]/20 px-3 py-2">
+                                  <p className="font-semibold">{item.focus_area}</p>
+                                  <p className="text-muted-foreground">{item.action}</p>
+                                </div>
+                              ))}
+                            </div>
+                          </Card>
+                        </div>
+
+                        <div className="rounded-md border border-[#003366]/20 bg-[#003366]/5 px-4 py-3 text-sm text-[#003366]">
+                          Salary prediction, job role, and company recommendations are hidden for low-probability cases.
+                          Improve the above gaps and regenerate to unlock full prediction details.
+                        </div>
+                      </div>
+                    );
+                  }
+
+                  return (
+                    <>
+                      <div className="grid grid-cols-2 gap-4">
+                        <Card className="bg-gradient-to-br from-[#003366]/10 to-[#0055A4]/10 p-4">
+                          <p className="text-sm text-muted-foreground">Placement Probability</p>
+                          <p className="text-3xl font-bold text-[#003366]">{predictions.overall_placement_probability}%</p>
+                        </Card>
+                        
+                        <Card className="bg-gradient-to-br from-[#10B981]/10 to-[#059669]/10 p-4">
+                          <p className="text-sm text-muted-foreground">Predicted Salary</p>
+                          <p className="text-3xl font-bold text-[#10B981]">₹{predictions.predicted_salary_lpa} LPA</p>
+                        </Card>
+                      </div>
+
+                      <Card className="p-4 bg-gradient-to-br from-[#FFC107]/10 to-[#F59E0B]/10">
+                        <p className="text-sm text-muted-foreground mb-2">Predicted Job Role</p>
+                        <p className="text-xl font-bold text-[#FFC107]">{predictions.predicted_job_role}</p>
+                      </Card>
+
+                      <Card className="p-4">
+                        <p className="text-sm text-muted-foreground mb-3">Top Recommended Companies</p>
+                        <div className="flex flex-wrap gap-2">
+                          {predictions.recommended_companies?.map((company: string) => (
+                            <span key={company} className="px-3 py-1 bg-[#003366]/10 text-[#003366] rounded-full text-sm font-medium">
+                              {company}
+                            </span>
+                          ))}
+                        </div>
+                      </Card>
+                    </>
+                  );
+                })()}
 
                 <Link to="/predictions">
                   <Button className="w-full h-12 bg-gradient-to-r from-[#003366] to-[#0055A4] hover:opacity-90">

@@ -1,0 +1,188 @@
+{
+  "ai_engineer.pdf": {
+    "title": "ai_engineer",
+    "nodes": [
+      {
+        "id": "ai engineer career path",
+        "label": "Ai Engineer Career Path"
+      },
+      {
+        "id": "skills",
+        "label": "Skills"
+      },
+      {
+        "id": "tools",
+        "label": "Tools"
+      },
+      {
+        "id": "projects",
+        "label": "Projects"
+      },
+      {
+        "id": "resources",
+        "label": "Resources"
+      },
+      {
+        "id": "path",
+        "label": "Path"
+      }
+    ],
+    "edges": [
+      {
+        "source": "general",
+        "target": "ai engineer career path"
+      },
+      {
+        "source": "general",
+        "target": "skills"
+      },
+      {
+        "source": "general",
+        "target": "tools"
+      },
+      {
+        "source": "general",
+        "target": "projects"
+      },
+      {
+        "source": "general",
+        "target": "resources"
+      },
+      {
+        "source": "general",
+        "target": "path"
+      }
+    ]
+  },
+  "data_analyst.pdf": {
+    "title": "data_analyst",
+    "nodes": [
+      {
+        "id": "data analyst career path",
+        "label": "Data Analyst Career Path"
+      },
+      {
+        "id": "skills",
+        "label": "Skills"
+      },
+      {
+        "id": "tools",
+        "label": "Tools"
+      },
+      {
+        "id": "projects",
+        "label": "Projects"
+      },
+      {
+        "id": "resources",
+        "label": "Resources"
+      },
+      {
+        "id": "path",
+        "label": "Path"
+      }
+    ],
+    "edges": [
+      {
+        "source": "general",
+        "target": "data analyst career path"
+      },
+      {
+        "source": "general",
+        "target": "skills"
+      },
+      {
+        "source": "general",
+        "target": "tools"
+      },
+      {
+        "source": "general",
+        "target": "projects"
+      },
+      {
+        "source": "general",
+        "target": "resources"
+      },
+      {
+        "source": "general",
+        "target": "path"
+      }
+    ]
+  },
+  "data_analyst_roadmap.txt": {
+    "title": "data_analyst_roadmap",
+    "nodes": [
+      {
+        "id": "data analyst career path",
+        "label": "Data Analyst Career Path"
+      }
+    ],
+    "edges": [
+      {
+        "source": "general",
+        "target": "data analyst career path"
+      }
+    ]
+  },
+  "software_developer_roadmap.txt": {
+    "title": "software_developer_roadmap",
+    "nodes": [
+      {
+        "id": "software developer career path",
+        "label": "Software Developer Career Path"
+      }
+    ],
+    "edges": [
+      {
+        "source": "general",
+        "target": "software developer career path"
+      }
+    ]
+  },
+  "data_analyst.json": {
+    "title": "data_analyst",
+    "nodes": [
+      {
+        "id": "general",
+        "label": "General"
+      },
+      {
+        "id": "technical skills",
+        "label": "Technical Skills"
+      },
+      {
+        "id": "soft skills",
+        "label": "Soft Skills"
+      }
+    ],
+    "edges": [
+      {
+        "source": "general",
+        "target": "technical skills"
+      },
+      {
+        "source": "general",
+        "target": "soft skills"
+      }
+    ]
+  },
+  "software_developer.json": {
+    "title": "software_developer",
+    "nodes": [
+      {
+        "id": "general",
+        "label": "General"
+      },
+      {
+        "id": "tools",
+        "label": "Tools"
+      }
+    ],
+    "edges": [
+      {
+        "source": "general",
+        "target": "tools"
+      }
+    ]
+  }
+}

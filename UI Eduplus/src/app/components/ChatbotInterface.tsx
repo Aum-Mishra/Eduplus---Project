@@ -1,9 +1,10 @@
 import { useState, useRef, useEffect } from "react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
-import { Brain, Send, Mic, Paperclip, Home, MessageSquare, LogOut, User, Menu, X, AlertCircle, Loader2, Trash2, Download } from "lucide-react";
+import { Brain, Send, Mic, Paperclip, Home, MessageSquare, LogOut, User, Menu, X, Loader2, Trash2, Download } from "lucide-react";
 import { Link } from "react-router";
 import { motion, AnimatePresence } from "motion/react";
+import { StudentSession } from "../auth";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
 const PREDICTION_UPDATE_TOKEN = "[[PREDICTION_UPDATE_REQUIRED]]";
@@ -42,7 +43,12 @@ interface ChatHistoryResponse {
   chats: ChatSession[];
 }
 
-export function ChatbotInterface() {
+interface ChatbotInterfaceProps {
+  session: StudentSession;
+  onLogout: () => void;
+}
+
+export function ChatbotInterface({ session, onLogout }: ChatbotInterfaceProps) {
   const welcomeText = "Hello! I'm your AI Placement Assistant. I can help you understand your profile data, placement chances, salary predictions, recommended companies, and skill assessments. What would you like to know?";
 
   const getInitialMessages = (): Message[] => [
@@ -107,12 +113,8 @@ export function ChatbotInterface() {
   };
 
   // Student ID state
-  const [studentId, setStudentId] = useState<number | null>(null);
-  const [studentIdInput, setStudentIdInput] = useState("");
-  const [showStudentIdModal, setShowStudentIdModal] = useState(true);
-  const [studentIdError, setStudentIdError] = useState<string | null>(null);
-  const [validatingStudentId, setValidatingStudentId] = useState(false);
-  const [studentName, setStudentName] = useState<string | null>(null);
+  const [studentId, setStudentId] = useState<number | null>(session.studentId);
+  const [studentName, setStudentName] = useState<string | null>(session.name);
   const [chatSessions, setChatSessions] = useState<ChatSession[]>([]);
   const [activeChatId, setActiveChatId] = useState<string | null>(null);
   const [historyLoading, setHistoryLoading] = useState(false);
@@ -260,36 +262,11 @@ export function ChatbotInterface() {
     }
   };
 
-  const validateStudentId = async () => {
-    if (!studentIdInput.trim()) {
-      setStudentIdError("Please enter a student ID");
-      return;
-    }
-
-    setValidatingStudentId(true);
-    setStudentIdError(null);
-
-    try {
-      const response = await fetch(`${API_BASE_URL}/student/${parseInt(studentIdInput)}`);
-      const data = await response.json();
-
-      if (response.ok) {
-        const parsedStudentId = parseInt(studentIdInput);
-        setStudentId(parsedStudentId);
-        setStudentName(data.name || data.student?.name || "Student");
-        setShowStudentIdModal(false);
-        await loadHistory(parsedStudentId);
-        console.log("[ChatBot] Student validated:", data.name || data.student?.name);
-      } else {
-        setStudentIdError(data.message || "Student ID not found");
-      }
-    } catch (error) {
-      setStudentIdError("Error validating student ID. Please try again.");
-      console.error("[ChatBot] Validation error:", error);
-    } finally {
-      setValidatingStudentId(false);
-    }
-  };
+  useEffect(() => {
+    setStudentId(session.studentId);
+    setStudentName(session.name);
+    loadHistory(session.studentId);
+  }, [session.studentId, session.name]);
 
   const handleSend = async () => {
     if (!input.trim() || !studentId) return;
@@ -385,76 +362,7 @@ export function ChatbotInterface() {
 
   return (
     <>
-      {/* Student ID Modal */}
-      {showStudentIdModal && (
-        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-          <motion.div
-            initial={{ scale: 0.95, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            className="bg-card rounded-lg p-6 max-w-md w-full shadow-lg"
-          >
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-[#003366] to-[#0055A4] rounded-lg flex items-center justify-center">
-                <Brain className="w-6 h-6 text-white" />
-              </div>
-              <h2 className="text-xl" style={{ fontWeight: 600 }}>Welcome to Chatbot</h2>
-            </div>
-
-            <p className="text-sm text-muted-foreground mb-4">
-              Please enter your student ID to access your personalized placement data and guidance.
-            </p>
-
-            <div className="space-y-4">
-              <div>
-                <label className="text-sm font-medium mb-2 block">Student ID</label>
-                <Input
-                  type="number"
-                  placeholder="e.g., 200000"
-                  value={studentIdInput}
-                  onChange={(e) => {
-                    setStudentIdInput(e.target.value);
-                    setStudentIdError(null);
-                  }}
-                  onKeyPress={(e) => e.key === 'Enter' && validateStudentId()}
-                  disabled={validatingStudentId}
-                  className="h-10"
-                />
-                {studentIdError && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="mt-2 p-2 bg-destructive/10 border border-destructive/20 rounded text-sm text-destructive flex items-center gap-2"
-                  >
-                    <AlertCircle className="w-4 h-4" />
-                    {studentIdError}
-                  </motion.div>
-                )}
-              </div>
-
-              <Button
-                onClick={validateStudentId}
-                disabled={!studentIdInput.trim() || validatingStudentId}
-                className="w-full"
-              >
-                {validatingStudentId ? (
-                  <>
-                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                    Validating...
-                  </>
-                ) : (
-                  'Start Chatting'
-                )}
-              </Button>
-            </div>
-
-            <p className="text-xs text-muted-foreground text-center mt-4">
-              Your student ID is from your college admission email (e.g., 200001)
-            </p>
-          </motion.div>
-        </div>
-      )}
-
-      {!showStudentIdModal && (
+      {
         <div className="h-screen bg-background flex overflow-hidden">
           {/* Left Sidebar - Chat History */}
           <aside className={`
@@ -548,7 +456,7 @@ export function ChatbotInterface() {
                   </button>
                 </Link>
               ))}
-              <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-destructive/10 text-destructive transition-colors">
+              <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-destructive/10 text-destructive transition-colors" onClick={onLogout}>
                 <LogOut className="w-4 h-4" />
                 <span className="text-sm">Logout</span>
               </button>
@@ -581,8 +489,8 @@ export function ChatbotInterface() {
                   </div>
                 </div>
               </div>
-              <Button variant="ghost" size="sm" onClick={() => setShowStudentIdModal(true)}>
-                Change ID
+              <Button variant="ghost" size="sm" onClick={onLogout}>
+                Logout
               </Button>
             </header>
 
@@ -768,7 +676,7 @@ export function ChatbotInterface() {
             />
           )}
         </div>
-      )}
+      }
     </>
   );
 }

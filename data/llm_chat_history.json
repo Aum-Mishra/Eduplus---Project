@@ -1,0 +1,564 @@
+{
+  "200001": {
+    "active_chat_id": "2d19491c-8f6d-4f2b-a056-d8ab06a959a2",
+    "chats": [
+      {
+        "chat_id": "2d2b516c-256f-4d3c-96ca-06101791e21c",
+        "title": "Top amazon leetcode questions in last 3 months",
+        "created_at": "2026-04-19T18:51:04Z",
+        "updated_at": "2026-04-19T18:51:18Z",
+        "messages": [
+          {
+            "sender": "user",
+            "text": "Top amazon leetcode questions in last 3 months",
+            "timestamp": "2026-04-19T18:51:07Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "### LeetCode Questions for Amazon (Last 3 Months)\n\n- Total Questions Returned: **380**\n- Difficulty Split: Easy **114**, Medium **217**, Hard **49**\n\n#### Top Question Preview\n- 1. Two Sum (Easy, 100.0%)\n- 2. Add Two Numbers (Medium, 62.5%)\n- 3. Longest Substring Without Repeating Characters (Medium, 87.5%)\n- 4. Median of Two Sorted Arrays (Hard, 62.5%)\n- 5. Longest Palindromic Substring (Medium, 62.5%)\n- 6. Palindrome Number (Easy, 62.5%)\n- 7. Container With Most Water (Medium, 75.0%)\n- 8. Roman to Integer (Easy, 37.5%)\n- 9. Longest Common Prefix (Easy, 75.0%)\n- 10. 3Sum (Medium, 75.0%)",
+            "timestamp": "2026-04-19T18:51:07Z",
+            "intent": "leetcode_company_questions",
+            "source": "leetcode_dataset",
+            "value": {
+              "company": "amazon",
+              "time_label": "Last 3 Months",
+              "count": 380,
+              "easy": 114,
+              "medium": 217,
+              "hard": 49,
+              "download_url": null
+            }
+          },
+          {
+            "sender": "user",
+            "text": "Generate pdf for google leetcode interview questions",
+            "timestamp": "2026-04-19T18:51:16Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "### LeetCode Questions for Google (All Time)\n\n- Total Questions Returned: **2217**\n- Difficulty Split: Easy **588**, Medium **1153**, Hard **476**\n\n#### Top Question Preview\n- 1. Two Sum (Easy, 100.0%)\n- 2. Add Two Numbers (Medium, 75.0%)\n- 3. Longest Substring Without Repeating Characters (Medium, 75.0%)\n- 4. Median of Two Sorted Arrays (Hard, 75.0%)\n- 5. String to Integer (atoi) (Medium, 37.5%)\n- 6. Integer to Roman (Medium, 37.5%)\n- 7. Longest Common Prefix (Easy, 75.0%)\n- 8. 3Sum Closest (Medium, 50.0%)\n- 9. 4Sum (Medium, 50.0%)\n- 10. Valid Parentheses (Easy, 62.5%)\n\nDownloadable PDF: http://localhost:8001/api/llm-reports/llm_leetcode_google_all_20260419185116_182a15e1.pdf",
+            "timestamp": "2026-04-19T18:51:18Z",
+            "intent": "leetcode_company_questions",
+            "source": "leetcode_dataset",
+            "value": {
+              "company": "google",
+              "time_label": "All Time",
+              "count": 2217,
+              "easy": 588,
+              "medium": 1153,
+              "hard": 476,
+              "download_url": "http://localhost:8001/api/llm-reports/llm_leetcode_google_all_20260419185116_182a15e1.pdf"
+            }
+          }
+        ]
+      },
+      {
+        "chat_id": "2d19491c-8f6d-4f2b-a056-d8ab06a959a2",
+        "title": "Top amazon leetcode questions in last 3 months",
+        "created_at": "2026-04-19T18:45:06Z",
+        "updated_at": "2026-04-19T19:47:25Z",
+        "messages": [
+          {
+            "sender": "user",
+            "text": "Top amazon leetcode questions in last 3 months",
+            "timestamp": "2026-04-19T18:45:10Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "### Leetcode Guidance\n\n- Current Score: **45.7/100**\n- You are in a moderate zone; improve quality and consistency to reach the next band.\n- Prioritize arrays, strings, trees, graphs, and dynamic programming patterns.",
+            "timestamp": "2026-04-19T18:45:10Z",
+            "intent": "score_guidance",
+            "source": "student_profile",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "Show my placement prediction",
+            "timestamp": "2026-04-19T18:47:25Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "### Your Placement Prediction Summary\n\n- Overall Placement Probability: **80.23%**\n- Predicted Salary: **6.12 LPA**\n- Salary Range: **4.29 to 7.96 LPA**\n- Predicted Job Role: **Analyst**\n- Recommended Companies: **Birlasoft,CGI,Birlasoft,Reliance Jio,Sopra Steria**\n",
+            "timestamp": "2026-04-19T18:47:25Z",
+            "intent": "prediction_summary",
+            "source": "prediction_data",
+            "value": {
+              "student_id": "200001",
+              "overall_placement_probability": 80.23,
+              "predicted_salary_lpa": 6.12,
+              "salary_range_min_lpa": 4.29,
+              "salary_range_mid_lpa": 6.12,
+              "salary_range_max_lpa": 7.96,
+              "prob_salary_gt_2_lpa": 90.8,
+              "prob_salary_gt_5_lpa": 77.1,
+              "prob_salary_gt_10_lpa": 0.6,
+              "prob_salary_gt_15_lpa": 0.4,
+              "prob_salary_gt_20_lpa": 0.3,
+              "prob_salary_gt_25_lpa": 0.3,
+              "prob_salary_gt_30_lpa": 0.2,
+              "prob_salary_gt_35_lpa": 0.2,
+              "prob_salary_gt_40_lpa": 0.1,
+              "predicted_job_role": "Analyst",
+              "recommended_companies": "Birlasoft,CGI,Birlasoft,Reliance Jio,Sopra Steria"
+            }
+          },
+          {
+            "sender": "user",
+            "text": "### Your Placement Prediction Summary  - Overall Placement Probability: **80.23%** - Predicted Salary: **6.12 LPA** - Salary Range: **4.29 to 7.96 LPA** - Predicted Job Role: **Analyst** - Recommended Companies: **Birlasoft,CGI,Birlasoft,Reliance Jio,Sopra Steria**",
+            "timestamp": "2026-04-19T18:47:35Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "### Your Placement Prediction Summary\n\n- Overall Placement Probability: **80.23%**\n- Predicted Salary: **6.12 LPA**\n- Salary Range: **4.29 to 7.96 LPA**\n- Predicted Job Role: **Analyst**\n- Recommended Companies: **Birlasoft,CGI,Birlasoft,Reliance Jio,Sopra Steria**\n",
+            "timestamp": "2026-04-19T18:47:35Z",
+            "intent": "prediction_summary",
+            "source": "prediction_data",
+            "value": {
+              "student_id": "200001",
+              "overall_placement_probability": 80.23,
+              "predicted_salary_lpa": 6.12,
+              "salary_range_min_lpa": 4.29,
+              "salary_range_mid_lpa": 6.12,
+              "salary_range_max_lpa": 7.96,
+              "prob_salary_gt_2_lpa": 90.8,
+              "prob_salary_gt_5_lpa": 77.1,
+              "prob_salary_gt_10_lpa": 0.6,
+              "prob_salary_gt_15_lpa": 0.4,
+              "prob_salary_gt_20_lpa": 0.3,
+              "prob_salary_gt_25_lpa": 0.3,
+              "prob_salary_gt_30_lpa": 0.2,
+              "prob_salary_gt_35_lpa": 0.2,
+              "prob_salary_gt_40_lpa": 0.1,
+              "predicted_job_role": "Analyst",
+              "recommended_companies": "Birlasoft,CGI,Birlasoft,Reliance Jio,Sopra Steria"
+            }
+          },
+          {
+            "sender": "user",
+            "text": "### Your Placement Prediction Summary  - Overall Placement Probability: **80.23%** - Predicted Salary: **6.12 LPA** - Salary Range: **4.29 to 7.96 LPA** - Predicted Job Role: **Analyst** - Recommended Companies: **Birlasoft,CGI,Birlasoft,Reliance Jio,Sopra Steria**  exaplin my placement prediction to me",
+            "timestamp": "2026-04-19T18:47:53Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "### Your Placement Prediction Summary\n\n- Overall Placement Probability: **80.23%**\n- Predicted Salary: **6.12 LPA**\n- Salary Range: **4.29 to 7.96 LPA**\n- Predicted Job Role: **Analyst**\n- Recommended Companies: **Birlasoft,CGI,Birlasoft,Reliance Jio,Sopra Steria**\n",
+            "timestamp": "2026-04-19T18:47:53Z",
+            "intent": "prediction_summary",
+            "source": "prediction_data",
+            "value": {
+              "student_id": "200001",
+              "overall_placement_probability": 80.23,
+              "predicted_salary_lpa": 6.12,
+              "salary_range_min_lpa": 4.29,
+              "salary_range_mid_lpa": 6.12,
+              "salary_range_max_lpa": 7.96,
+              "prob_salary_gt_2_lpa": 90.8,
+              "prob_salary_gt_5_lpa": 77.1,
+              "prob_salary_gt_10_lpa": 0.6,
+              "prob_salary_gt_15_lpa": 0.4,
+              "prob_salary_gt_20_lpa": 0.3,
+              "prob_salary_gt_25_lpa": 0.3,
+              "prob_salary_gt_30_lpa": 0.2,
+              "prob_salary_gt_35_lpa": 0.2,
+              "prob_salary_gt_40_lpa": 0.1,
+              "predicted_job_role": "Analyst",
+              "recommended_companies": "Birlasoft,CGI,Birlasoft,Reliance Jio,Sopra Steria"
+            }
+          },
+          {
+            "sender": "user",
+            "text": "see my profile in depth and tell me is i am capable of getting placed",
+            "timestamp": "2026-04-19T18:48:33Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "Based on the data provided for Student_2, it appears that they are well-positioned to secure a placement. Here's a summary of their academic and predictive scores:\n\nAcademic Scores:\n- Branch: Computer Science & Engineering (CSE)\n- CGPA: 6.53\n- DSA Score: 45.66\n- Project Score: 65.66\n- Aptitude Score: 38.82\n- HR Score: 79.98\n- Resume ATS Score: 56.61\n- CS Fundamentals Score: 45.09\n\nPredictive Scores:\n- Overall Placement Probability: 80.23%\n- Predicted Salary (LPA): 6.12\n- Salary Range (Min LPA - Max LPA): 4.29 to 7.96\n- Predicted Job Role: Analyst\n- Recommended Companies: Birlasoft, CGI, Reliance Jio, Sopra Steria\n\nThe high overall placement probability and recommended companies suggest that Student_2 is capable of securing a placement. However, it's important to note that these predictions are based on the provided data and may not account for all factors influencing employment opportunities. Student_2 should continue to focus on improving their skills, participating in internships, and networking to increase their chances further.\n\nData Unavailable:\n- Exact policy numbers related to company placements are not provided in this context.",
+            "timestamp": "2026-04-19T18:48:59Z",
+            "intent": "llm_conversational",
+            "source": "llm_mistral",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "can i get a salary of more that 20 lpa?",
+            "timestamp": "2026-04-19T18:49:35Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "### Top Companies by Average Package\n\n- **Google** | Tier: Tier-1 Product | Avg Package: 22.0 LPA | Min CGPA: 8.0 | Backlogs Allowed: False\n- **Netflix** | Tier: Tier-1 Product | Avg Package: 20.0 LPA | Min CGPA: 7.8 | Backlogs Allowed: False\n- **Uber** | Tier: Tier-1 Product | Avg Package: 18.0 LPA | Min CGPA: 7.5 | Backlogs Allowed: False\n- **Amazon** | Tier: Tier-1 Product | Avg Package: 18.0 LPA | Min CGPA: 7.5 | Backlogs Allowed: False\n- **Atlassian** | Tier: Tier-1 Product | Avg Package: 17.0 LPA | Min CGPA: 7.5 | Backlogs Allowed: False\n- **LinkedIn** | Tier: Tier-1 Product | Avg Package: 17.0 LPA | Min CGPA: 7.5 | Backlogs Allowed: False\n- **Twitter(X)** | Tier: Tier-1 Product | Avg Package: 16.0 LPA | Min CGPA: 7.2 | Backlogs Allowed: False\n- **Microsoft** | Tier: Tier-1 Product | Avg Package: 16.0 LPA | Min CGPA: 7.0 | Backlogs Allowed: False\n- **Walmart Global Tech** | Tier: Tier-1 Product | Avg Package: 15.0 LPA | Min CGPA: 7.2 | Backlogs Allowed: False\n- **Flipkart** | Tier: Tier-1 Product | Avg Package: 14.0 LPA | Min CGPA: 7.0 | Backlogs Allowed: False\n- **SAP Labs** | Tier: Tier-1 Product | Avg Package: 14.0 LPA | Min CGPA: 7.0 | Backlogs Allowed: False\n- **Adobe** | Tier: Tier-1 Product | Avg Package: 13.0 LPA | Min CGPA: 7.0 | Backlogs Allowed: False",
+            "timestamp": "2026-04-19T18:49:35Z",
+            "intent": "company_package_query",
+            "source": "company_data",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "?what i need to do to get the salary of more that 20 lpa",
+            "timestamp": "2026-04-19T18:49:54Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "### Top Companies by Average Package\n\n- **Google** | Tier: Tier-1 Product | Avg Package: 22.0 LPA | Min CGPA: 8.0 | Backlogs Allowed: False\n- **Netflix** | Tier: Tier-1 Product | Avg Package: 20.0 LPA | Min CGPA: 7.8 | Backlogs Allowed: False\n- **Uber** | Tier: Tier-1 Product | Avg Package: 18.0 LPA | Min CGPA: 7.5 | Backlogs Allowed: False\n- **Amazon** | Tier: Tier-1 Product | Avg Package: 18.0 LPA | Min CGPA: 7.5 | Backlogs Allowed: False\n- **Atlassian** | Tier: Tier-1 Product | Avg Package: 17.0 LPA | Min CGPA: 7.5 | Backlogs Allowed: False\n- **LinkedIn** | Tier: Tier-1 Product | Avg Package: 17.0 LPA | Min CGPA: 7.5 | Backlogs Allowed: False\n- **Twitter(X)** | Tier: Tier-1 Product | Avg Package: 16.0 LPA | Min CGPA: 7.2 | Backlogs Allowed: False\n- **Microsoft** | Tier: Tier-1 Product | Avg Package: 16.0 LPA | Min CGPA: 7.0 | Backlogs Allowed: False\n- **Walmart Global Tech** | Tier: Tier-1 Product | Avg Package: 15.0 LPA | Min CGPA: 7.2 | Backlogs Allowed: False\n- **Flipkart** | Tier: Tier-1 Product | Avg Package: 14.0 LPA | Min CGPA: 7.0 | Backlogs Allowed: False\n- **SAP Labs** | Tier: Tier-1 Product | Avg Package: 14.0 LPA | Min CGPA: 7.0 | Backlogs Allowed: False\n- **Adobe** | Tier: Tier-1 Product | Avg Package: 13.0 LPA | Min CGPA: 7.0 | Backlogs Allowed: False",
+            "timestamp": "2026-04-19T18:49:54Z",
+            "intent": "company_package_query",
+            "source": "company_data",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "can i get a job with a salary of more that 20 lpa?",
+            "timestamp": "2026-04-19T19:11:44Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "### Can You Reach 20.0+ LPA?\n\nYes, it is possible. Right now your predicted package is **6.12 LPA**, so you need roughly **13.88 LPA** more to consistently hit **20.0 LPA** roles.\n\nA practical plan for you:\n- Raise your DSA score toward 75+ with company-focused problem patterns and timed mocks.\n- Upgrade your top 2 projects to production-grade quality (deployment, metrics, architecture clarity).\n- Improve your resume ATS score by aligning keywords with high-package role job descriptions.\n- Apply strategically to high-package companies where your CGPA and skills match eligibility.",
+            "timestamp": "2026-04-19T19:11:44Z",
+            "intent": "salary_goal_guidance",
+            "source": "prediction_and_company_data",
+            "value": {
+              "salary_goal_lpa": 20.0,
+              "predicted_salary_lpa": 6.12,
+              "eligible_high_package_companies": []
+            }
+          },
+          {
+            "sender": "user",
+            "text": "what i need to do to get the salary of more that 20 lpa",
+            "timestamp": "2026-04-19T19:12:11Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "### Can You Reach 20.0+ LPA?\n\nYes, it is possible. Right now your predicted package is **6.12 LPA**, so you need roughly **13.88 LPA** more to consistently hit **20.0 LPA** roles.\n\nA practical plan for you:\n- Raise your DSA score toward 75+ with company-focused problem patterns and timed mocks.\n- Upgrade your top 2 projects to production-grade quality (deployment, metrics, architecture clarity).\n- Improve your resume ATS score by aligning keywords with high-package role job descriptions.\n- Apply strategically to high-package companies where your CGPA and skills match eligibility.",
+            "timestamp": "2026-04-19T19:12:11Z",
+            "intent": "salary_goal_guidance",
+            "source": "prediction_and_company_data",
+            "value": {
+              "salary_goal_lpa": 20.0,
+              "predicted_salary_lpa": 6.12,
+              "eligible_high_package_companies": []
+            }
+          },
+          {
+            "sender": "user",
+            "text": "see my profile in depth and tell me is i am capable of getting placed\\",
+            "timestamp": "2026-04-19T19:12:24Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "Based on your academic profile, here's a breakdown of your performance:\n\n- Branch: Computer Science and Engineering (CSE)\n- CGPA: 6.53\n- DSA Score: 45.66\n- Project Score: 65.66\n- Aptitude Score: 38.82\n- HR Score: 79.98\n- Resume ATS Score: 56.61\n- CS Fundamentals Score: 45.09\n\nYour overall placement probability is 80.23%, which suggests a high likelihood of getting placed. The predicted salary range for you is between **₹ 4.29 LPA** and **₹ 7.96 LPA**. Your profile indicates that you might be offered the job role of an Analyst.\n\nGiven your scores, it seems that you possess a strong foundation in Computer Science fundamentals, which is important for many roles. Additionally, your high HR score suggests good interpersonal skills, which are vital in any work environment.\n\nThe system has also recommended some companies where you might have a good fit: Birlasoft, CGI, Reliance Jio, Sopra Steria. These recommendations are based on various factors such as company culture, job openings, and your profile's match with the required qualifications.\n\nIn summary, your profile shows promising signs for getting placed, and you appear to be capable of securing a good role in the IT industry. Keep up the good work and continue to enhance your skills!",
+            "timestamp": "2026-04-19T19:12:50Z",
+            "intent": "llm_conversational",
+            "source": "llm_mistral",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "Show my placement prediction",
+            "timestamp": "2026-04-19T19:13:10Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "### Your Placement Prediction Summary\n\nYou currently have an estimated placement probability of **80.23%**.\nYour predicted salary is **6.12 LPA**, with an expected range of **4.29 to 7.96 LPA**.\nYour most likely job role is **Analyst**.\nRecommended companies for your present profile: **Birlasoft,CGI,Birlasoft,Reliance Jio,Sopra Steria**.\n",
+            "timestamp": "2026-04-19T19:13:10Z",
+            "intent": "prediction_summary",
+            "source": "prediction_data",
+            "value": {
+              "student_id": "200001",
+              "overall_placement_probability": 80.23,
+              "predicted_salary_lpa": 6.12,
+              "salary_range_min_lpa": 4.29,
+              "salary_range_mid_lpa": 6.12,
+              "salary_range_max_lpa": 7.96,
+              "prob_salary_gt_2_lpa": 90.8,
+              "prob_salary_gt_5_lpa": 77.1,
+              "prob_salary_gt_10_lpa": 0.6,
+              "prob_salary_gt_15_lpa": 0.4,
+              "prob_salary_gt_20_lpa": 0.3,
+              "prob_salary_gt_25_lpa": 0.3,
+              "prob_salary_gt_30_lpa": 0.2,
+              "prob_salary_gt_35_lpa": 0.2,
+              "prob_salary_gt_40_lpa": 0.1,
+              "predicted_job_role": "Analyst",
+              "recommended_companies": "Birlasoft,CGI,Birlasoft,Reliance Jio,Sopra Steria"
+            }
+          },
+          {
+            "sender": "user",
+            "text": "what i need to do to get the salary of more that 20 lpa",
+            "timestamp": "2026-04-19T19:21:23Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "### Your Pathway to a Salary Above ₹20 LPA\n\nGreat question! Let's break it down for you. Your current predicted package is **₹6.12 LPA**, so to reach the goal of consistently earning **₹20 LPA**, you need approximately **₹13.88 LPA** more.\n\nHere's a step-by-step plan to help you achieve this:\n\n1. Boost your DSA score by focusing on company-specific problem patterns and timed mock tests. Aim for a score of 75+.\n2. Enhance the quality of your top 2 projects by deploying them, adding metrics, and clarifying the architecture. Strive for production-grade standards.\n3. Optimize your resume to improve its ATS (Applicant Tracking System) score. Align keywords with high-package role job descriptions to get noticed.\n4. Strategically apply to companies where your CGPA and skills align with their eligibility criteria, such as Birlasoft, CGI, Reliance Jio, Sopra Steria, among others.\n\nRemember, it's all about hard work and smart planning. Keep up the good work!\n\nYour Current Predicted Salary: **₹6.12 LPA**\nYour Goal Salary: **₹20 LPA**\n\nGood luck on your journey towards a higher salary! 💪💼",
+            "timestamp": "2026-04-19T19:21:45Z",
+            "intent": "salary_goal_guidance",
+            "source": "prediction_and_company_data_humanized",
+            "value": {
+              "salary_goal_lpa": 20.0,
+              "predicted_salary_lpa": 6.12,
+              "eligible_high_package_companies": []
+            }
+          },
+          {
+            "sender": "user",
+            "text": "Show my placement prediction",
+            "timestamp": "2026-04-19T19:22:03Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "**Hey there!**\n\nHere's your placement prediction summary:\n\n- Your estimated probability of getting placed is **80.23%**. That's great news!\n- The predicted salary for you is around **₹6.12 LPA**. This is within a range of **₹4.29 to ₹7.96 LPA**.\n- Based on your profile, the most likely job role for you is an **Analyst**.\n- Here are some companies that might be interested in your profile: **Birlasoft**, **CGI**, **Birlasoft** again (they seem to like you!), **Reliance Jio**, and **Sopra Steria**.\n\nRemember, this is just an estimate. Your actual placement and salary may vary based on various factors during the recruitment process. Keep working hard and good luck with your placements!\n\n**P.S.**: You have a higher probability of getting a salary above ₹10 LPA (60% chance), ₹15 LPA (40% chance), and even ₹20 LPA (30% chance) or more, but the chances decrease as the salary amount increases. Keep striving for excellence!",
+            "timestamp": "2026-04-19T19:22:23Z",
+            "intent": "prediction_summary",
+            "source": "prediction_data_humanized",
+            "value": {
+              "student_id": "200001",
+              "overall_placement_probability": 80.23,
+              "predicted_salary_lpa": 6.12,
+              "salary_range_min_lpa": 4.29,
+              "salary_range_mid_lpa": 6.12,
+              "salary_range_max_lpa": 7.96,
+              "prob_salary_gt_2_lpa": 90.8,
+              "prob_salary_gt_5_lpa": 77.1,
+              "prob_salary_gt_10_lpa": 0.6,
+              "prob_salary_gt_15_lpa": 0.4,
+              "prob_salary_gt_20_lpa": 0.3,
+              "prob_salary_gt_25_lpa": 0.3,
+              "prob_salary_gt_30_lpa": 0.2,
+              "prob_salary_gt_35_lpa": 0.2,
+              "prob_salary_gt_40_lpa": 0.1,
+              "predicted_job_role": "Analyst",
+              "recommended_companies": "Birlasoft,CGI,Birlasoft,Reliance Jio,Sopra Steria"
+            }
+          },
+          {
+            "sender": "user",
+            "text": "what i need to do to get the salary of more that 20 lpa",
+            "timestamp": "2026-04-19T19:37:09Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "### Reaching Your Salary Goal of 20+ LPA\n\nCongratulations, you have a good chance of hitting your goal! However, your current predicted package is **₹6.12 LPA**, which means you need to aim for jobs that offer around **₹13.88 LPA** more. Here's a practical plan to help you get there:\n\n- Boost your DSA score towards 75+ with company-specific problem patterns and timed mock tests.\n- Enhance the quality of your top two projects by making them deployment-ready, including metrics and clear architecture documentation.\n- Align keywords on your resume with those found in high-package role job descriptions to improve your ATS score.\n- Strategically apply to companies where your CGPA and skills match their eligibility criteria, such as Birlasoft, CGI, Reliance Jio, and Sopra Steria.\n\nRemember, this is a journey and persistence will be key. Good luck on your path towards achieving your salary goal!",
+            "timestamp": "2026-04-19T19:37:28Z",
+            "intent": "salary_goal_guidance",
+            "source": "prediction_and_company_data_humanized",
+            "value": {
+              "salary_goal_lpa": 20.0,
+              "predicted_salary_lpa": 6.12,
+              "eligible_high_package_companies": []
+            }
+          },
+          {
+            "sender": "user",
+            "text": "what i need to do to get the salary of more that 20 lpa",
+            "timestamp": "2026-04-19T19:37:47Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "### Achieving a Salary of More Than ₹20 LPA\n\nCongratulations, you have a good chance of reaching your goal! Your predicted salary currently stands at **₹6.12 LPA**, so to consistently earn **₹20 LPA**, you'll need to improve by approximately **₹13.88 LPA**. Here's a tailored plan for you:\n\n- Boost your DSA score, aiming towards 75+ with an emphasis on company-specific problem patterns and timed mock tests.\n- Enhance the quality of your top two projects by deploying them, adding metrics, and clarifying the project architecture to make them production-grade.\n- Optimize your resume for ATS (Applicant Tracking System) by aligning keywords with high-package role job descriptions.\n- Apply strategically to companies where your CGPA and skills are a good match for their eligibility, such as Birlasoft, CGI, Reliance Jio, Sopra Steria, among others.",
+            "timestamp": "2026-04-19T19:38:04Z",
+            "intent": "salary_goal_guidance",
+            "source": "prediction_and_company_data_humanized",
+            "value": {
+              "salary_goal_lpa": 20.0,
+              "predicted_salary_lpa": 6.12,
+              "eligible_high_package_companies": []
+            }
+          },
+          {
+            "sender": "user",
+            "text": "what i need to do to get the salary of more that 20 lpa",
+            "timestamp": "2026-04-19T19:47:25Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "### Reaching 20.0+ LPA\n\n#### Reality Check\nRight now your predicted package is **6.12 LPA**, so you need roughly **13.88 LPA** more to consistently hit **20.0 LPA** roles.\nYour current estimated probability of crossing **20 LPA** is **0.30%**, which is low right now. This is not a final outcome; with focused effort, you can improve it.\nYou can improve this with disciplined effort and a focused plan.\n\n#### Data Used\n- Predicted Salary: **6.12 LPA**\n- Probability >15 LPA: **0.40%**\n- Probability >20 LPA: **0.30%**\n- Probability >25 LPA: **0.30%**\n\n#### Why Low Right Now\n- Your current >20 LPA probability is low, so this goal needs a significant profile jump.\n- Your DSA score (**45.7**) is below the typical bar for top-package roles.\n- Your project score (**65.7**) indicates room to improve project depth and impact.\n- Your ATS score (**56.6**) can limit shortlist conversion for premium roles.\n\n#### 30/60/90 Day Action Plan\n**Next 30 Days**\n- Solve 80-100 focused DSA problems (arrays, strings, trees, graphs, DP).\n- Rebuild your resume for ATS and target role keywords.\n- Finalize 1 flagship project with clear impact metrics and deployment.\n\n**Day 31-60**\n- Complete 8-10 timed mock interviews (DSA + CS fundamentals + HR).\n- Finish system design and OOPS/DBMS revision for interview rounds.\n- Upgrade one more project to production quality and add measurable outcomes.\n\n**Day 61-90**\n- Run company-specific preparation sprints for 20+ LPA target companies.\n- Apply strategically to aligned roles and track conversion stage-by-stage.\n- Iterate weak areas from mock feedback every week.\n\n#### Target Companies and Eligibility Gap\n- **Google** | Avg Package: **22.0 LPA** | Min CGPA: **8.0** | CGPA gap: +1.47 | Skills: DSA, Algorithms, System Design, OS, DBMS\n- **Netflix** | Avg Package: **20.0 LPA** | Min CGPA: **7.8** | CGPA gap: +1.27 | Skills: DSA, System Design, Backend, Projects\n\n#### Skills You Should Prepare (From 20+ LPA Company Profiles)\n- DSA, Algorithms, System Design, OS, DBMS, Backend, Projects",
+            "timestamp": "2026-04-19T19:47:25Z",
+            "intent": "salary_goal_guidance",
+            "source": "prediction_and_company_data",
+            "value": {
+              "salary_goal_lpa": 20.0,
+              "predicted_salary_lpa": 6.12,
+              "prob_salary_gt_15_lpa": 0.4,
+              "prob_salary_gt_20_lpa": 0.3,
+              "prob_salary_gt_25_lpa": 0.3,
+              "eligible_high_package_companies": [],
+              "target_companies": [
+                {
+                  "company_name": "Google",
+                  "avg_package_lpa": 22.0,
+                  "min_cgpa": 8.0,
+                  "cgpa_gap": 1.47,
+                  "required_skills": "DSA, Algorithms, System Design, OS, DBMS",
+                  "backlogs_allowed": "0"
+                },
+                {
+                  "company_name": "Netflix",
+                  "avg_package_lpa": 20.0,
+                  "min_cgpa": 7.8,
+                  "cgpa_gap": 1.27,
+                  "required_skills": "DSA, System Design, Backend, Projects",
+                  "backlogs_allowed": "0"
+                }
+              ],
+              "aggregated_required_skills": [
+                "DSA",
+                "Algorithms",
+                "System Design",
+                "OS",
+                "DBMS",
+                "Backend",
+                "Projects"
+              ],
+              "action_plan": {
+                "day_30": [
+                  "Solve 80-100 focused DSA problems (arrays, strings, trees, graphs, DP).",
+                  "Rebuild your resume for ATS and target role keywords.",
+                  "Finalize 1 flagship project with clear impact metrics and deployment."
+                ],
+                "day_60": [
+                  "Complete 8-10 timed mock interviews (DSA + CS fundamentals + HR).",
+                  "Finish system design and OOPS/DBMS revision for interview rounds.",
+                  "Upgrade one more project to production quality and add measurable outcomes."
+                ],
+                "day_90": [
+                  "Run company-specific preparation sprints for 20+ LPA target companies.",
+                  "Apply strategically to aligned roles and track conversion stage-by-stage.",
+                  "Iterate weak areas from mock feedback every week."
+                ]
+              }
+            }
+          }
+        ]
+      },
+      {
+        "chat_id": "0fb67b0a-90ad-4725-bc6b-d77a46f6fbc1",
+        "title": "Recommend companies for my profile",
+        "created_at": "2026-04-19T18:36:12Z",
+        "updated_at": "2026-04-19T18:44:49Z",
+        "messages": [
+          {
+            "sender": "user",
+            "text": "Recommend companies for my profile",
+            "timestamp": "2026-04-19T18:44:18Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "Based on the provided data from your student profile and prediction context, here are the top recommended companies that match well with your academic achievements and predicted job role.\n\n**Recommended Companies:**\n\n1. Birlasoft\n   - Industry: IT Services\n   - Job Role Prediction: Analyst/Software Engineer\n   - Potential Salary Range: INR 4.29 LPA - INR 7.96 LPA (Data available)\n\n2. CGI\n   - Industry: IT Services and Consulting\n   - Job Role Prediction: Analyst/Developer\n   - Potential Salary Range: Not Specified (Data unavailable)\n\n3. Reliance Jio\n   - Industry: Telecommunications\n   - Job Role Prediction: Analyst/Network Engineer\n   - Potential Salary Range: INR 4.29 LPA - INR 7.96 LPA (Data available)\n\n4. Sopra Steria\n   - Industry: IT Services and Consulting\n   - Job Role Prediction: Analyst/Developer\n   - Potential Salary Range: Not Specified (Data unavailable)\n\nThese companies have been selected based on your predicted job role, overall placement probability, and predicted salary range. It's essential to research more about each company, including their culture, values, and current openings, before applying for positions to ensure a good fit. Good luck with your career journey!",
+            "timestamp": "2026-04-19T18:44:40Z",
+            "intent": "llm_conversational",
+            "source": "llm_mistral",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "Generate pdf for google leetcode interview questions",
+            "timestamp": "2026-04-19T18:44:49Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "### Leetcode Guidance\n\n- Current Score: **45.7/100**\n- You are in a moderate zone; improve quality and consistency to reach the next band.\n- Prioritize arrays, strings, trees, graphs, and dynamic programming patterns.",
+            "timestamp": "2026-04-19T18:44:49Z",
+            "intent": "score_guidance",
+            "source": "student_profile",
+            "value": null
+          }
+        ]
+      }
+    ]
+  },
+  "200059": {
+    "active_chat_id": "c09d3180-7a40-40a8-823d-5a404eb31efa",
+    "chats": [
+      {
+        "chat_id": "c09d3180-7a40-40a8-823d-5a404eb31efa",
+        "title": "New Chat",
+        "created_at": "2026-04-20T08:10:36Z",
+        "updated_at": "2026-04-20T08:10:36Z",
+        "messages": []
+      }
+    ]
+  },
+  "200004": {
+    "active_chat_id": "9cbd0d34-95a3-4dd0-929d-7b8c33f768a4",
+    "chats": [
+      {
+        "chat_id": "9cbd0d34-95a3-4dd0-929d-7b8c33f768a4",
+        "title": "New Chat",
+        "created_at": "2026-04-20T11:13:34Z",
+        "updated_at": "2026-04-20T11:13:34Z",
+        "messages": []
+      }
+    ]
+  },
+  "200070": {
+    "active_chat_id": "cb06a95b-f4a4-43d7-9322-6e739fa7c938",
+    "chats": [
+      {
+        "chat_id": "cb06a95b-f4a4-43d7-9322-6e739fa7c938",
+        "title": "New Chat",
+        "created_at": "2026-04-20T11:46:51Z",
+        "updated_at": "2026-04-20T11:46:51Z",
+        "messages": []
+      }
+    ]
+  }
+}

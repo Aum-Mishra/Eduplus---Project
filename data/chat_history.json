@@ -1426,5 +1426,63 @@
         ]
       }
     ]
+  },
+  "200059": {
+    "active_chat_id": "chat_e6e50cf028a3",
+    "chats": [
+      {
+        "chat_id": "chat_e6e50cf028a3",
+        "title": "My placement probability?",
+        "created_at": "2026-04-19T17:50:52Z",
+        "updated_at": "2026-04-20T08:19:47Z",
+        "messages": [
+          {
+            "sender": "bot",
+            "text": "Hello! I'm your AI Placement Assistant. I can help you understand your profile data, placement chances, salary predictions, recommended companies, and skill assessments. What would you like to know?",
+            "timestamp": "2026-04-19T17:50:52Z",
+            "intent": null,
+            "source": "system",
+            "value": null
+          },
+          {
+            "sender": "user",
+            "text": "My placement probability?",
+            "timestamp": "2026-04-20T08:19:42Z",
+            "intent": "user_message",
+            "source": "user",
+            "value": null
+          },
+          {
+            "sender": "bot",
+            "text": "Your placement probability needs to be updated before I can answer this query.\nPlease go to the Placement Prediction Model page and generate/update your prediction, then try again.\n[[PREDICTION_UPDATE_REQUIRED]]",
+            "timestamp": "2026-04-20T08:19:47Z",
+            "intent": "info",
+            "source": "chatbot",
+            "value": null
+          }
+        ]
+      }
+    ]
+  },
+  "200004": {
+    "active_chat_id": "chat_6e0226cbef5a",
+    "chats": [
+      {
+        "chat_id": "chat_6e0226cbef5a",
+        "title": "New Chat",
+        "created_at": "2026-04-20T13:46:41Z",
+        "updated_at": "2026-04-20T13:46:41Z",
+        "messages": [
+          {
+            "sender": "bot",
+            "text": "Hello! I'm your AI Placement Assistant. I can help you understand your profile data, placement chances, salary predictions, recommended companies, and skill assessments. What would you like to know?",
+            "timestamp": "2026-04-20T13:46:41Z",
+            "intent": null,
+            "source": "system",
+            "value": null
+          }
+        ]
+      }
+    ]
   }
 }

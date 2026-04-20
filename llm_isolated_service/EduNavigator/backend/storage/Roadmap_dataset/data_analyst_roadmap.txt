@@ -1,0 +1,54 @@
+Data Analyst Career Path
+
+1. Foundation Skills (3-6 months)
+   - Learn SQL basics and advanced queries
+   - Master Excel fundamentals and advanced functions
+   - Basic statistics concepts
+   - Python programming basics
+
+2. Data Analysis Tools (3-4 months)
+   - Tableau or Power BI for visualization
+   - Python libraries: pandas, numpy
+   - Advanced Excel: Pivot tables, VLOOKUP, macros
+   - Basic data cleaning and preprocessing
+
+3. Statistics and Math (2-3 months)
+   - Descriptive statistics
+   - Probability distributions
+   - Hypothesis testing
+   - Correlation and regression
+
+4. Advanced Analysis (4-6 months)
+   - Data mining techniques
+   - Machine learning basics
+   - Time series analysis
+   - A/B testing
+
+5. Business Skills (2-3 months)
+   - Business metrics and KPIs
+   - Data storytelling
+   - Presentation skills
+   - Industry domain knowledge
+
+Projects to Build:
+1. Sales data analysis dashboard
+2. Customer segmentation analysis
+3. Market trend prediction
+4. KPI monitoring system
+
+Key Skills to Master:
+- SQL
+- Python (pandas, numpy)
+- Tableau/Power BI
+- Excel
+- Statistics
+- Data Visualization
+- Problem-solving
+- Communication
+
+Career Progression:
+1. Junior Data Analyst (0-2 years)
+2. Data Analyst (2-5 years)
+3. Senior Data Analyst (5+ years)
+4. Analytics Manager (8+ years)
+5. Analytics Director (10+ years)
