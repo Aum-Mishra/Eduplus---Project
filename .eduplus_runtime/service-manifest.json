@@ -1,0 +1,40 @@
+﻿{
+    "startedAt":  "2026-08-11T22:36:28",
+    "services":  [
+                     {
+                         "name":  "backend",
+                         "pid":  44928,
+                         "port":  5000,
+                         "url":  "http://localhost:5000",
+                         "workingDirectory":  "D:\\Eduplus"
+                     },
+                     {
+                         "name":  "frontend",
+                         "pid":  31628,
+                         "port":  5173,
+                         "url":  "http://localhost:5173",
+                         "workingDirectory":  "D:\\Eduplus\\UI Eduplus"
+                     },
+                     {
+                         "name":  "rasa-actions",
+                         "pid":  42036,
+                         "port":  5055,
+                         "url":  "http://localhost:5055",
+                         "workingDirectory":  "D:\\Eduplus\\Chatbot"
+                     },
+                     {
+                         "name":  "rasa-server",
+                         "pid":  41332,
+                         "port":  5005,
+                         "url":  "http://localhost:5005",
+                         "workingDirectory":  "D:\\Eduplus\\Chatbot"
+                     },
+                     {
+                         "name":  "rag",
+                         "pid":  36508,
+                         "port":  8001,
+                         "url":  "http://localhost:8001",
+                         "workingDirectory":  "D:\\Eduplus\\llm_isolated_service"
+                     }
+                 ]
+}

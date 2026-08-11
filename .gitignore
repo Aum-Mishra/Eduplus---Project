@@ -1,0 +1,62 @@
+# Python virtual environments
+.venv/
+.venv_all/
+.venv*/
+venv/
+env/
+edunav/
+**/edunav/
+Chatbot/venv_rasa/
+
+# Python cache & Jupyter checkpoints
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+.Python
+.ipynb_checkpoints
+**/.ipynb_checkpoints/
+
+# Temporary files & Local backups (Kept locally, excluded from Git)
+.tmp*
+*.tmp
+tmpclaude*
+**/tmpclaude*
+app_backup.py
+.tmp_answer_queries.py
+
+# Archives & Large Zips
+*.zip
+*.tar.gz
+Chatbot/models/*.tar.gz
+llm_isolated_service/*.zip
+
+# Node.js & Frontend build outputs
+node_modules/
+UI Eduplus/node_modules/
+dist/
+UI Eduplus/dist/
+.vite/
+UI Eduplus/.vite/
+
+# Rasa internal state
+Chatbot/.rasa/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+UI Eduplus/.env.local
+
+# OS generated files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE & Editor settings
+.vscode/
+.idea/
+*.swp
+*.swo

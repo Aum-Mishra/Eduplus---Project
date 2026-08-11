@@ -1,0 +1,2084 @@
+version: "3.1"
+
+nlu:
+- lookup: company
+  examples: |
+    - Google
+    - Amazon
+    - Microsoft
+    - TCS
+    - Infosys
+    - Wipro
+    - Accenture
+    - IBM
+    - Flipkart
+    - Uber
+    - Adobe
+    - Oracle
+    - Netflix
+    - Swiggy
+    - Zomato
+# ==================== LOOKUP TABLE ====================
+- lookup: company_name
+  examples: |
+    - Amazon
+    - Google
+    - Microsoft
+    - Flipkart
+    - Walmart Global Tech
+    - Adobe
+    - Atlassian
+    - Oracle
+    - Paytm
+    - Zomato
+    - IBM
+    - Accenture
+    - Cognizant
+    - Capgemini
+    - Persistent Systems
+    - TCS
+    - Infosys
+    - Wipro
+    - HCL
+    - Tech Mahindra
+    - Netflix
+    - Uber
+    - LinkedIn
+    - Twitter
+    - X
+    - SAP Labs
+    - Bosch
+    - Qualcomm
+    - Intel
+    - Dell
+    - HP
+    - L&T Infotech
+    - Mindtree
+    - Mphasis
+    - Hexaware
+    - KPMG
+    - DXC Technology
+    - Birlasoft
+    - Zensar
+    - Cybage
+    - Sopra Steria
+    - Reliance Jio
+    - Tata Elxsi
+    - CGI
+    - Nagarro
+    - EPAM Systems
+    - Freshworks
+    - Zoho
+    - Ola
+    - Swiggy
+    - Razorpay
+
+# ==================== SYNONYMS ====================
+- synonym: package
+  examples: |
+    - salary
+    - ctc
+    - pay
+    - compensation
+    - avg package
+    - average package
+
+- synonym: cgpa
+  examples: |
+    - eligibility
+    - cutoff
+    - gpa
+    - percentage
+
+- synonym: backlogs
+  examples: |
+    - arrears
+    - backlog
+    - pending subjects
+
+# ==================== BASIC INTENTS ====================
+
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+    - good morning
+    - good evening
+    - start
+    - hi there
+
+- intent: thank_you
+  examples: |
+    - thanks
+    - thank you
+    - thanks a lot
+    - thank you so much
+    - appreciate it
+    - that helps
+
+- intent: goodbye
+  examples: |
+    - bye
+    - goodbye
+    - see you later
+    - talk to you later
+    - exit
+    - quit
+
+# ==================== LAYER 1: COMPANY-SPECIFIC QUERIES ====================
+
+- intent: ask_avg_package
+  examples: |
+    - What is the average package of [Google](company)?
+    - [Amazon](company) average salary
+    - average package for [TCS](company)
+    - [Microsoft](company) avg package
+    - salary of [Infosys](company)
+    - [IBM](company) average ctc
+    - what does [Wipro](company) pay on average?
+    - [Accenture](company) average compensation
+    - [Swiggy](company) package
+    - [Razorpay](company) salary
+    - [Zoho](company) average package
+    - [Flipkart](company) pay
+    - [Google](company) package
+    - package of [Google](company)
+    - [Amazon](company) avg package
+    - avg package [TCS](company)
+    - [Microsoft](company) salary
+    - [IBM](company) package
+    - package [Wipro](company)
+    - [Infosys](company) avg
+    - [Accenture](company) ctc
+    - salary [Cognizant](company)
+    - [HCL](company) pay
+    - package for [Oracle](company)
+    - [Adobe](company) average
+    - [Netflix](company) package
+    - [Uber](company) salary
+    - gogle package
+    - amazn avg package
+    - [TCS](company) average package
+    - package of [Walmart Global Tech](company)
+    # Generic / Context-Dependent
+    - what is the package?
+    - tell me the salary
+    - average package details
+    - package info
+    - how much do they pay?
+
+- intent: ask_max_package
+  examples: |
+    - What is the highest package at [Amazon](company)?
+    - [Google](company) maximum package
+    - max salary [Microsoft](company)
+    - highest ctc [Flipkart](company)
+    - [Adobe](company) top package
+    - maximum compensation [Netflix](company)
+    - [Uber](company) highest salary
+    - [Zoho](company) max package
+    - [TCS](company) highest package
+    - [Google](company) max package
+    - max package [Google](company)
+    - highest package [Amazon](company)
+    - [Microsoft](company) highest
+    - max [TCS](company)
+    - [IBM](company) maximum
+    - highest [Wipro](company)
+    - [Infosys](company) max
+    - top package [Accenture](company)
+    - [Oracle](company) highest package
+    # Generic / Context-Dependent
+    - what is the highest package?
+    - max salary
+    - highest offer
+    - maximum ctc allowed
+    - top package details
+
+- intent: ask_min_cgpa
+  examples: |
+    - What CGPA does [IBM](company) require?
+    - [Google](company) minimum cgpa
+    - cgpa requirement for [TCS](company)
+    - [Amazon](company) cgpa cutoff
+    - minimum gpa [Microsoft](company)
+    - [Wipro](company) cgpa criteria
+    - what cgpa is needed for [Infosys](company)?
+    - [Accenture](company) cgpa requirement
+    - [Swiggy](company) cgpa needed
+    - [Google](company) cgpa
+    - cgpa [Google](company)
+    - [TCS](company) eligibility
+    - [Amazon](company) cutoff
+    - [Microsoft](company) cgpa
+    - cgpa for [IBM](company)
+    - [Wipro](company) cgpa
+    - [Infosys](company) minimum cgpa
+    - eligibility [Accenture](company)
+    - [Cognizant](company) cgpa
+    - cutoff [HCL](company)
+    - [Oracle](company) cgpa requirement
+    # Generic / Context-Dependent
+    - what is the cgpa cutoff?
+    - minimum cgpa required
+    - cgpa criteria
+    - gpa limit
+    - cut off marks
+
+- intent: ask_allowed_departments
+  examples: |
+    - Which branches can apply to [TCS](company)?
+    - [Google](company) allowed departments
+    - eligible branches for [Amazon](company)
+    - [IBM](company) which departments
+    - [Wipro](company) branch eligibility
+    # Generic / Context-Dependent
+    - which branches are eligible?
+    - allowed departments
+    - branch criteria
+    - can mechanical students apply?
+    - is cse allowed?
+
+- intent: ask_eligibility_summary
+  examples: |
+    - Am I eligible for [Google](company)?
+    - eligibility criteria for [Amazon](company)
+    - [Microsoft](company) eligibility
+    - [TCS](company) requirements
+    - who can apply for [Infosys](company)?
+    # Generic / Context-Dependent
+    - am i eligible?
+    - what are the requirements?
+    - eligibility details
+    - criteria for placement
+    - can i apply?
+
+- intent: ask_interview_process
+  examples: |
+    - What is the interview process of [Google](company)?
+    - [Amazon](company) interview rounds
+    - how many rounds in [TCS](company)?
+    - [Microsoft](company) selection process
+    - [Wipro](company) coding rounds
+    - interview details for [Infosys](company)
+    - [Accenture](company) technical rounds
+    - is there an hr round in [IBM](company)?
+    - [Flipkart](company) interview procedure
+    - [Adobe](company) rounds
+    # Generic / Context-Dependent
+    - how many rounds?
+    - interview process
+    - selection procedure
+    - what are the rounds?
+    - interview steps
+
+- intent: ask_preparation_roadmap
+  examples: |
+    - How to prepare for [Google](company)?
+    - [Amazon](company) roadmap
+    - preparation topics for [Microsoft](company)
+    - what to study for [TCS](company)?
+    - [Wipro](company) syllabus
+    - [Infosys](company) preparation strategy
+    - dsa topics for [Amazon](company)
+    - system design for [Google](company)
+    - [Accenture](company) aptitude topics
+    - [IBM](company) coding questions
+    # Generic / Context-Dependent
+    - how to prepare?
+    - what should i study?
+    - preparation roadmap
+    - syllabus details
+    - topics to cover    - can ECE apply to [Microsoft](company)?
+    - [Infosys](company) allowed branches
+    - departments eligible for [Accenture](company)
+    - [Razorpay](company) which branches
+    - [Google](company) branches
+    - branches [Google](company)
+    - [TCS](company) departments
+    - departments for [Amazon](company)
+    - [Microsoft](company) allowed branches
+    - which branches [IBM](company)
+    - [Wipro](company) departments
+    - branches for [Infosys](company)
+    - [Accenture](company) which departments
+
+- intent: ask_required_skills
+  examples: |
+    - What skills does [Razorpay](company) need?
+    - [Google](company) required skills
+    - skills for [Amazon](company)
+    - [Microsoft](company) skill requirements
+    - what to learn for [TCS](company)?
+    - [IBM](company) technical skills
+    - [Wipro](company) skills needed
+    - [Swiggy](company) requirements
+    - [Zoho](company) what skills
+    - [Google](company) skills
+    - skills [Google](company)
+    - [Amazon](company) skills needed
+    - [TCS](company) skills
+    - skills for [Microsoft](company)
+    - [IBM](company) requirements
+    - [Wipro](company) skills
+    - requirements [Infosys](company)
+    - [Accenture](company) skills
+
+- intent: ask_company_backlogs
+  examples: |
+    - Does [Wipro](company) allow backlogs?
+    - [IBM](company) backlog policy
+    - can I apply to [TCS](company) with backlogs?
+    - [Accenture](company) backlogs allowed
+    - [Google](company) backlog rule
+    - [Amazon](company) accepts backlogs?
+    - [Infosys](company) backlog criteria
+    - [Cognizant](company) backlog allowed
+    - [Google](company) backlogs
+    - backlogs [Google](company)
+    - [IBM](company) backlog
+    - backlog policy [IBM](company)
+    - does [TCS](company) allow backlogs
+    - [Amazon](company) backlogs allowed
+    - [Microsoft](company) backlog policy
+    - [Wipro](company) backlogs
+    - backlog [Infosys](company)
+    - [Accenture](company) backlog
+    - [Cognizant](company) backlogs
+    - How many backlogs does [Infosys](company) allow?
+    - [TCS](company) maximum backlogs
+    - [Wipro](company) backlog limit
+    - [IBM](company) max backlogs
+    - [Accenture](company) how many backlogs
+    - backlog limit for [Cognizant](company)
+    - [HCL](company) backlog limit
+    - [Google](company) backlog limit
+    - backlog limit [Google](company)
+    - [TCS](company) max backlogs
+    - max backlogs [IBM](company)
+    - how many backlogs [Wipro](company)
+    - [Infosys](company) backlog limit
+    - [Accenture](company) maximum backlogs
+
+- intent: ask_company_tier
+  examples: |
+    - What tier is [Swiggy](company)?
+    - [Google](company) company tier
+    - is [TCS](company) tier 1?
+    - [IBM](company) tier
+    - [Amazon](company) company category
+    - [Wipro](company) tier level
+    - [Razorpay](company) which tier
+    - [Google](company) tier
+    - tier [Google](company)
+    - [TCS](company) tier
+    - tier of [Amazon](company)
+    - [Microsoft](company) tier
+    - [IBM](company) which tier
+    - [Wipro](company) tier
+    - tier [Infosys](company)
+
+- intent: ask_hiring_roles
+  examples: |
+    - What roles does [Accenture](company) hire for?
+    - [Google](company) hiring positions
+    - [Amazon](company) job roles
+    - [TCS](company) recruitment roles
+    - [IBM](company) positions
+    - [Microsoft](company) hiring roles
+    - what jobs [Infosys](company) offers
+    - [Wipro](company) job positions
+    - [Google](company) roles
+    - roles [Google](company)
+    - [Amazon](company) positions
+    - jobs at [Amazon](company)
+    - [TCS](company) hiring
+    - [Microsoft](company) jobs
+    - positions [IBM](company)
+    - [Wipro](company) roles
+    - hiring [Infosys](company)
+
+- intent: ask_eligibility_summary
+  examples: |
+    - Am I eligible for [Google](company)?
+    - [Amazon](company) eligibility criteria
+    - [TCS](company) complete eligibility
+    - [IBM](company) requirements
+    - [Microsoft](company) eligibility
+    - can I apply to [Wipro](company)?
+    - [Infosys](company) full criteria
+    - [Swiggy](company) eligibility
+    - [Google](company) eligibility
+    - eligibility [Google](company)
+    - [TCS](company) criteria
+    - criteria for [Amazon](company)
+    - [Microsoft](company) requirements
+    - can I apply [IBM](company)
+    - eligible for [Wipro](company)
+    - [Infosys](company) eligibility
+
+- intent: ask_interview_process
+  examples: |
+    - How many rounds does [Amazon](company) conduct?
+    - [Google](company) interview rounds
+    - number of rounds in [IBM](company)
+    - [Microsoft](company) interview process
+    - [TCS](company) how many stages
+    - [Wipro](company) interview stages
+    - [Infosys](company) rounds count
+    - how many interviews [Accenture](company) has
+    - [Swiggy](company) interview process
+    - [Razorpay](company) how many rounds
+    - what is the process for [Zoho](company)
+    - [Flipkart](company) hiring process
+    - [Google](company) rounds
+    - rounds [Google](company)
+    - [Amazon](company) interview
+    - interview [Amazon](company)
+    - [TCS](company) process
+    - process for [Microsoft](company)
+    - [IBM](company) rounds
+    - how many rounds [Wipro](company)
+    - [Infosys](company) interview
+    - interview process [Accenture](company)
+    - placement process for [Google](company)
+    - [Amazon](company) placement process
+    - what is the placement process for [TCS](company)
+    - placement stages for [Microsoft](company)
+    - [IBM](company) placement rounds
+    - how many rounds [Google](company) conduct
+    - how many rounds in [Amazon](company) process
+    - number of rounds for [TCS](company)
+    - round count [Microsoft](company)
+    - [Infosys](company) number of rounds
+
+- intent: ask_prep_topics_by_area
+  examples: |
+    - [dbms](prep_area) topics for [Google](company)
+    - [dsa](prep_area) for [Amazon](company)
+    - [oops](prep_area) questions for [Microsoft](company)
+    - [system design](prep_area) for [Uber](company)
+    - [hr](prep_area) interview topics for [TCS](company)
+    - [database](prep_area) preparation for [Oracle](company)
+    - [sql](prep_area) questions [Flipkart](company)
+    - [design](prep_area) topics [Netflix](company)
+    - [behavioral](prep_area) round for [Adobe](company)
+    - [algorithms](prep_area) for [Google](company)
+    - [structures](prep_area) for [Amazon](company)
+    - [managerial](prep_area) questions [Infosys](company)
+    - [hld](prep_area) for [Swiggy](company)
+    - [lld](prep_area) for [Zomato](company)
+    - [hr](prep_area) topics for [TCS](company)
+    - [oops](prep_area) topics for [Microsoft](company)
+    - [dsa](prep_area) topics for [Amazon](company)
+    - [dbms](prep_area) topics for [Infosys](company)
+    - [hr](prep_area) topics for [Accenture](company)
+    - [oops](prep_area) topics for [Google](company)
+    - [dsa](prep_area) prep for [Wipro](company)
+    - [dbms](prep_area) prep for [HCL](company)
+    - [system design](prep_area) topics for [Amazon](company)
+    - [oops](prep_area) for [tcs](company)
+    - [hr](prep_area) for [microsoft](company)
+    - [dbms](prep_area) for [google](company)
+    - [dsa](prep_area) for [ibm](company)
+    - [sql](prep_area) for [amazon](company)
+    - [design](prep_area) topics for [uber](company)
+    - [system design](prep_area) round [microsoft](company)
+    - [behavioral](prep_area) topics [tcs](company)
+    - [oops](prep_area) prep [amazon](company)
+    - [hr](prep_area) questions for [google](company)
+    - [database](prep_area) topics for [microsoft](company)
+    - [coding](prep_area) topics for [google](company)
+    - [algorithms](prep_area) questions [amazon](company)
+    - [hr](prep_area) prep for [infosys](company)
+    - [managerial](prep_area) round for [ibm](company)
+    - [oops](prep_area) topics for [capgemini](company)
+    - [dbms](prep_area) questions for [dell](company)
+    - [dsa](prep_area) round for [nvidia](company)
+    - [system design](prep_area) topics for [atlassian](company)
+    - [hr](prep_area) interview for [salesforce](company)
+
+- intent: inform_company
+  examples: |
+    - [Google](company)
+    - [Amazon](company)
+    - [Microsoft](company)
+    - [TCS](company)
+    - [Infosys](company)
+    - [Wipro](company)
+    - [Accenture](company)
+    - [IBM](company)
+    - [Flipkart](company)
+    - [Uber](company)
+    - [Adobe](company)
+    - [Oracle](company)
+    - [Netflix](company)
+    - [Meta](company)
+    - [Salesforce](company)
+    - [Cisco](company)
+    - [Intel](company)
+    - [Dell](company)
+    - [HP](company)
+    - [Lenovo](company)
+    - [Sony](company)
+    - [Samsung](company)
+    - [LG](company)
+    - [Nokia](company)
+    - [Zoho](company)
+    - [Swiggy](company)
+    - [Zomato](company)
+    - [Paytm](company)
+    - [Razorpay](company)
+    - [Cred](company)
+    - [Zerodha](company)
+    - [Byius](company)
+    - [Unacademy](company)
+    - [Upgrad](company)
+
+- intent: ask_general_hr_question
+  examples: |
+    - hr interview question
+    - how to answer hr questions
+    - what are common hr rounds?
+    - tell me about hr interviews
+    - general hr tips
+    - common behavioral questions
+    - how to prepare for hr round
+    - hr interview preparation
+    - sample hr questions
+    - how to handle managerial round?
+
+- synonym: hr
+  examples: |
+    - hr
+    - hr topics
+    - behavioral
+    - soft skills
+    - hr round
+    - managerial
+
+- synonym: oops
+  examples: |
+    - oops
+    - oop
+    - object oriented
+    - object oriented programming
+
+- synonym: dbms
+  examples: |
+    - dbms
+    - database
+    - sql
+    - sql topics
+    - databases
+
+- synonym: system_design
+  examples: |
+    - system design
+    - scalability
+    - hld
+    - lld
+    - architecture
+    - design
+
+- intent: ask_preparation_roadmap
+  examples: |
+    - What should I prepare for [Google](company)?
+    - [Amazon](company) preparation topics
+    - How to prepare for [TCS](company) interview?
+    - [Microsoft](company) roadmap
+    - preparation for [IBM](company)
+    - [Google](company) preparation
+    - prep for [Amazon](company)
+    - [TCS](company) topics
+    - what to study for [IBM](company)
+    - [Wipro](company) interview preparation
+    - [Infosys](company) prep topics
+    - [Accenture](company) preparation roadmap
+    - topics for [Oracle](company)
+    - [Flipkart](company) what to prepare
+    - preparation guide [Swiggy](company)
+    - [Zoho](company) study topics
+    - [Razorpay](company) preparation
+    - prep roadmap [Netflix](company)
+    - [Uber](company) topics
+    - what should I study for [LinkedIn](company)
+
+# ==================== NEW HUMAN-LIKE INTENTS ====================
+
+- intent: ask_company_overview
+  examples: |
+    - Give me an overview of [Google](company)
+    - Tell me about [Amazon](company)
+    - [TCS](company) overview
+    - what is [Infosys](company)?
+    - brief about [Microsoft](company)
+    - summarize [Wipro](company)
+    - [IBM](company) summary
+    - who is [Accenture](company)?
+    - company profile of [Flipkart](company)
+    - [Adobe](company) overview
+    - [Zoho](company) profile
+    - overview [Google](company)
+    - about [Amazon](company)
+    - [TCS](company) company info
+    - details about [Google](company)
+    - introduce [Infosys](company)
+    - [Razorpay](company) overview
+    - know about [Swiggy](company)
+    - [Zomato](company) profile
+    - everything about [Uber](company)
+    - [Netflix](company) company details
+
+- intent: ask_company_difficulty
+  examples: |
+    - How difficult is it to get into [Google](company)?
+    - [Amazon](company) interview difficulty
+    - how tough is [Microsoft](company)?
+    - difficulty of [TCS](company)
+    - [Infosys](company) how hard to crack
+    - is [Wipro](company) easy to crack?
+    - [IBM](company) selection difficulty
+    - how hard is [Flipkart](company)?
+    - [Adobe](company) difficulty level
+    - difficulty rating [Google](company)
+    - how tough [Amazon](company)
+    - [Microsoft](company) difficulty
+    - crack [TCS](company) how hard
+    - [Infosys](company) tough?
+    - [Wipro](company) difficulty
+    - [IBM](company) hard to get
+    - competitive level [Oracle](company)
+    - is [Accenture](company) easy?
+    - [Razorpay](company) difficulty
+    - [Zoho](company) selection tough?
+    - [Swiggy](company) difficult to get in
+    - how competitive is [Google](company)?
+    - what is [Amazon](company) difficulty score?
+
+- intent: ask_company_hiring_pattern
+  examples: |
+    - How many students does [TCS](company) hire?
+    - [Infosys](company) hiring volume
+    - [Wipro](company) mass recruiter?
+    - how actively does [Google](company) recruit?
+    - [Amazon](company) hiring intensity
+    - [IBM](company) recruits how many students?
+    - is [Accenture](company) a mass recruiter?
+    - [HCL](company) how many offers
+    - hiring pattern of [TCS](company)
+    - [Google](company) campus hiring
+    - how many are selected by [Microsoft](company)?
+    - [Infosys](company) campus placement volume
+    - [Wipro](company) hiring numbers
+    - [IBM](company) hiring intensity
+    - campus recruitment [TCS](company)
+    - [Accenture](company) recruits in bulk?
+    - how many seats [Oracle](company)?
+    - hiring volume [Cognizant](company)
+    - [Amazon](company) how selective
+    - [Flipkart](company) hires how many
+
+- intent: ask_company_job_roles
+  examples: |
+    - What job roles does [Google](company) offer?
+    - [Amazon](company) job positions
+    - [TCS](company) what roles
+    - roles offered by [Microsoft](company)
+    - [Infosys](company) job titles
+    - what designations does [Wipro](company) hire for?
+    - [IBM](company) job roles offered
+    - [Accenture](company) positions
+    - job titles [Google](company)
+    - [Amazon](company) roles
+    - what roles [TCS](company)
+    - [Microsoft](company) positions
+    - job roles [IBM](company)
+    - [Wipro](company) designations
+    - what does [Infosys](company) hire for?
+    - titles at [Accenture](company)
+    - roles for freshers [Oracle](company)
+    - [Adobe](company) job openings
+    - [Flipkart](company) fresher roles
+    - [Zoho](company) job roles
+
+- intent: ask_company_category
+  examples: |
+    - Is [Google](company) product or service?
+    - [TCS](company) product based or service based?
+    - [Amazon](company) company type
+    - is [Infosys](company) a service company?
+    - [Microsoft](company) product or service
+    - [Wipro](company) it service or product?
+    - category of [IBM](company)
+    - is [Razorpay](company) product based?
+    - [Google](company) type
+    - product or service [TCS](company)
+    - [Amazon](company) category
+    - [Microsoft](company) product company?
+    - [Infosys](company) service based?
+    - type of [Wipro](company)
+    - [IBM](company) product or outsourcing?
+    - is [Flipkart](company) product based?
+    - [Zoho](company) company category
+    - [Accenture](company) service based?
+    - is [Adobe](company) a product company?
+
+- intent: ask_company_tier_info
+  examples: |
+    - Tell me about [Google](company) tier
+    - what does being [TCS](company) tier mean?
+    - explain [Amazon](company) tier classification
+    - [Microsoft](company) tier details
+    - what tier is [Infosys](company) and what does it mean?
+    - [Wipro](company) tier explanation
+    - explain the tier of [IBM](company)
+    - tier info for [Accenture](company)
+    - tier explanation [Google](company)
+    - [Amazon](company) tier details
+    - [TCS](company) tier info
+    - [Microsoft](company) what tier and why
+    - [IBM](company) tier classification
+    - understanding [Wipro](company) tier
+    - [Infosys](company) tier meaning
+    - what does tier mean for [Oracle](company)?
+    - [Flipkart](company) tier explanation
+    - [Razorpay](company) tier
+
+- intent: ask_company_preparation
+  examples: |
+    - How should I prepare for [Google](company)?
+    - [Amazon](company) preparation guide
+    - study plan for [Microsoft](company)
+    - [TCS](company) prep strategy
+    - how to crack [Infosys](company)?
+    - what to focus on for [Wipro](company)?
+    - [IBM](company) preparation tips
+    - [Accenture](company) how to prepare
+    - preparation strategy [Google](company)
+    - [Amazon](company) guide
+    - prep tips [TCS](company)
+    - [Microsoft](company) study strategy
+    - how to crack [IBM](company)
+    - [Wipro](company) prep guide
+    - tips for [Infosys](company)
+    - [Accenture](company) strategy
+    - [Oracle](company) how to prepare
+    - [Adobe](company) preparation plan
+    - [Flipkart](company) how to crack
+    - [Razorpay](company) prep tips
+    - [Zoho](company) preparation guide
+    - what areas to focus [Swiggy](company)
+
+- intent: compare_companies
+  examples: |
+    - Compare [Google](company) and [Amazon](company)
+    - [TCS](company) vs [Infosys](company)
+    - difference between [Microsoft](company) and [IBM](company)
+    - [Wipro](company) versus [Accenture](company)
+    - which is better [Google](company) or [Amazon](company)?
+    - [Flipkart](company) or [Razorpay](company)?
+    - compare [Zoho](company) and [Freshworks](company)
+    - [TCS](company) vs [Wipro](company)
+    - Google vs Amazon comparison
+    - [Microsoft](company) vs [Google](company)
+    - compare [IBM](company) with [Accenture](company)
+    - difference [TCS](company) vs [Infosys](company)
+    - which is better [Wipro](company) or [HCL](company)?
+    - [Amazon](company) vs [Flipkart](company)
+    - contrast [Oracle](company) and [Adobe](company)
+    - [Swiggy](company) vs [Zomato](company)
+
+# ==================== LAYER 2: AGGREGATE/ANALYTICS QUERIES ====================
+
+- intent: list_companies_by_cgpa
+  examples: |
+    - Which companies accept CGPA above 7?
+    - companies with cgpa less than 6
+    - list companies for 7.5 cgpa
+    - companies accepting 6.5 cgpa
+    - which companies need cgpa above 8?
+    - companies for low cgpa
+    - cgpa 6 companies
+    - companies for 7 cgpa
+    - show companies with cgpa 6.5
+
+- intent: list_companies_allowing_backlogs
+  examples: |
+    - Which companies allow backlogs?
+    - companies accepting backlogs
+    - list backlog friendly companies
+    - companies with backlog allowed
+    - which companies accept students with backlogs?
+    - show companies that allow backlogs
+    - how many companies allow backlogs
+    - count companies allowing backlogs
+    - total companies with backlogs
+    - number of companies allowing backlogs
+    - count of backlog friendly companies
+    - tell me the number of companies accepting backlogs
+    - how many companies have backlog allowance
+    - total companies allowing backlogs
+    - number of companies that allow backlogs
+    - backlog allowed companies count
+    - how many firms allow backlogs
+    - give me the count of companies with active backlogs allowed
+
+- intent: ask_count_companies
+  examples: |
+    - number of product based companies
+    - count companies for CS students
+    - how many companies hire IT branch
+    - total companies above 15 LPA
+    - how many companies for 7.5 cgpa
+    - count of companies accepting 6 cgpa
+    - total count of companies
+    - how many firms are recruiting
+    - number of companies with high salary
+
+
+    - total count of backlog accepting companies
+    - number of companies open to backlogs
+    - how many companies take students with backlogs
+    - count of companies permitting backlogs
+
+- intent: list_tier1_companies
+  examples: |
+    - List all Tier-1 companies
+    - tier 1 companies
+    - top tier companies
+    - product based companies
+    - tier 1 list
+    - show tier-1 companies
+    - which are tier 1
+    - how many tier 1 companies
+    - how many tier 2 companies
+    - how many tier 3 companies
+    - count tier 1 companies
+    - count tier-2 companies
+    - total tier 1 companies
+    - total tier-2 companies
+    - total tier-3 companies
+    - number of tier 1 companies
+    - number of tier 2 companies
+    - tier 2 companies
+    - tier 3 companies
+    - tier-2 list
+    - tier-3 companies list
+
+- intent: list_high_paying_companies
+  examples: |
+    - Companies offering above 15 LPA
+    - high paying companies
+    - companies with package above 10 lpa
+    - best salary companies
+    - companies paying more than 12 lpa
+    - top paying companies
+    - companies above 20 lpa
+
+- intent: list_companies_by_branch
+  examples: |
+    - Companies for CS students
+    - which companies hire ECE?
+    - companies for IT branch
+    - CS eligible companies
+    - companies accepting all branches
+    - ECE companies list
+    - companies for electrical students
+
+- intent: count_companies_by_criteria
+  examples: |
+    - How many companies allow CGPA above 8?
+    - how many tier 1 companies?
+    - number of companies for CS
+    - count high paying companies
+    - how many companies accept 6 cgpa?
+    - total number of companies
+    - how many companies are there
+
+# ==================== LAYER 3: POLICY/GENERAL QUERIES ====================
+
+- intent: ask_placement_rules
+  examples: |
+    - What are the placement rules?
+    - college placement policy
+    - placement guidelines
+    - rules for placements
+    - placement regulations
+    - tell me placement rules
+
+- intent: ask_backlog_rules
+  examples: |
+    - What is the backlog policy?
+    - backlog rules
+    - how many backlogs allowed?
+    - backlog criteria
+    - college backlog policy
+    - general backlog rules
+
+- intent: ask_training_schedule
+  examples: |
+    - When is training?
+    - training schedule
+    - placement training timings
+    - when does CRT start?
+    - training timing
+    - training days
+
+- intent: ask_internship_policy
+  examples: |
+    - Do companies provide internships?
+    - internship opportunities
+    - are internships available?
+    - company internship policy
+    - do they offer PPO?
+    - what is PPO?
+    - internship to full time
+
+- intent: ask_company_tiers_explained
+  examples: |
+    - What is a Tier-1 company?
+    - explain company tiers
+    - difference between tier 1 and tier 3
+    - what does tier 2 mean?
+    - company tier classification
+    - tier system explained
+
+- intent: ask_general_preparation
+  examples: |
+    - How to prepare for placements?
+    - placement preparation tips
+    - what should I study?
+    - how to crack placements?
+    - preparation strategy
+    - how to get placed
+
+- intent: inform_company
+  examples: |
+    - Microsoft
+    - Google
+    - Amazon
+    - TCS
+    - Infosys
+    - Wipro
+    - Accenture
+    - IBM
+    - Cognizant
+    - HCL
+    - Oracle
+    - Adobe
+    - Flipkart
+    - Razorpay
+    - Swiggy
+    - Zomato
+    - CRED
+    - Netflix
+    - Uber
+    - Meta
+    - Apple
+    - Samsung
+    - Jio
+    - Reliance
+    - Tata
+    - Cisco
+    - Intel
+    - AMD
+    - Nvidia
+    - HP
+    - Dell
+    - Lenovo
+    - Sony
+    - LG
+
+- intent: ask_company_eligibility
+  examples: |
+    - Am I eligible for [Amazon](company_name) with 7 CGPA?
+    - Can I apply to [Google](company_name) if I have 2 backlogs?
+    - Eligibility for [TCS](company_name) with 6.5 cgpa?
+    - I have 8 cgpa and 0 backlogs, can I sit for [Microsoft](company_name)?
+    - checks for [Infosys](company_name) eligibility
+    - [Wipro](company_name) eligibility for 6 pointer
+    - do I qualify for [Flipkart](company_name) with 1 backlog?
+    - eligible for [Adobe](company_name) with 7.5 cgpa?
+    - strict eligibility for [Oracle](company_name)
+    - can I join [Accenture](company_name) with 5.5 cgpa?
+    - is 6 cgpa enough for [Cognizant](company_name)?
+    - [Uber](company_name) requirements for 2 backlogs
+    - my cgpa is 8.5 am I eligible for [Netflix](company_name)
+    - [Zomato](company_name) criteria for backlogs
+# ==================== PHASE 4: PLACEMENT PREDICTION INTENTS ====================
+
+- intent: placement_probability
+  examples: |
+    - What's my placement probability?
+    - What are my placement chances?
+    - Check my placement probability
+    - Can I get placed?
+    - Get my placement prediction
+    - What's the chance I'll get placed?
+    - Analyze my placement probability
+    - Will I get placed?
+    - Show my placement stats
+    - Calculate my placement chances
+    - My student ID is 200001, what's my placement probability?
+    - Check placement for student 200010
+    - What's the probability of getting placed for 200050?
+
+- intent: eligible_companies
+  examples: |
+    - Which companies am I eligible for?
+    - Show eligible companies
+    - List companies I can apply to
+    - What companies match my profile?
+    - Get eligible companies for me
+    - Which companies should I target?
+    - Show companies I'm eligible for
+    - What are my options?
+    - List matching companies
+    - Companies I can sit for
+    - Find eligible companies
+    - My student ID is 200001, which companies am I eligible?
+
+- intent: skill_gap_analysis
+  examples: |
+    - What are my skill gaps?
+    - Analyze my skills
+    - Show my skill scores
+    - Where do I need improvement?
+    - Identify my weak areas
+    - What skills should I improve?
+    - Skill gap analysis
+    - Where do I stand in terms of skills?
+    - Show all my skill scores
+    - What skills do I need to work on?
+    - Compare my skills
+    - Get skill recommendations for my profile
+
+# ==================== SUPPLEMENTARY TRAINING EXAMPLES ====================
+# These duplicate-intent blocks are merged by Rasa with the above examples.
+
+# --- Company Overview ---
+- intent: ask_company_overview
+  examples: |
+    - Tell me about [Amazon](company)
+    - Give me details about [Google](company)
+    - What is [Microsoft](company) like?
+    - Explain [Infosys](company)
+    - Show company details for [TCS](company)
+    - Give me full details of [Adobe](company)
+    - What do you know about [Accenture](company)
+    - Can you describe [Zoho](company)
+    - Provide company profile for [Wipro](company)
+    - Tell me about [IBM](company)
+    - describe [Flipkart](company)
+    - company info [Oracle](company)
+    - full profile of [Razorpay](company)
+    - details of [Cognizant](company)
+    - what is [HCL](company)?
+    - tell me everything about [Capgemini](company)
+    - [Netflix](company) company details
+    - [Swiggy](company) details
+    - give information about [Zomato](company)
+
+# --- Tier Info ---
+- intent: ask_company_tier_info
+  examples: |
+    - What does Tier-1 mean for [Amazon](company)?
+    - What tier is [Amazon](company)?
+    - Is [Google](company) a Tier 1 company?
+    - Is [Infosys](company) a Tier 2 company?
+    - Is [Microsoft](company) a top company?
+    - What tier is [Accenture](company)?
+    - Is [Adobe](company) Tier 1?
+    - What tier company is [TCS](company)?
+    - Is [Zoho](company) a Tier 1 company?
+    - What tier is [IBM](company)?
+    - Is [Wipro](company) a Tier 2 company?
+    - What does tier mean for [Google](company)?
+    - Is [Amazon](company) a tier 1 firm?
+    - [HCL](company) tier meaning
+    - tier details [Oracle](company)
+
+# --- Company Tier (basic) ---
+- intent: ask_company_tier
+  examples: |
+    - What tier is [Amazon](company)?
+    - Is [Google](company) Tier 1?
+    - what tier is [TCS](company)?
+    - tier classification of [Infosys](company)
+    - [Wipro](company) which tier?
+    - [Cognizant](company) tier
+    - is [HCL](company) tier 3?
+    - [Capgemini](company) tier
+
+# --- Preparation ---
+- intent: ask_company_preparation
+  examples: |
+    - How should I prepare for [Amazon](company)?
+    - What topics should I study for [Google](company)?
+    - What should I focus on for [Microsoft](company) interview?
+    - What preparation is needed for [Adobe](company)?
+    - How can I prepare for [Zoho](company) placement?
+    - What should I study for [Infosys](company)?
+    - How to prepare for [TCS](company) interview?
+    - What topics should I study for [IBM](company)?
+    - How to prepare for [Accenture](company) placements?
+    - What should I study for [Wipro](company) interview?
+    - prep guide for [Flipkart](company)
+    - how do I crack [Oracle](company)?
+    - study plan for [HCL](company)
+    - preparation for [Razorpay](company)
+    - what to focus on [Cognizant](company)
+    - [Capgemini](company) how to prepare
+    - [Netflix](company) preparation topics
+    - what should I learn for [Swiggy](company)?
+    - topics to cover for [Zomato](company)
+    - how to crack [Amazon](company) interview?
+    - what areas to cover for [Google](company) placement?
+
+# --- Salary / Package ---
+- intent: ask_avg_package
+  examples: |
+    - What package does [Amazon](company) offer?
+    - What is the salary at [Google](company)?
+    - What is the average package of [Microsoft](company)?
+    - What salary can I get in [Infosys](company)?
+    - How much does [TCS](company) pay freshers?
+    - What is the package at [Accenture](company)?
+    - What salary does [IBM](company) offer freshers?
+    - What is the salary range at [Wipro](company)?
+    - how much does [Adobe](company) pay?
+    - fresher salary at [Flipkart](company)
+    - [Oracle](company) fresher package
+    - [Zoho](company) salary details
+    - [HCL](company) how much salary
+    - [Cognizant](company) pay scale
+
+- intent: ask_max_package
+  examples: |
+    - What is the highest salary in [Adobe](company)?
+    - What is the maximum package offered by [Zoho](company)?
+    - What is the best package at [Amazon](company)?
+    - highest offer at [Google](company)
+    - max salary [Infosys](company)
+    - [Flipkart](company) maximum package
+
+# --- CGPA ---
+- intent: ask_min_cgpa
+  examples: |
+    - What CGPA is required for [Microsoft](company)?
+    - What is the minimum CGPA for [Adobe](company)?
+    - What CGPA does [IBM](company) require?
+    - cgpa needed for [Accenture](company)
+    - [Zoho](company) CGPA requirement
+    - minimum cgpa for [Flipkart](company)
+    - [Oracle](company) cgpa cutoff
+    - [HCL](company) minimum gpa
+
+# --- Eligibility ---
+- intent: ask_eligibility_summary
+  examples: |
+    - What is the eligibility criteria for [Amazon](company)?
+    - What are the requirements for [Infosys](company)?
+    - What qualifications are needed for [TCS](company)?
+    - What do I need to apply to [Zoho](company)?
+    - Can I apply to [Wipro](company) with my profile?
+    - full eligibility for [Adobe](company)
+    - [Accenture](company) who is eligible
+    - what does [IBM](company) look for?
+
+- intent: ask_company_eligibility
+  examples: |
+    - Can I apply for [Google](company) with 7 CGPA?
+    - Am I eligible for [Accenture](company) with 6.5 CGPA?
+    - I have 8 CGPA, am I eligible for [TCS](company)?
+    - can someone with 6 cgpa apply to [Wipro](company)?
+    - [Infosys](company) eligible with 2 backlogs?
+    - my cgpa is 7.5 can I sit for [IBM](company)?
+
+# --- Skills ---
+- intent: ask_required_skills
+  examples: |
+    - What skills are required for [Amazon](company)?
+    - What technologies does [Google](company) expect?
+    - What skills should I learn for [Adobe](company)?
+    - What programming skills are needed for [Zoho](company)?
+    - What technical skills are required for [Infosys](company)?
+    - What programming languages are needed for [TCS](company)?
+    - What technologies should I learn for [Wipro](company)?
+    - skills needed for [Accenture](company)
+    - [IBM](company) technical requirements
+    - what tech stack for [Microsoft](company)?
+    - [Flipkart](company) skills
+    - [Oracle](company) what should I know?
+    - [HCL](company) required knowledge
+
+# --- Departments ---
+- intent: ask_allowed_departments
+  examples: |
+    - Which branches can apply to [Amazon](company)?
+    - Does [Google](company) allow CSE students?
+    - Can IT students apply to [Microsoft](company)?
+    - Which departments are eligible for [Adobe](company)?
+    - Can ECE students apply to [Infosys](company)?
+    - Does [Zoho](company) allow mechanical students?
+    - Which branches are allowed for [Accenture](company)?
+    - Can civil students apply to [TCS](company)?
+    - Does [IBM](company) allow IT branch students?
+    - Which departments can apply to [Wipro](company)?
+    - is CSE eligible for [Flipkart](company)?
+    - [Oracle](company) which engineering branches?
+    - [HCL](company) department eligibility
+    - can non-CS apply to [Amazon](company)?
+
+# --- Backlogs ---
+- intent: ask_company_backlogs
+  examples: |
+    - Does [Amazon](company) allow backlogs?
+    - Can I apply to [Google](company) with a backlog?
+    - Are backlogs allowed in [Infosys](company)?
+    - Does [Microsoft](company) accept students with backlogs?
+    - Does [TCS](company) allow backlogs in campus placements?
+    - Can I apply to [Adobe](company) with 1 backlog?
+    - Are backlogs allowed in [Accenture](company)?
+    - Does [Zoho](company) allow students with backlogs?
+    - Does [Wipro](company) allow backlog students?
+    - [IBM](company) accepting backlog students?
+    - backlog rule at [Flipkart](company)
+    - does [Oracle](company) allow arrears?
+    - [HCL](company) students with backlogs allowed?
+
+# --- Hiring Pattern ---
+- intent: ask_company_hiring_pattern
+  examples: |
+    - Does [TCS](company) hire many students?
+    - How often does [Infosys](company) hire?
+    - Is [Accenture](company) a mass recruiter?
+    - What is the hiring pattern of [Amazon](company)?
+    - How active is [Google](company) in campus placements?
+    - Does [Wipro](company) recruit a lot of students?
+    - Is [IBM](company) a mass recruiter?
+    - How frequently does [Microsoft](company) hire freshers?
+    - How many students does [Zoho](company) usually hire?
+    - Does [Adobe](company) hire many graduates?
+    - how selective is [Flipkart](company)?
+    - [Oracle](company) bulk hiring?
+    - does [HCL](company) do mass recruitment?
+    - [Cognizant](company) recruiting lots?
+
+# --- Job Roles ---
+- intent: ask_company_job_roles
+  examples: |
+    - What roles does [Amazon](company) offer?
+    - What job roles are available at [Google](company)?
+    - What positions does [Microsoft](company) hire for?
+    - What role can I get in [Infosys](company)?
+    - Does [Adobe](company) offer SDE roles?
+    - What jobs does [Zoho](company) offer freshers?
+    - What roles are available in [Accenture](company)?
+    - What job roles does [IBM](company) offer?
+    - What roles does [TCS](company) provide?
+    - What positions does [Wipro](company) hire for?
+    - fresher roles at [Flipkart](company)
+    - [Oracle](company) designations for freshers
+    - what can I become at [HCL](company)?
+    - [Cognizant](company) entry level roles
+
+# --- Category ---
+- intent: ask_company_category
+  examples: |
+    - Is [Amazon](company) a product company?
+    - Is [Infosys](company) a service company?
+    - What type of company is [Microsoft](company)?
+    - What category does [Accenture](company) belong to?
+    - Is [Google](company) a product company?
+    - Is [TCS](company) a service company?
+    - What category is [Zoho](company)?
+    - Is [IBM](company) a product company?
+    - What type of company is [Adobe](company)?
+    - Is [Wipro](company) a service company?
+    - service or product [Flipkart](company)?
+    - [Oracle](company) product based?
+    - [HCL](company) service company?
+    - [Cognizant](company) which type?
+
+# --- Difficulty ---
+- intent: ask_company_difficulty
+  examples: |
+    - How difficult is [Google](company) to get into?
+    - Is [Amazon](company) hard to crack?
+    - Is [Infosys](company) easy to get into?
+    - What is the difficulty level of [Microsoft](company)?
+    - Is [Adobe](company) competitive?
+    - How tough is the interview at [Zoho](company)?
+    - Is [Accenture](company) difficult to crack?
+    - How competitive is [IBM](company) hiring?
+    - Is [TCS](company) easy to get selected in?
+    - How difficult is [Wipro](company) placement process?
+    - how tough is [Flipkart](company)?
+    - [Oracle](company) selection difficulty
+    - is [HCL](company) hard to crack?
+    - [Cognizant](company) easy or hard?
+    - how easy is [Capgemini](company)?
+
+# --- Company Comparison ---
+- intent: compare_companies
+  examples: |
+    - Which company offers higher salary: [Amazon](company) or [Google](company)?
+    - Which company is easier: [TCS](company) or [Infosys](company)?
+    - Which company requires higher CGPA: [Microsoft](company) or [Adobe](company)?
+    - Which company is better for freshers: [Accenture](company) or [Wipro](company)?
+    - Compare [Amazon](company) and [Microsoft](company)
+    - Compare [Google](company) and [Adobe](company)
+    - Compare [Infosys](company) and [TCS](company)
+    - Compare [Zoho](company) and [IBM](company)
+    - Compare [Accenture](company) and [Cognizant](company)
+    - Compare [Wipro](company) and [Capgemini](company)
+    - [Google](company) vs [Amazon](company) salary
+    - [TCS](company) vs [Wipro](company) package
+    - difference between [Microsoft](company) and [Infosys](company)
+    - which is better [IBM](company) or [HCL](company)?
+    - [Adobe](company) or [Oracle](company) which is easier?
+    - [Flipkart](company) vs [Razorpay](company)
+
+# --- Lists: CGPA ---
+- intent: list_companies_by_cgpa
+  examples: |
+    - List companies with lowest CGPA requirement
+    - Which companies have lowest cgpa cutoff?
+    - Show companies with easy cgpa requirement
+    - Companies with minimum CGPA requirement
+    - which companies need lowest cgpa?
+    - companies requiring least marks
+    - show me easiest cgpa companies
+
+# --- Lists: High paying ---
+- intent: list_high_paying_companies
+  examples: |
+    - List companies with highest salary
+    - List companies with highest package
+    - Show top paying companies
+    - Which companies pay the most?
+    - Companies with best salary
+    - most paying companies
+    - show highest salary companies
+    - top LPA companies
+
+# --- Lists: Campus/All ---
+- intent: list_tier1_companies
+  examples: |
+    - Which companies visit our campus?
+    - Show all companies
+    - List all campus companies
+    - Which companies come for campus placements?
+    - all recruiting companies
+    - companies that visit for placement
+    - show me all companies
+
+# --- Lists: By Category (NEW) ---
+- intent: list_companies_by_category
+  examples: |
+    - Show product companies
+    - Show service companies
+    - List product based companies
+    - List IT service companies
+    - Which companies are product based?
+    - Which are service companies?
+    - Show companies with easy hiring process
+    - List easiest companies to get into
+    - Which companies have easy selection process?
+    - show service based companies
+    - product only companies
+    - IT services companies list
+    - which companies are easiest to crack?
+    - easiest placement companies
+    - companies with simple hiring process
+# --- Multi-factor query (salary + eligibility + difficulty) ---
+- intent: ask_multi_factor
+  examples: |
+    - What is the salary, eligibility, and difficulty for [Amazon](company)?
+    - Give me complete hiring information for [Google](company)
+    - What package, CGPA requirement, and roles does [Microsoft](company) offer?
+    - Tell me everything about [Infosys](company) placement
+    - Full placement profile of [TCS](company)
+    - Complete details of [Wipro](company)
+    - What are all the requirements and salary for [Adobe](company)?
+    - Give full information about [Accenture](company)
+    - Everything I need to know about [Capgemini](company) placement
+    - All placement details for [HCL](company)
+    - What is [Oracle](company) salary and eligibility and difficulty?
+    - Show complete profile of [Cognizant](company)
+
+# --- Salary vs difficulty reasoning ---
+- intent: ask_salary_difficulty
+  examples: |
+    - Which company is harder but offers higher salary: [Amazon](company) or [Google](company)?
+    - Compare salary vs difficulty of [Infosys](company) and [TCS](company)
+    - Is [Adobe](company) worth preparing for compared to [Microsoft](company)?
+    - Which company gives better salary and is easier: [Infosys](company) or [TCS](company)?
+    - Is [Amazon](company) worth the effort compared to [Wipro](company)?
+    - Compare the difficulty and pay of [Google](company) and [Accenture](company)
+    - Is it worth applying to [Microsoft](company) over [HCL](company) in terms of salary vs effort?
+    - Which offers better return on effort: [Capgemini](company) or [Infosys](company)?
+    - Salary vs difficulty [TCS](company) vs [Amazon](company)
+    - Is the difficulty of [Google](company) worth the salary compared to [Wipro](company)?
+
+# ==================== STUDENT ID & PERSONALIZED PLACEMENT QUERIES ====================
+
+# --- Student ID Extraction ---
+- intent: inform_student_id
+  examples: |
+    - My student ID is [200001](student_id)
+    - My ID is [200051](student_id)
+    - I am [200001](student_id)
+    - I'm student [200050](student_id)
+    - My student number is [200010](student_id)
+    - ID: [200001](student_id)
+    - Student ID [200051](student_id)
+    - I have ID [200025](student_id)
+    - My enrollment is [200001](student_id)
+    - Register me as [200001](student_id)
+    - Register my ID [200051](student_id)
+    - My ID number is [200025](student_id)
+    - [200001](student_id) is my ID
+    - I'm [200050](student_id)
+    - Register [200001](student_id)
+    - my id [200051](student_id)
+
+# --- Overall Placement Probability ---
+- intent: ask_student_placement_probability
+  examples: |
+    - What is my placement probability?
+    - What are my placement chances?
+    - Check my placement probability
+    - Will I get placed?
+    - What's my chance of getting placed?
+    - Show my placement stats
+    - Calculate my placement probability
+    - What's the probability I'll get placed?
+    - What is my placement likelihood?
+    - Tell me my placement probability
+    - Get my placement prediction
+    - My placement chances
+    - Will I be placed?
+    - What is the difference between my minimum and maximum salary prediction?
+    - What are the chances that I will get placed?
+    - How likely am I to get a placement?
+    - Can you tell me my chances of getting placed?
+    - What percentage chance do I have of getting a job?
+    - Am I likely to get placed this year?
+    - Based on my profile, what is my placement probability?
+    - What is my predicted chance of placement?
+    - How confident is the model about my placement?
+    - What are my job chances?
+
+# --- Placement Status ---
+- intent: ask_student_placement_status
+  examples: |
+    - What is my placement status?
+    - Should I target high paying companies?
+    - Am I likely to get placed?
+    - What's my placement status?
+    - Check my status
+    - Is my profile good for placements?
+    - What is my placement readiness?
+    - Will my profile get selected?
+    - Status of my placement chances
+    - My placement likelihood
+    - Get my placement assessment
+    - Evaluate my placement prospects
+    - will i get a job?
+    - chances of my placement
+
+# --- Predicted Company ---
+- intent: ask_student_predicted_company
+  examples: |
+    - Which company am I likely to get?
+    - What companies should I target?
+    - Predict my company
+    - Which companies are best for me?
+    - What company matches my profile?
+    - Which company will I likely get?
+    - Show my matching companies
+    - What companies fit my profile?
+    - Recommended companies for me
+    - Which companies should I focus on?
+    - My ideal companies
+    - Companies that will hire me
+    - Which companies should I apply to?
+    - What companies are recommended for me?
+    - Which recruiters match my profile?
+    - Which companies are most suitable for me?
+    - Where should I apply for placements?
+    - Which companies might hire me?
+    - What companies can I get into?
+
+# --- Predicted Job Role ---
+- intent: ask_student_predicted_job_role
+  examples: |
+    - What job role will I get?
+    - What role am I likely to get?
+    - Predict my job role
+    - What position can I get?
+    - What role suits me?
+    - What job will I get?
+    - Predicted role for me
+    - My ideal job role
+    - What position should I target?
+    - What role matches my profile?
+    - Recommended role for me
+    - Software engineer role prediction
+    - What job role am I most likely to get?
+    - What role does the model predict for me?
+    - Which job position suits my profile?
+    - What role can I expect during placements?
+    - What job title is predicted for me?
+    - What position might I get placed in?
+
+# --- Predicted Salary ---
+- intent: ask_student_predicted_salary
+  examples: |
+    - What salary will I get?
+    - What's my predicted salary?
+    - Predict my salary
+    - What package can I expect?
+    - What CTC will I get?
+    - Salary prediction for me
+    - What salary range fits me?
+    - My expected salary
+    - What package should I expect?
+    - Give me my salary prediction
+    - What minimum salary will I get?
+    - What maximum salary is possible?
+    - My salary range
+    - Expected LPA for me
+    - What salary package can I expect?
+    - What is my predicted salary in LPA?
+    - What package should I expect during placement?
+    - What is the estimated salary offered to me?
+    - What is my expected salary range?
+
+# --- Profile Summary ---
+- intent: ask_student_profile_summary
+  examples: |
+    - Show my profile
+    - What is my profile summary?
+    - Get my profile details
+    - Show my overall profile
+    - My profile analysis
+    - Give me my profile report
+    - What does my profile look like?
+    - Summarize my profile
+    - My complete profile
+    - Profile evaluation
+    - Overall assessment of my profile
+    - My student profile
+
+# --- Areas to Improve ---
+- intent: ask_student_areas_to_improve
+  examples: |
+    - What should I improve?
+    - Areas to improve in my profile
+    - What are my weak areas?
+    - Where do I need to improve?
+    - What skills should I develop?
+    - What should I work on?
+    - My improvement areas
+    - Skills to develop
+    - How can I improve my chances?
+    - What should I focus on?
+    - My skill gaps
+    - Weaknesses in my profile
+    - What do I need to learn?
+
+# --- Company Fit ---
+- intent: ask_student_company_fit
+  examples: |
+    - How well do I fit with [Google](company)?
+    - Am I a good fit for [Amazon](company)?
+    - Do I match [Microsoft](company) requirements?
+    - What's my fit with [TCS](company)?
+    - How suitable am I for [Infosys](company)?
+    - Am I compatible with [Adobe](company)?
+    - Check my fit with [Accenture](company)?
+    - My compatibility with [Zoho](company)
+    - How well do I match [Wipro](company)?
+    - Fit analysis with [Flipkart](company)
+    - My profile fit for [Oracle](company)
+    - Suitability for [IBM](company)
+    - Am I a match for [HCL](company)?
+    - Profile compatibility with [Cognizant](company)
+
+# ==================== ENHANCED STUDENT QUERIES - SALARY RANGES ====================
+
+# --- Salary Range (Min/Mid/Max) ---
+- intent: ask_salary_range
+  examples: |
+    - What is my salary range?
+    - What salary range can I expect?
+    - What is the minimum salary I can get?
+    - What is the maximum salary I can get?
+    - What is my mid-range salary prediction?
+    - Between what salary do I fall?
+    - What is the lowest and highest salary predicted for me?
+    - Show my salary range
+    - My minimum and maximum salary
+    - Salary boundaries for me
+    - What's the lowest I can get paid?
+    - What's the highest I can get paid?
+    - Can you show my expected salary range?
+    - What bracket of salary am I in?
+    - What is the salary range predicted for me?
+    - What's the salary range between min and max?
+    - Between what salary range can I expect offers?
+    - Can you show my expected salary range?
+
+# --- Salary Threshold Probabilities ---
+- intent: ask_salary_threshold
+  examples: |
+    - What is the probability that I will get more than 5 LPA?
+    - What are my chances of getting above 10 LPA?
+    - What is the probability that I get a package above 20 LPA?
+    - What are the chances of getting a salary higher than 15 LPA?
+    - How likely am I to get more than 2 LPA?
+    - What is my probability of getting above 25 LPA?
+    - Do I have a chance of getting above 30 LPA?
+    - What are my chances of a 40 LPA package?
+    - Can I get a 10 LPA package?
+    - Do I have chances for a 15 LPA offer?
+    - Am I likely to get a high paying job?
+    - What's the chance I get above 5 LPA?
+    - Probability of earning more than 20 LPA
+    - Will I get above average salary?
+    - My chances of crossing 15 LPA
+    - Can I climb to 25 LPA?
+    - What are my chances of getting a package higher than 20 LPA?
+    - Can I expect more than 30 LPA?
+    - What's the likelihood of getting 15 LPA+?
+    - Will I get a high salary?
+    - Is there a chance for 40 LPA?
+    - What's the probability of 25 LPA or more?
+
+# --- Recommended Companies ---
+- intent: ask_recommended_companies
+  examples: |
+    - Which companies should I apply to?
+    - What companies are recommended for me?
+    - Which recruiters match my profile?
+    - Which companies are most suitable for me?
+    - Where should I apply for placements?
+    - Which companies might hire me?
+    - What companies can I get into?
+    - Which companies should I target?
+    - Companies I should focus on
+    - My matching companies
+    - Which companies will likely hire me?
+    - Best companies for my profile
+    - Companies that fit my profile
+    - Where would I be a good fit?
+
+# --- Combined Multi-Intent Questions ---
+- intent: ask_placement_and_salary
+  examples: |
+    - What are my placement chances and expected salary?
+    - Can you tell me my predicted role and salary?
+    - What companies should I apply to and what salary can I expect?
+    - What are my chances of getting placed and which companies should I target?
+    - What job role and salary is predicted for me?
+    - What is my placement probability and expected salary range?
+    - Tell me about my placement and salary together
+    - My placement status and predicted salary
+    - Get my full placement prediction including salary
+    - What will I earn and where will I work?
+
+# --- Comparison Questions ---
+- intent: ask_salary_comparison
+  examples: |
+    - Is it more likely that I will get above 5 LPA or above 10 LPA?
+    - What is the difference between my minimum and maximum salary prediction?
+    - Is my probability higher for 5 LPA or 15 LPA?
+    - Which salary bracket am I most likely to fall into?
+    - How much higher is my max salary compared to min?
+    - What's the spread between my minimum and maximum salary?
+    - Compare my minimum and maximum salary
+    - Am I more likely to get 10 LPA or 20 LPA?
+    - Which salary level is more probable for me?
+    - What's more realistic for me: 5 LPA or 10 LPA?
+
+# --- Decision-Making Questions ---
+- intent: ask_placement_advice
+  examples: |
+    - Should I target high paying companies?
+    - Am I likely to get into top tech companies?
+    - Based on my prediction, should I focus on product companies or service companies?
+    - Should I expect a high salary offer?
+    - What kind of companies should I prepare for?
+    - Is my profile suitable for FAANG companies?
+    - Should I focus on startups or established companies?
+    - Am I competitive enough for premium companies?
+    - What should be my target salary?
+    - Which tier companies should I apply to?
+    - Will I get tier-1 companies?
+    - Should I be optimistic about my chances?
+
+# --- Follow-Up Conversation Questions ---
+- intent: ask_explanation
+  examples: |
+    - Can you explain my salary prediction?
+    - Why is my placement probability low?
+    - Why is my predicted salary high?
+    - Can I improve my placement chances?
+    - How can I increase my expected salary?
+    - Why am I fit for these companies?
+    - What factors affect my salary prediction?
+    - Explain my job role prediction
+    - How did you calculate my probability?
+    - What makes me likely or unlikely for placement?
+    - How does my profile impact my salary?
+    - Why was I assigned this role?
+
+# --- Very Realistic Student Questions ---
+- intent: ask_realistic_placement
+  examples: |
+    - Will I get placed this year?
+    - Can I get a 10 LPA package?
+    - Which companies can I realistically get into?
+    - Is my profile good for product companies?
+    - Do I have a chance of getting a high package?
+    - Will anyone hire me?
+    - What's my realistic job market value?
+    - Can I beat the average?
+    - Do I have decent placement chances?
+    - What companies won't reject me?
+    - Realistically, what can I expect?
+    - Am I in the safe zone for placements?
+    - What is a realistic salary for me?
+    - Will I get any good offers?
+
+# --- Required Integration Intents ---
+- intent: placement_probability_query
+  examples: |
+    - Please show my placement probability in percentage format
+    - Give me my model placement confidence with explanation
+    - Placement probability query for my profile
+    - I want my placement chance report from prediction model
+    - Tell me my predicted placement percentage and reason
+    - Show placement probability analysis with role and salary context
+    - Explain my placement chance category from the model
+    - What does the model say about my placement likelihood today?
+    - Provide placement confidence report based on my student record
+    - Share my predicted placement percent and matching companies
+
+- intent: salary_prediction_query
+  examples: |
+    - Give me the salary prediction report for my profile
+    - Show my expected CTC with explanation from the model
+    - Salary prediction query for my student profile
+    - I want model-based salary estimate in LPA with reasons
+    - Provide my estimated package and probability breakdown
+    - Explain why this salary is predicted for me
+    - Show my salary expectation using historical placement model
+    - Share my predicted salary details and confidence insights
+
+- intent: salary_range_query
+  examples: |
+    - Show min mid max salary range from my prediction row
+    - Salary range query with conservative and optimistic values
+    - I need my minimum mid and maximum salary estimate
+    - Give my salary bracket report in LPA
+    - Explain my lower and upper salary bounds from model output
+    - What is my predicted salary interval according to the model?
+    - Provide salary range analysis for my student id
+
+- intent: recommended_companies_query
+  examples: |
+    - Give me recommended companies from my prediction model
+    - Recommended companies query for my placement profile
+    - Show recruiters mapped to my predicted role and salary
+    - Provide a company recommendation list with reasoning
+    - Which matching companies are suggested by the model output?
+    - Share my recommended recruiters with placement probability context
+
+- intent: placement_summary_query
+  examples: |
+    - What are my placement chances and expected salary?
+    - Can you tell me my predicted role and salary?
+    - What companies should I apply to and what salary can I expect?
+    - What are my chances of getting placed and which companies should I target?
+    - What job role and salary is predicted for me?
+    - What is my placement probability and expected salary range?
+
+- intent: placement_analytical_query
+  examples: |
+    - What are my chances of getting placed with a salary above 10 LPA?
+    - If my placement probability is high, what salary should I expect?
+    - Which companies offer the salary range predicted for me?
+    - What role can help me achieve more than 15 LPA?
+    - What are my chances of getting a package above 20 LPA in recommended companies?
+    - If I get placed, what is the most likely salary I will get?
+
+- intent: salary_comparison_query
+  examples: |
+    - Is it more likely that I will get above 5 LPA or above 10 LPA?
+    - What is the difference between my minimum and maximum salary prediction?
+    - Is my probability higher for 5 LPA or 15 LPA?
+    - Which salary bracket am I most likely to fall into?
+
+- intent: placement_advice_query
+  examples: |
+    - Should I target high paying companies?
+    - Am I likely to get into top tech companies?
+    - Based on my prediction, should I focus on product companies or service companies?
+    - Should I expect a high salary offer?
+
+- intent: placement_explanation_query
+  examples: |
+    - Can you explain my salary prediction?
+    - Why is my placement probability low?
+    - Why is my predicted salary high?
+    - Can I improve my placement chances?
+    - How can I increase my expected salary?
+
+- intent: realistic_student_query
+  examples: |
+    - Will I get placed this year?
+    - Can I get a 10 LPA package?
+    - Which companies can I realistically get into?
+    - Is my profile good for product companies?
+    - Do I have a chance of getting a high package?
+
+# ==================== COMPANY PLACEMENT DB INTEGRATION EXAMPLES ====================
+
+- intent: list_tier1_companies
+  examples: |
+    - Which companies are coming for placements?
+    - Show me the list of companies in the dataset.
+    - Which companies are Tier 1?
+    - Which companies are Tier 2?
+    - Which companies are Tier 3?
+
+- intent: ask_company_overview
+  examples: |
+    - Tell me about Amazon.
+
+- intent: ask_company_tier
+  examples: |
+    - What tier is Google in?
+
+- intent: ask_hiring_roles
+  examples: |
+    - What roles does Microsoft offer?
+    - What kind of roles does Flipkart hire for?
+    - What companies hire Software Engineers?
+
+- intent: ask_avg_package
+  examples: |
+    - What is the average package offered by Amazon?
+    - What is the average salary offered by Microsoft?
+    - Compare Amazon and Microsoft packages.
+
+- intent: ask_max_package
+  examples: |
+    - What is the maximum package offered by Google?
+    - Which company has the highest max package?
+
+- intent: list_high_paying_companies
+  examples: |
+    - What companies offer more than 20 LPA?
+    - Which companies offer the highest salary?
+    - What companies offer packages between 10 and 20 LPA?
+    - Which companies offer the lowest packages?
+    - Which companies offer more than 15 LPA average?
+
+- intent: ask_min_cgpa
+  examples: |
+    - What is the minimum CGPA required for Amazon?
+    - Can I sit for Google if my CGPA is 7.5?
+    - Which companies have the highest CGPA requirement?
+    - Which companies have the lowest CGPA requirement?
+
+- intent: list_companies_by_cgpa
+  examples: |
+    - Which companies allow CGPA above 7?
+    - Which companies allow CGPA above 6.5?
+    - Which companies allow low CGPA students?
+    - What companies require CGPA above 8?
+
+- intent: ask_allowed_departments
+  examples: |
+    - Which departments are allowed for Amazon?
+    - Can IT students apply for Google?
+    - Which companies allow CSE students?
+    - Which companies allow ECE students?
+    - Which companies allow multiple departments?
+    - Which companies are open for all branches?
+
+- intent: ask_company_backlogs
+  examples: |
+    - Does Amazon allow backlogs?
+    - What is the maximum backlog allowed for Google?
+    - Which companies do not allow any backlogs?
+
+- intent: list_companies_allowing_backlogs
+  examples: |
+    - Which companies allow students with backlogs?
+    - Can I apply with 1 backlog?
+
+- intent: ask_required_skills
+  examples: |
+    - What skills are required for Amazon?
+    - What skills are required for Google?
+    - Which companies require Python?
+    - Which companies require Data Structures?
+    - Which companies require Machine Learning?
+    - What skills should I learn to get into Microsoft?
+    - Which companies require strong DSA?
+
+- intent: ask_interview_process
+  examples: |
+    - What is the interview process for Amazon?
+    - How many rounds does Google have?
+    - What is Round 1 for Microsoft?
+    - What happens in the first round of Flipkart?
+    - What is the focus of Round 2 for Amazon?
+    - What happens in the HR round?
+    - Which companies have 4 interview rounds?
+    - Which companies have the longest interview process?
+
+- intent: ask_round_duration
+  examples: |
+    - How long is Round 1 of Amazon?
+    - What is the duration of the Google coding round?
+    - Which companies have the longest interviews?
+    - Which companies have the shortest interview rounds?
+
+- intent: ask_prep_topics_by_area
+  examples: |
+    - What DSA topics should I prepare for Amazon?
+    - Which DSA topics are required for Google?
+    - What DSA topics should I focus on?
+    - What system design topics should I study?
+    - Which companies ask system design questions?
+    - What OOPS topics should I prepare for interviews?
+    - What DBMS topics should I prepare?
+    - What HR questions are asked by companies?
+
+# ==================== TEMPLATE-DRIVEN ADVANCED QUERIES ====================
+
+- intent: ask_hiring_intensity_templates
+  examples: |
+    - Which companies are hiring the most students?
+    - Which company has the highest hiring intensity?
+    - Which companies hire the least students?
+    - Which companies have high hiring chances?
+
+- intent: ask_comparison_templates
+  examples: |
+    - Compare Amazon and Google packages.
+    - Which is better: Amazon or Microsoft?
+    - Which company has a higher average package: Flipkart or Walmart?
+    - Which company has easier eligibility: Amazon or Flipkart?
+    - Which company has more interview rounds?
+
+- intent: ask_recommendation_templates
+  examples: |
+    - Which companies should I target?
+    - Which companies are best for high salary?
+    - Which companies have easier selection?
+    - Which companies have fewer interview rounds?
+    - Which companies have high hiring intensity?
+
+- intent: ask_strategy_templates
+  examples: |
+    - How should I prepare for Amazon?
+    - What should I study for Google interviews?
+    - What topics are most important for Microsoft?
+    - What preparation is required for Flipkart?
+
+- intent: ask_eligibility_strategy_templates
+  examples: |
+    - Can I apply for Amazon with 7.5 CGPA and 1 backlog?
+    - Which companies can I apply to with 7 CGPA?
+    - Which companies are best for students with low CGPA?
+    - Which companies are easiest to get into?
+
+- intent: ask_salary_hiring_templates
+  examples: |
+    - Which companies offer high salary and high hiring?
+    - Which companies offer good packages but hire many students?
+    - Which companies offer high salary but low hiring?
+
+- intent: ask_advanced_analytics_templates
+  examples: |
+    - Which Tier 1 companies offer more than 20 LPA?
+    - Which companies require DSA and System Design both?
+    - Which companies have more than 3 interview rounds?
+    - Which companies allow backlogs and offer high salary?
+    - Which companies require CGPA above 8 and offer more than 25 LPA?
+    - Which companies hire the most students and offer good packages?
+
+- intent: ask_decision_templates
+  examples: |
+    - Should I focus on Amazon or Microsoft?
+    - Which company is easier to crack?
+    - Which company gives the best salary vs difficulty ratio?
+    - Which company has the best chance of selection?
+
+- intent: ask_complex_templates
+  examples: |
+    - Which Tier 1 companies offer more than 20 LPA and require CGPA above 8?
+    - Which companies have high hiring intensity but fewer interview rounds?
+    - Which companies offer high salary but allow backlogs?
+    - Which companies require strong DSA and System Design preparation?
+    - Which companies are best for CSE students with 7 CGPA?
+    - Which companies offer the best package with the lowest CGPA requirement?
+    - Which companies have high packages and short interview processes?
+    - Which companies require the most preparation topics?
+    - Top package companies with low CGPA requirement
+    - best salary with minimum cgpa companies
+    - high package and short interview process companies
+    - companies with shorter interviews and strong packages
+    - companies needing both dsa and system design prep
+    - companies that require dsa plus system design
+    - best companies for cse with 7 cgpa
+    - suitable companies for cse students around 7 cgpa
+    - tier 1 companies above 20 lpa and cgpa above 8
+    - companies with high hiring intensity and short rounds
+    - high salary companies that still allow backlogs
+    - which firms need the maximum preparation topics
+
+- intent: ask_filter_templates
+  examples: |
+    - Show companies with CGPA requirement below 7.5
+    - Show companies with max package above 25 LPA
+    - Show companies with hiring intensity above 10
+    - Show companies that allow backlogs
+
+- intent: ask_ranking_templates
+  examples: |
+    - Rank companies by average package
+    - Rank companies by hiring intensity
+    - Rank companies by CGPA requirement
+
+- intent: ask_top_paying_templates
+  examples: |
+    - Top 5 highest paying companies
+    - Top 3 highest paying companies
+
+- intent: ask_leetcode_company_questions
+  examples: |
+    - give me leetcode interview questions for [amazon](company)
+    - show companywise leetcode questions for [google](company)
+    - generate leetcode report for [microsoft](company)
+    - get all leetcode questions asked in [meta](company)
+    - show latest leetcode questions for [amazon](company)
+    - newest interview questions for [google](company)
+    - recent leetcode questions for [adobe](company)
+    - leetcode questions for [uber](company) in last 30 days
+    - leetcode questions for [netflix](company) in last 3 months
+    - leetcode questions for [apple](company) in 6 months
+    - questions for [flipkart](company) older than six months
+    - build downloadable pdf report for [microsoft](company) leetcode questions
+    - I need companywise coding questions for [meta](company)
+    - interview question roadmap for [amazon](company)

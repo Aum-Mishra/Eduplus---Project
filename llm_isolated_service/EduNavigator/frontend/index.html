@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EduNavigator - Career Guidance Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif; }
+        .card { box-shadow: 0 10px 25px rgba(0,0,0,0.08); }
+        .chip { background: #eef2ff; color: #4338ca; }
+        .mindmap-node { cursor: pointer; }
+        .mindmap-link { stroke-width: 2; }
+    </style>
+</head>
+<body class="bg-slate-50 min-h-screen">
+    <header class="bg-white sticky top-0 z-10 border-b border-slate-200/60">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <h1 class="text-2xl font-bold text-slate-800">EduNavigator</h1>
+                <span class="text-sm text-slate-500">AI-Powered Career Guidance</span>
+            </div>
+            <button id="btnIngest" class="px-3 py-2 rounded-lg bg-slate-900 text-white hover:bg-slate-800 transition-colors">
+                Build Index
+            </button>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-8">
+        <div class="grid lg:grid-cols-12 gap-8">
+            <!-- Left Column: Profile Form -->
+            <section class="lg:col-span-4">
+                <div class="bg-white rounded-xl p-6 card sticky top-24">
+                    <h2 class="text-xl font-semibold mb-4 text-slate-800">Student Profile</h2>
+                    <div class="grid gap-4">
+                        <label class="block">
+                            <span class="text-slate-700 font-medium">Branch</span>
+                            <input id="branch" 
+                                class="mt-1 w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200" 
+                                placeholder="e.g., CSE, ECE, IT" />
+                        </label>
+                        <label class="block">
+                            <span class="text-slate-700 font-medium">Interests</span>
+                            <input id="interests" 
+                                class="mt-1 w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200" 
+                                placeholder="e.g., AI, Data Science, Security" />
+                            <span class="text-xs text-slate-500 mt-1">Comma-separated values</span>
+                        </label>
+                        <label class="block">
+                            <span class="text-slate-700 font-medium">Known Skills</span>
+                            <input id="skills" 
+                                class="mt-1 w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200" 
+                                placeholder="e.g., Python, SQL, Git" />
+                            <span class="text-xs text-slate-500 mt-1">Comma-separated values</span>
+                        </label>
+                        <label class="block">
+                            <span class="text-slate-700 font-medium">Career Goal</span>
+                            <input id="goal" 
+                                class="mt-1 w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200" 
+                                placeholder="e.g., Data Analyst" />
+                        </label>
+                        <div class="pt-2">
+                            <button id="btnRecommend" 
+                                class="w-full px-4 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-500 transition-colors font-medium">
+                                Get Personalized Roadmap
+                            </button>
+                        </div>
+                        <div class="flex gap-3">
+                            <input id="question" 
+                                class="flex-1 border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200" 
+                                placeholder="Ask about your career path..." />
+                            <button id="btnAsk" 
+                                class="px-4 py-2 rounded-lg bg-slate-700 text-white hover:bg-slate-600 transition-colors font-medium">
+                                Ask
+                            </button>
+                        </div>
+                    </div>
+            </div>
+            <p id="status" class="mt-3 text-sm text-slate-600"></p>
+        </section>
+
+        <section class="bg-white rounded-xl p-6 card">
+            <h2 class="text-xl font-semibold mb-4 text-slate-800">Mindmap</h2>
+            <div id="mindmap" class="w-full h-[420px] border rounded-lg"></div>
+        </section>
+
+        <section class="bg-white rounded-xl p-6 card md:col-span-2">
+            <h2 class="text-xl font-semibold mb-4 text-slate-800">Recommended Roadmap</h2>
+            <div id="roadmap" class="grid md:grid-cols-3 gap-4"></div>
+            <div class="mt-6">
+                <h3 class="font-semibold text-slate-800 mb-2">Resources</h3>
+                <ul id="resources" class="list-disc pl-6"></ul>
+            </div>
+            <div class="mt-6">
+                <h3 class="font-semibold text-slate-800 mb-2">Projects</h3>
+                <ul id="projects" class="list-disc pl-6"></ul>
+            </div>
+            <div class="mt-6">
+                <h3 class="font-semibold text-slate-800 mb-2">Answer</h3>
+                <p id="answer" class="text-slate-700"></p>
+                <div class="mt-2 flex gap-2">
+                    <button id="fb-answer-good" class="px-2 py-1 rounded-md bg-emerald-600 text-white text-sm">Helpful</button>
+                    <button id="fb-answer-bad" class="px-2 py-1 rounded-md bg-rose-600 text-white text-sm">Not Helpful</button>
+                </div>
+            </div>
+            <div class="mt-6">
+                <h3 class="font-semibold text-slate-800 mb-2">Sources</h3>
+                <div id="sources" class="flex flex-wrap gap-2"></div>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+

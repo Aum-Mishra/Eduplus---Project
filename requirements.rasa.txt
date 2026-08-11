@@ -1,0 +1,8 @@
+rasa==3.6.13
+rasa-sdk>=3.6.2,<3.7.0
+setuptools==65.5.1
+pandas==2.0.3
+requests==2.32.3
+reportlab==4.2.2
+fuzzywuzzy==0.18.0
+python-Levenshtein==0.21.1

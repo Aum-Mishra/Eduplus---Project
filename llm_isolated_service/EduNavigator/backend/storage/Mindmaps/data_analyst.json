@@ -1,0 +1,33 @@
+{
+    "nodes": [
+        {"id": "Data Analyst", "group": 1},
+        {"id": "Technical Skills", "group": 2},
+        {"id": "SQL", "group": 3},
+        {"id": "Python", "group": 3},
+        {"id": "Data Visualization", "group": 3},
+        {"id": "Statistics", "group": 3},
+        {"id": "Tools & Platforms", "group": 2},
+        {"id": "Tableau", "group": 3},
+        {"id": "Excel", "group": 3},
+        {"id": "Power BI", "group": 3},
+        {"id": "Soft Skills", "group": 2},
+        {"id": "Problem Solving", "group": 3},
+        {"id": "Communication", "group": 3},
+        {"id": "Business Acumen", "group": 3}
+    ],
+    "links": [
+        {"source": "Data Analyst", "target": "Technical Skills"},
+        {"source": "Technical Skills", "target": "SQL"},
+        {"source": "Technical Skills", "target": "Python"},
+        {"source": "Technical Skills", "target": "Data Visualization"},
+        {"source": "Technical Skills", "target": "Statistics"},
+        {"source": "Data Analyst", "target": "Tools & Platforms"},
+        {"source": "Tools & Platforms", "target": "Tableau"},
+        {"source": "Tools & Platforms", "target": "Excel"},
+        {"source": "Tools & Platforms", "target": "Power BI"},
+        {"source": "Data Analyst", "target": "Soft Skills"},
+        {"source": "Soft Skills", "target": "Problem Solving"},
+        {"source": "Soft Skills", "target": "Communication"},
+        {"source": "Soft Skills", "target": "Business Acumen"}
+    ]
+}
